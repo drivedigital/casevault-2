@@ -1,0 +1,72 @@
+{
+  "inferenceCalls": 0,
+  "billingTierConfirmed": false,
+  "results": [
+    {
+      "keyLabel": "Key 1",
+      "checkedAt": "2026-10-04T18:06:14.513Z",
+      "status": 200,
+      "modelCount": 61,
+      "selectedModels": [
+        {
+          "name": "models/gemini-3.1-pro-preview",
+          "methods": [
+            "generateContent",
+            "countTokens",
+            "createCachedContent",
+            "batchGenerateContent"
+          ],
+          "inputTokenLimit": 1048576,
+          "outputTokenLimit": 65536
+        },
+        {
+          "name": "models/gemini-3.8-flash",
+          "methods": [
+            "generateContent",
+            "countTokens",
+            "createCachedContent",
+            "batchGenerateContent"
+          ],
+          "inputTokenLimit": 1048576,
+          "outputTokenLimit": 65536
+        }
+      ]
+    },
+    {
+      "keyLabel": "Key 2",
+      "checkedAt": "2026-10-04T18:06:14.569Z",
+      "status": 401,
+      "error": "Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project."
+    },
+    {
+      "keyLabel": "Key 3",
+      "checkedAt": "2026-10-04T18:06:14.569Z",
+      "status": 200,
+      "modelCount": 61,
+      "selectedModels": [
+        {
+          "name": "models/gemini-3.1-pro-preview",
+          "methods": [
+            "generateContent",
+            "countTokens",
+            "createCachedContent",
+            "batchGenerateContent"
+          ],
+          "inputTokenLimit": 1048576,
+          "outputTokenLimit": 65536
+        },
+        {
+          "name": "models/gemini-3.8-flash",
+          "methods": [
+            "generateContent",
+            "countTokens",
+            "createCachedContent",
+            "batchGenerateContent"
+          ],
+          "inputTokenLimit": 1048576,
+          "outputTokenLimit": 65536
+        }
+      ]
+    }
+  ]
+}

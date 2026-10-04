@@ -45,6 +45,8 @@ PaliGemma was not present in the current integrated-model catalog. Its [legacy f
 
 Authenticated discovery succeeded and listed `gemini-3.8-flash` and `gemini-3.1-pro-preview`. [Gemini document understanding](https://ai.google.dev/gemini-api/docs/document-processing) supports native PDF input, so a future test can submit this small original PDF without splitting it into OCR.space requests.
 
+Three additional operator-supplied keys were checked through the read-only model-list endpoint. Key 1 and Key 3 returned HTTP 200 and listed both requested models; Key 2 returned HTTP 401. Labels follow their order in the operator's message. No secret values are in the repository. These checks made zero inference calls and do not establish project billing tier, generation entitlement, or remaining quota. See [key verification](gemini-key-verification.json).
+
 [Current pricing](https://ai.google.dev/gemini-api/docs/pricing) lists a free tier for Gemini 3.8 Flash, while Gemini 3.1 Pro Preview has no API free tier. A model listing and a working key do not establish the key's project billing tier. Flash inference awaits confirmation that this project's billing is disabled; Pro was not called under the continuing free-only policy. No Gemini quality result is claimed.
 
 ## Reproduction and review
