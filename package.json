@@ -10,7 +10,7 @@
     "build:worker": "opennextjs-cloudflare build",
     "deploy": "opennextjs-cloudflare deploy",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
-    "test": "tsx --test tests/*.test.ts",
+    "test": "tsx --test tests/*.test.ts tests/*.test.mjs",
     "prebuild": "node scripts/prepare-pdf-assets.mjs",
     "predev": "node scripts/prepare-pdf-assets.mjs",
     "bridge:once": "node bridges/runner.mjs",

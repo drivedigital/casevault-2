@@ -1,0 +1,9 @@
+{
+  "$schema": "../node_modules/wrangler/config-schema.json",
+  "name": "docket-key-ocr",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-10-04",
+  "compatibility_flags": ["nodejs_compat"],
+  "ai": { "binding": "AI" },
+  "observability": { "enabled": true, "head_sampling_rate": 1 }
+}
