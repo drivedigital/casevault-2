@@ -1,0 +1,28 @@
+{
+  "checkedAt": "2026-10-04T05:00:41.463Z",
+  "testData": "synthetic only; no lawsuit data transmitted",
+  "gemini": {
+    "modelListHttp": 401,
+    "credentialAccepted": false,
+    "errorCode": "UNAUTHENTICATED"
+  },
+  "ocrSpace": {
+    "http": 200,
+    "exitCode": 1,
+    "processingError": false,
+    "text": "OCR CONNECTOR TEST 12345",
+    "error": null
+  },
+  "deployment": {
+    "workerSecrets": [
+      "CASEVAULT_API_TOKEN",
+      "SESSION_SECRET"
+    ],
+    "ocrCredentialInstalled": false,
+    "aiCredentialInstalled": false,
+    "processingRunnerImplemented": false,
+    "queuedJobs": 506,
+    "documentsWithOcrText": 0,
+    "documentsWithAiSummary": 0
+  }
+}
