@@ -1,5 +1,7 @@
 # Google workspace sign-in
 
+Status: enabled and verified on 2026-10-03 (America/Chicago). The authorized account completed Google OAuth and reached the real workspace dashboard.
+
 The browser uses Google OAuth through Supabase Auth, with PKCE and server-managed HttpOnly/Secure/SameSite=Lax cookies. The Worker validates the current user through Supabase `getUser()` and permits only the configured `ALLOWED_LOGIN_EMAIL` with a confirmed email and Google identity. It never authorizes using editable `user_metadata`.
 
 The operator requested `dgeorgenyc@gmail.com` as the sole authorized Google account. Signing in successfully with a different account does not grant access to the workspace, database or files. Existing private-workspace database policies still apply behind the Worker. Individual workspace memberships remain a future build step.

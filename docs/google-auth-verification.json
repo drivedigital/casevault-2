@@ -1,0 +1,12 @@
+{
+  "verifiedAt": "2026-10-04T04:45:30.209335+00:00",
+  "provider": "google",
+  "supabaseProviderEnabled": true,
+  "authorizedEmail": "dgeorgenyc@gmail.com",
+  "flow": "authorization code with PKCE, server-managed cookies",
+  "callback": "https://casevault-2.dan-2eb.workers.dev/auth/callback",
+  "dashboardReached": true,
+  "documentsVisible": 506,
+  "legacyAccessKeyLogin": "retired",
+  "googleClientId": "275082261796-202tg4bvtat5criubav7d71c3cipsbgm.apps.googleusercontent.com"
+}

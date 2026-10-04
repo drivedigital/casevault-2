@@ -28,3 +28,7 @@ TypeScript and lint passed. Session tampering/expiry and import schema tests pas
 ## Remaining build work
 
 Run extraction/OCR through a leased cloud processor, preserve derivative receipts and quality review, implement retries and dead letters, and add real search/embeddings. Reconnect NYSCEF and NotebookLM session bridges and configure any requested Drive delivery. Expand the prototype schema into the canonical evidence/actor model with reviewed matching, individual identity and permissions, and attributed audit history. The queued corpus is ready for that work; it has not been labeled OCR-complete or legally verified.
+
+## Google sign-in update
+
+Google OAuth through Supabase is enabled and verified for the authorized operator. The access-key browser login is retired; machine credentials remain separate. The authorized Google account completed sign-in and reached the dashboard with all 506 documents. See `GOOGLE_SIGN_IN.md` for configuration and authorization details.
