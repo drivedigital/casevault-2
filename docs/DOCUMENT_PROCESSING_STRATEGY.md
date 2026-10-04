@@ -69,3 +69,7 @@ Give the model separate `target_document`, `docket_metadata` and `context_docume
 Save the context packet alongside each run: source capture/as-of timestamp, docket snapshot hash, selected entry/document IDs, original/extraction hashes, exact retrieved passages and page references, hints, retrieval version and truncation/missing-source warnings. Later docket imports affect future runs, not this saved context. A regenerated docket-context summary is a new version.
 
 This prevents a prior filing or later order from being presented as something the target document itself says. Literal quote matching checks citation location, while human review still determines whether the summarized interpretation is justified.
+
+## Derivative registry and provider follow-up
+
+See [searchable PDF storage and reader design](SEARCHABLE_PDF_DERIVATIVES.md) for current receipt paths versus the proposed immutable PDF version registry and version-aware review workflow. See [NVIDIA request conventions and comparison results](NVIDIA_VISION_ENDPOINTS.md) for verified image requests, DeepSeek 4.1 Flash image support, and text-only analysis candidates. These documents do not imply derivative UI/schema deployment.

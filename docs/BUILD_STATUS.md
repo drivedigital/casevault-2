@@ -66,3 +66,7 @@ Implemented independent on/off switches for all provider cards with retained key
 ## Authorized Llama agreement and OCR sandbox research — 2026-10-04
 
 The explicitly requested Llama agree call returned HTTP 200 through the Cloudflare integration. A subsequent page-12 image request also executed, but its invented sections and incorrect strikeouts failed OCR quality review. No accepted extraction, searchable PDF, production job consumption or new deployment resulted. The agreement gate is resolved independently of existing deployment access errors. See [receipt](llama-agreement-followup.json) and [sandbox research](OCR_SANDBOX_OPTIONS.md). NVIDIA’s configured catalog returned DeepSeek chat/coding IDs, but no DeepSeek-OCR entry. E2B is proposed for isolated PDF preparation and searchable-PDF assembly; no sandbox was created.
+
+## Derivative UX design and NVIDIA/OpenRouter comparison — 2026-10-04
+
+Recorded existing R2 extraction receipts and the proposed workspace-scoped searchable-PDF version registry, reader selector, independent PDF/AI review and version-pinned citations. NVIDIA Llama 11B and 90B image calls returned HTTP 200 but failed markings/reference/structure checks. OpenRouter Dots returned truncated output; Qwen returned upstream 429. No searchable PDF, deployed UI, schema migration or production job consumption resulted. Provider request conventions and sanitized benchmark receipts are saved in documentation.

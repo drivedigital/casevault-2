@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-04",
+  "page": 12,
+  "originalSha256": "9b7583985dfc3e190ff5b5eb7a6904f645c40eea1abb35032bfbc82880363cee",
+  "imageDpi": 130,
+  "calls": [
+    {"provider":"NVIDIA","model":"meta/llama-3.2-11b-vision-instruct","status":200,"elapsedMs":37281,"humanAccepted":false,"finding":"body transcription with reference errors, invented checkmarks, missed strikeout and non-JSON output"},
+    {"provider":"NVIDIA","model":"meta/llama-3.2-90b-vision-instruct","status":200,"elapsedMs":94600,"humanAccepted":false,"finding":"strikeouts described as checkmarks, reference errors and non-JSON output"},
+    {"provider":"OpenRouter","model":"dots-studio/dots-3-note-preview:free","status":200,"elapsedMs":37642,"finishReason":"length","humanAccepted":false,"finding":"truncated final output and statutory transcription error"},
+    {"provider":"OpenRouter","model":"qwen/qwen3.8-27b:free","status":429,"elapsedMs":174,"humanAccepted":false,"finding":"upstream shared-pool rate limit; no OCR output"}
+  ],
+  "searchablePdfCreated": false,
+  "productionJobsConsumed": false,
+  "deploymentPerformed": false,
+  "billingAllowanceChecked": false
+}
