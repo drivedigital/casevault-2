@@ -25,9 +25,12 @@
   "gemini": {
     "catalogStatus": 200,
     "flash": "gemini-3.8-flash",
-    "flashTest": "pending project free-tier confirmation",
+    "flashTest": "Six native PDF requests attempted; all returned HTTP 503/high demand",
     "pro": "gemini-3.1-pro-preview",
-    "proTest": "not called; no API free tier"
+    "proTest": "not called; no API free tier",
+    "billingTierConfirmed": true,
+    "keyLabel": "Key 3",
+    "verificationReceipt": "gemini-ocr-verification.json"
   },
   "calls": [
     {

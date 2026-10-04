@@ -1,5 +1,5 @@
 {
-  "testedAt": "2026-10-04T18:19:35.595Z",
+  "testedAt": "2026-10-04T18:23:14.914Z",
   "keyLabel": "Key 3",
   "model": "gemini-3.8-flash",
   "tierEvidence": {
@@ -24,7 +24,8 @@
         "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
         "status": "UNAVAILABLE"
       },
-      "receipt": "gemini-page-13.json"
+      "receipt": "gemini-page-13-initial-summary.json",
+      "endpoint": "generateContent"
     },
     {
       "input": "one-page PDF derivative",
@@ -38,7 +39,8 @@
         "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
         "status": "UNAVAILABLE"
       },
-      "receipt": "gemini-page-12.json"
+      "receipt": "gemini-page-12.json",
+      "endpoint": "generateContent"
     },
     {
       "input": "one-page PDF derivative",
@@ -52,7 +54,8 @@
         "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
         "status": "UNAVAILABLE"
       },
-      "receipt": "gemini-page-1.json"
+      "receipt": "gemini-page-1.json",
+      "endpoint": "generateContent"
     },
     {
       "input": "original 13-page PDF",
@@ -64,9 +67,47 @@
         "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
         "status": "UNAVAILABLE"
       },
-      "receipt": "gemini-full.json"
+      "receipt": "gemini-full.json",
+      "endpoint": "generateContent"
+    },
+    {
+      "endpoint": "interactions",
+      "input": "one-page PDF derivative",
+      "pages": [
+        13
+      ],
+      "at": "2026-10-04T18:19:00.732Z",
+      "status": 503,
+      "durationMs": 15764,
+      "error": {
+        "message": "gemini-3.8-flash is currently experiencing high demand, spikes in demand are usually temporary. Please try again later.",
+        "code": "service_unavailable"
+      },
+      "store": false,
+      "receipt": "gemini-interactions-page-13.json"
+    },
+    {
+      "endpoint": "generateContent",
+      "input": "one-page PDF derivative",
+      "pages": [
+        13
+      ],
+      "at": "2026-10-04T18:21:03.946Z",
+      "status": 503,
+      "durationMs": 2816,
+      "error": {
+        "code": 503,
+        "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+        "status": "UNAVAILABLE"
+      },
+      "receipt": "gemini-retry-page-13.json"
     }
   ],
-  "qualityAssessment": "Unavailable: service errors produced no transcripts",
-  "productionChanged": false
+  "qualityAssessment": "Unavailable: all six requests returned HTTP 503/high demand and produced no transcripts",
+  "productionChanged": false,
+  "totalRequests": 6,
+  "successfulTranscriptions": 0,
+  "finalRetryBackoffSeconds": 30,
+  "paidFallback": false,
+  "receiptLimitation": "The final retry overwrote the initial page-13 raw receipt. Initial status, duration and error are preserved from the verification summary written before retry. The final retry raw response has been renamed to its own file."
 }
