@@ -1,0 +1,325 @@
+{
+  "testedAt": "2026-10-04T18:01:45.997Z",
+  "original": {
+    "sha256": "9b7583985dfc3e190ff5b5eb7a6904f645c40eea1abb35032bfbc82880363cee",
+    "bytes": 629519,
+    "pages": 13
+  },
+  "render": {
+    "dpi": 130,
+    "format": "PNG"
+  },
+  "cloudflare": {
+    "instanceListStatus": 200,
+    "instances": 0,
+    "ocrEnabled": false
+  },
+  "baseline": {
+    "processorVersion": "text-first-ocrspace-v1",
+    "pageTextCharacters": 72,
+    "embeddedBodyTextPresent": false,
+    "ocrCalls": 0,
+    "statusReported": "complete",
+    "classificationCorrect": false
+  },
+  "gemini": {
+    "catalogStatus": 200,
+    "flash": "gemini-3.8-flash",
+    "flashTest": "pending project free-tier confirmation",
+    "pro": "gemini-3.1-pro-preview",
+    "proTest": "not called; no API free tier"
+  },
+  "calls": [
+    {
+      "model": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+      "page": 1,
+      "status": 503,
+      "error": null,
+      "durationMs": 419,
+      "finishReason": null,
+      "validJson": false,
+      "validShape": false,
+      "contentChars": 0,
+      "usage": null,
+      "privateReceipt": "extra-page-1.json",
+      "renderSha256": "36a1c6622a8039d08f9be69f3eb92c8e28b24a4796fe5b0f8f4721f0fa442a0c"
+    },
+    {
+      "model": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+      "page": 12,
+      "status": 200,
+      "error": null,
+      "durationMs": 42771,
+      "finishReason": "stop",
+      "validJson": true,
+      "validShape": false,
+      "contentChars": 3680,
+      "usage": {
+        "prompt_tokens": 1693,
+        "completion_tokens": 1911,
+        "total_tokens": 3604
+      },
+      "privateReceipt": "extra-page-12.json",
+      "renderSha256": "3ec16c0cf6f301a47768b6170097964004aa960290e8f8149887eccda8d983dc"
+    },
+    {
+      "model": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+      "page": 6,
+      "status": 200,
+      "error": null,
+      "durationMs": 42410,
+      "finishReason": "stop",
+      "validJson": true,
+      "validShape": false,
+      "contentChars": 2957,
+      "usage": {
+        "prompt_tokens": 1692,
+        "completion_tokens": 1632,
+        "total_tokens": 3324
+      },
+      "privateReceipt": "extra-page-6.json",
+      "renderSha256": "c3418717dc58819d9ae16d908c57252b5a290bafd49f0b13bb787556a54595cd"
+    },
+    {
+      "model": "google/gemma-4-31b-it",
+      "page": 12,
+      "status": 200,
+      "error": null,
+      "durationMs": 70733,
+      "finishReason": "stop",
+      "validJson": true,
+      "validShape": false,
+      "contentChars": 2350,
+      "usage": {
+        "prompt_tokens": 401,
+        "completion_tokens": 584,
+        "total_tokens": 985,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        }
+      },
+      "privateReceipt": "gemma-page-12.json",
+      "renderSha256": "3ec16c0cf6f301a47768b6170097964004aa960290e8f8149887eccda8d983dc"
+    },
+    {
+      "model": "google/diffusiongemma-26b-a4b-it",
+      "page": 13,
+      "status": 200,
+      "error": null,
+      "durationMs": 3496,
+      "finishReason": "stop",
+      "validJson": false,
+      "validShape": false,
+      "contentChars": 2915,
+      "usage": {
+        "prompt_tokens": 400,
+        "total_tokens": 1229,
+        "completion_tokens": 829,
+        "prompt_tokens_details": null
+      },
+      "privateReceipt": "google--diffusiongemma-26b-a4b-it.json",
+      "renderSha256": "c03ed6e1752e415ccc38170d2d181179d66bc6ff9e00b27befb5b13d68d29af8"
+    },
+    {
+      "model": "google/gemma-4-31b-it",
+      "page": 13,
+      "status": 200,
+      "error": null,
+      "durationMs": 102927,
+      "finishReason": "stop",
+      "validJson": true,
+      "validShape": false,
+      "contentChars": 3407,
+      "usage": {
+        "prompt_tokens": 402,
+        "completion_tokens": 951,
+        "total_tokens": 1353,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        }
+      },
+      "privateReceipt": "google--gemma-4-31b-it.json",
+      "renderSha256": "c03ed6e1752e415ccc38170d2d181179d66bc6ff9e00b27befb5b13d68d29af8"
+    },
+    {
+      "model": "moonshotai/kimi-k3",
+      "page": 1,
+      "status": 200,
+      "error": null,
+      "durationMs": 40574,
+      "finishReason": "stop",
+      "validJson": true,
+      "validShape": true,
+      "contentChars": 3440,
+      "usage": {
+        "prompt_tokens": 2289,
+        "completion_tokens": 826,
+        "total_tokens": 3115,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 9
+        }
+      },
+      "privateReceipt": "kimi-page-1.json",
+      "renderSha256": "36a1c6622a8039d08f9be69f3eb92c8e28b24a4796fe5b0f8f4721f0fa442a0c"
+    },
+    {
+      "model": "moonshotai/kimi-k3",
+      "page": 12,
+      "status": null,
+      "error": "TimeoutError",
+      "durationMs": 120006,
+      "finishReason": null,
+      "validJson": false,
+      "validShape": false,
+      "contentChars": 0,
+      "usage": null,
+      "privateReceipt": "kimi-page-12-retry.json",
+      "renderSha256": "3ec16c0cf6f301a47768b6170097964004aa960290e8f8149887eccda8d983dc"
+    },
+    {
+      "model": "moonshotai/kimi-k3",
+      "page": 12,
+      "status": 200,
+      "error": null,
+      "durationMs": 9269,
+      "finishReason": "stop",
+      "validJson": false,
+      "validShape": false,
+      "contentChars": 0,
+      "usage": {
+        "prompt_tokens": 2289,
+        "completion_tokens": 41,
+        "total_tokens": 2330,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 41
+        }
+      },
+      "privateReceipt": "kimi-page-12.json",
+      "renderSha256": "3ec16c0cf6f301a47768b6170097964004aa960290e8f8149887eccda8d983dc"
+    },
+    {
+      "model": "meta/llama-3.2-11b-vision-instruct",
+      "page": 13,
+      "status": 200,
+      "error": null,
+      "durationMs": 21236,
+      "finishReason": "stop",
+      "validJson": false,
+      "validShape": false,
+      "contentChars": 2369,
+      "usage": {
+        "prompt_tokens": 6529,
+        "total_tokens": 7043,
+        "completion_tokens": 514,
+        "prompt_tokens_details": null
+      },
+      "privateReceipt": "meta--llama-3.2-11b-vision-instruct.json",
+      "renderSha256": "c03ed6e1752e415ccc38170d2d181179d66bc6ff9e00b27befb5b13d68d29af8"
+    },
+    {
+      "model": "meta/llama-3.2-90b-vision-instruct",
+      "page": 13,
+      "status": 200,
+      "error": null,
+      "durationMs": 84122,
+      "finishReason": "stop",
+      "validJson": false,
+      "validShape": false,
+      "contentChars": 2407,
+      "usage": {
+        "prompt_tokens": 6529,
+        "total_tokens": 7150,
+        "completion_tokens": 621,
+        "prompt_tokens_details": null
+      },
+      "privateReceipt": "meta--llama-3.2-90b-vision-instruct.json",
+      "renderSha256": "c03ed6e1752e415ccc38170d2d181179d66bc6ff9e00b27befb5b13d68d29af8"
+    },
+    {
+      "model": "moonshotai/kimi-k3",
+      "page": 13,
+      "status": 200,
+      "error": null,
+      "durationMs": 53061,
+      "finishReason": "stop",
+      "validJson": true,
+      "validShape": true,
+      "contentChars": 4203,
+      "usage": {
+        "prompt_tokens": 2291,
+        "completion_tokens": 1104,
+        "total_tokens": 3395,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 11
+        }
+      },
+      "privateReceipt": "moonshotai--kimi-k3.json",
+      "renderSha256": "c03ed6e1752e415ccc38170d2d181179d66bc6ff9e00b27befb5b13d68d29af8"
+    },
+    {
+      "model": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+      "page": 13,
+      "status": 200,
+      "error": null,
+      "durationMs": 42541,
+      "finishReason": "stop",
+      "validJson": true,
+      "validShape": true,
+      "contentChars": 3146,
+      "usage": {
+        "prompt_tokens": 1722,
+        "completion_tokens": 1882,
+        "total_tokens": 3604
+      },
+      "privateReceipt": "nvidia--nemotron-3-nano-omni-30b-a3b-reasoning.json",
+      "renderSha256": "c03ed6e1752e415ccc38170d2d181179d66bc6ff9e00b27befb5b13d68d29af8"
+    },
+    {
+      "model": "google/paligemma",
+      "page": 13,
+      "status": 500,
+      "error": null,
+      "durationMs": 741,
+      "finishReason": null,
+      "validJson": false,
+      "validShape": false,
+      "contentChars": 0,
+      "usage": null,
+      "privateReceipt": "paligemma-retry.json",
+      "renderSha256": "c03ed6e1752e415ccc38170d2d181179d66bc6ff9e00b27befb5b13d68d29af8"
+    },
+    {
+      "model": "google/paligemma",
+      "page": 13,
+      "status": 422,
+      "error": null,
+      "durationMs": 985,
+      "finishReason": null,
+      "validJson": false,
+      "validShape": false,
+      "contentChars": 0,
+      "usage": null,
+      "privateReceipt": "paligemma.json",
+      "renderSha256": "c03ed6e1752e415ccc38170d2d181179d66bc6ff9e00b27befb5b13d68d29af8"
+    }
+  ],
+  "limitations": [
+    "Four unique pages tested through hosted inference; this is not full-document OCR.",
+    "Common page-13 prompt across six models; follow-up prompts differ.",
+    "Field shape checking measures the initial requested schema; looser Nano Omni follow-up prompts did not require the full nested shape.",
+    "No complete ground-truth transcript or word-error-rate score.",
+    "HTTP 200 does not imply nonempty output, valid JSON, correct text or preserved markings.",
+    "No paid fallback or production configuration change."
+  ]
+}
