@@ -1,3 +1,4 @@
+import {getCloudflareContext} from '@opennextjs/cloudflare';
 import {ProcessingHistory,type HistoryView} from '@/components/ProcessingHistory';
 import {DocumentProcessingPrompt} from '@/components/AgentWorkspace';
 import {readAgents} from '@/lib/agent-workspace';
@@ -43,6 +44,8 @@ export default async function DocumentDetailPage({
   const contactOptions = data.contacts.filter((c) => c.isCanonical).map((c) => ({ id: c.id, displayName: c.displayName }));
   const matterOptions = data.matters.map((m) => ({ id: m.id, name: m.name }));
 
+  const comparisons: {id:string;approvedAt:string;models:number}[] = doc.id===1008 ? await getCloudflareContext().env.OCR_COMPARISON.fetch('https://comparison.internal/documents/1008').then(r=>r.ok?r.json() as Promise<{runs:{id:string;approvedAt:string;models:number}[]}>:{runs:[]}).then(r=>r.runs).catch(()=>[]) : [];
+
   return (
     <div className="space-y-5">
       <Link href={bypassesDocumentReview(doc) ? `/docket-key${doc.docketId ? `/${doc.docketId}` : ""}` : "/documents"} className="flex items-center gap-1 text-xs font-medium text-slate-500 hover:text-slate-700">
@@ -69,6 +72,7 @@ export default async function DocumentDetailPage({
         </div>
       </div>
 
+      {comparisons.length>0&&<Card className="p-5"><h2 className="font-semibold">Hosted OCR comparisons and searchable PDF versions</h2><p className="mt-1 text-sm text-slate-500">Each comparison preserves all 13 original pages, separate model transcripts, extraction failures and draft summaries. Searchable versions remain unreviewed; partial coverage and approximate text placement are labeled.</p>{comparisons.map(run=><p key={run.id} className="mt-3 text-sm"><a href={`/api/ocr-comparisons/runs/${run.id}/view`} className="text-indigo-600 hover:underline">Open {run.models}-model comparison · {formatDateTime(run.approvedAt)}</a></p>)}</Card>}
       <DocumentProcessingPrompt documents={[{id:doc.id,title:doc.title}]} agents={await readAgents()} selectedDocumentId={doc.id}/>
       <div className="grid grid-cols-1 gap-5 xl:grid-cols-[1.3fr_1fr]">
         <div className="h-[720px] xl:sticky xl:top-5">

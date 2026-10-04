@@ -1,0 +1,11 @@
+{
+ "$schema":"../node_modules/wrangler/config-schema.json",
+ "name":"casevault-2-ocr-comparison",
+ "main":"worker.mjs",
+ "compatibility_date":"2026-10-04",
+ "compatibility_flags":["nodejs_compat"],
+ "ai":{"binding":"AI"},
+ "r2_buckets":[{"binding":"EVIDENCE","bucket_name":"legal-evidence-arena"}],
+ "vars":{"WORKSPACE_ID":"b37e40d6-4746-490c-9b73-ea46e15e2b01"},
+ "observability":{"enabled":true}
+}

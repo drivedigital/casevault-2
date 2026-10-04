@@ -16,3 +16,5 @@ __pycache__/
 *.pyc
 
 supabase/.temp/
+
+output/pdf/
