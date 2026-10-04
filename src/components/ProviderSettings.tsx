@@ -36,7 +36,7 @@ export function ProviderSettings({ initialProviders }: { initialProviders: Provi
       <div className="mt-4 grid gap-4 text-sm md:grid-cols-3">
         <div><p className="font-medium text-slate-700">Court docket imports</p><p className="mt-1 text-slate-500">Bypass routine document review. Flagged filings still need your attention.</p></div>
         <div><p className="font-medium text-slate-700">Knowledge Graph</p><p className="mt-1 text-slate-500">Placeholder for now.</p></div>
-        <div><p className="font-medium text-slate-700">Extraction and AI processing</p><p className="mt-1 text-slate-500">Processing service pending. Connected providers and model discovery do not start the document backlog.</p></div>
+        <div><p className="font-medium text-slate-700">Extraction and AI processing</p><p className="mt-1 text-slate-500">The cloud processor handles approved pilot jobs. Model discovery alone does not start the document backlog.</p></div>
       </div>
     </Card>
     <div className="flex flex-wrap items-center justify-between gap-3">

@@ -1,5 +1,6 @@
 import {
   pgSchema,
+  uuid,
   serial,
   text,
   varchar,
@@ -373,4 +374,15 @@ export const notebookAssociations = pgTable("notebook_associations", {
   status: text("status").notNull(),
   equivalence: text("equivalence").notNull(),
   provenance: jsonb("provenance").$type<Record<string, unknown>>(),
+});
+
+// Hosted pilot ledger; RLS scopes all records to the private app role's workspace.
+export const processingPilot=pgTable("processing_pilot",{
+ workspaceId:uuid("workspace_id").notNull().default("b37e40d6-4746-490c-9b73-ea46e15e2b01"),documentId:integer("document_id").notNull(),originalHash:varchar("original_hash",{length:64}).notNull(),createdAt:timestamp("created_at",{withTimezone:true}).notNull().defaultNow()
+});
+export const processingRequests=pgTable("processing_requests",{
+ id:uuid("id").primaryKey(),workspaceId:uuid("workspace_id").notNull().default("b37e40d6-4746-490c-9b73-ea46e15e2b01"),documentId:integer("document_id").notNull(),agentId:uuid("agent_id").notNull(),prompt:text("prompt").notNull(),state:text("state").notNull().default("awaiting_approval"),createdAt:timestamp("created_at",{withTimezone:true}).notNull().defaultNow()
+});
+export const processingRuns=pgTable("processing_runs",{
+ id:uuid("id").primaryKey(),workspaceId:uuid("workspace_id").notNull().default("b37e40d6-4746-490c-9b73-ea46e15e2b01"),requestId:uuid("request_id").notNull(),documentId:integer("document_id").notNull(),jobId:integer("job_id").notNull(),snapshot:jsonb("snapshot").$type<Record<string,unknown>>().notNull(),extractionKey:text("extraction_key"),extractionState:text("extraction_state").notNull().default("queued"),aiState:text("ai_state").notNull().default("queued"),result:jsonb("result").$type<Record<string,unknown>>(),error:text("error"),reviewState:text("review_state").notNull().default("unreviewed"),reviewedAt:timestamp("reviewed_at",{withTimezone:true}),createdAt:timestamp("created_at",{withTimezone:true}).notNull().defaultNow(),updatedAt:timestamp("updated_at",{withTimezone:true}).notNull().defaultNow()
 });

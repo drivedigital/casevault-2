@@ -11,9 +11,9 @@ A document can have several ingestion jobs, and one ingestion job can acquire se
 
 ## Active inference models
 
-Settings uses accessible pill buttons, with one active model per remote provider: OpenRouter, NVIDIA, and Gemini. Search narrows the available model pills. A **None** pill clears the selection. No model is selected automatically. Selection is saved server-side in private R2 at `casevault-2/settings/active-models/<provider>.json`, so it survives reloads and works across browsers. Each provider has its own object to avoid overwriting another provider's setting.
+Settings uses accessible pill buttons, with multiple active models per remote provider: OpenRouter, NVIDIA, and Gemini. Search narrows the available model pills. The clear-selection control removes all active selections. No model is selected automatically. Selection is saved server-side in private R2 at `casevault-2/settings/active-models/<provider>.json`, so it survives reloads and works across browsers. Each provider has its own object to avoid overwriting another provider's setting.
 
-The server rejects models absent from that provider's latest discovered catalog, connections that failed their check, and models declared to return only non-text outputs. NVIDIA's catalog has limited capability metadata; discovery does not prove every listed model supports chat. Model disappearance leaves the saved selection visible but blocks inference until a valid available model is selected. `generateWithActiveModel()` uses the saved setting and never silently switches providers. Selecting a model does not trigger the legal evidence backlog.
+The server rejects models absent from that provider's latest discovered catalog, connections that failed their check, and models declared to return only non-text outputs. NVIDIA's catalog has limited capability metadata; discovery does not prove every listed model supports chat. Model disappearance leaves the saved selection visible but blocks inference until a valid available model is selected. Each processing agent binds one explicit model from those active selections; approved runs snapshot that binding. Legacy single-model selections remain supported. Selecting a model does not trigger the legal evidence backlog.
 
 ## Google Drive file selector
 
@@ -92,3 +92,7 @@ Automated tests cover model selection boundaries, Drive query escaping and batch
 ## Temporary public review access
 
 At the owner’s request, `PUBLIC_REVIEW=true` disables the sign-in gate for app pages and ordinary read APIs, including document previews and downloads. Anyone with the URL can review the workspace and its documents. Adding/toggling agent configurations and submitting special-processing requests is also open, with same-origin checks for browser mutations. Drive operations, provider model changes/refresh, existing document edits and source bridge operations continue to require the owner’s Google session or machine token. Machine-only lease and receipt routes keep their additional token check. Provider keys, Drive grants and machine secrets remain server-side. Set `PUBLIC_REVIEW=false` and deploy to restore the sign-in gate.
+
+## Hosted document processing
+
+The fixed pilot now uses a separate Cloudflare Worker for embedded text extraction and cloud OCR on insufficient-text pages. The scheduled worker consumes only approved `pilot_process` jobs, never the general backlog or source bridge jobs. See [Processing pilot](PROCESSING_PILOT.md) for policies, receipts, results, and rollout restrictions. [Cloudflare evaluation](CLOUDFLARE_EVALUATION.md) records AI Search OCR and Browser Run planning.

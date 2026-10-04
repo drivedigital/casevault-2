@@ -1,3 +1,7 @@
+import {ProcessingHistory,type HistoryView} from '@/components/ProcessingHistory';
+import {DocumentProcessingPrompt} from '@/components/AgentWorkspace';
+import {readAgents} from '@/lib/agent-workspace';
+import {processingHistory} from '@/lib/processing';
 import { bypassesDocumentReview } from "@/lib/review-policy";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -65,12 +69,14 @@ export default async function DocumentDetailPage({
         </div>
       </div>
 
+      <DocumentProcessingPrompt documents={[{id:doc.id,title:doc.title}]} agents={await readAgents()} selectedDocumentId={doc.id}/>
       <div className="grid grid-cols-1 gap-5 xl:grid-cols-[1.3fr_1fr]">
-        <div className="h-[720px]">
+        <div className="h-[720px] xl:sticky xl:top-5">
           <DocumentViewer fileUrl={doc.objectKey ? `/api/documents/${doc.id}/file` : null} title={doc.fileName ?? doc.title} pageCount={doc.pageCount ?? 1} ocrText={doc.ocrText} highlights={highlights} />
         </div>
 
         <div className="space-y-5">
+          <ProcessingHistory documentId={doc.id} history={JSON.parse(JSON.stringify(await processingHistory(doc.id))) as HistoryView}/>
           <Card className="p-5">
             <h2 className="text-sm font-semibold text-slate-800">Document metadata</h2>
             <dl className="mt-3 grid grid-cols-2 gap-y-2 text-xs">
@@ -104,11 +110,11 @@ export default async function DocumentDetailPage({
           </Card>
 
           <Card className="p-5">
-            <h2 className="text-sm font-semibold text-slate-800">AI summary & key concepts</h2>
+            <h2 className="text-sm font-semibold text-slate-800">Draft AI summary & key concepts</h2>
             {doc.aiSummary ? (
               <p className="mt-2 text-sm text-slate-600">{doc.aiSummary}</p>
             ) : (
-              <p className="mt-2 text-sm text-slate-400">No AI summary yet. Extraction is queued; the processing service is being built.</p>
+              <p className="mt-2 text-sm text-slate-400">No AI summary yet. Pilot documents can be processed after approval.</p>
             )}
             {doc.keyConcepts && doc.keyConcepts.length > 0 ? (
               <div className="mt-3 flex flex-wrap gap-1.5">

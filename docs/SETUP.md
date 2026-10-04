@@ -23,7 +23,7 @@ Machine requests continue to send `Authorization: Bearer <CASEVAULT_API_TOKEN>`.
 
 Google's client secret belongs only in the Supabase Google provider configuration. The Supabase publishable key is public configuration; no administrative/service-role key is sent to the browser.
 
-If a future processor needs access, install the same machine token as a secret on that trusted endpoint, or introduce scoped per-service credentials before broadening access. No nonexistent processor endpoint has been configured. Optional local OCR-provider keys are private staging configuration and are not activated by this foundation.
+The trusted `casevault-2-processor` Worker uses the same machine token to renew workspace jobs, plus `OCR_SPACE_API_KEY` for isolated pages. Its endpoint is service-bound, with workers.dev disabled. AI keys remain on the app Worker. Introduce scoped per-service credentials before broadening access.
 
 ## Repeatable deployment
 
@@ -49,4 +49,8 @@ The import client retries transient failures with backoff. Node 26's experimenta
 
 The existing `SESSION_SECRET` now also protects encrypted Drive connection tokens. Rotating it requires reconnecting Drive. Use **Choose Drive files → Connect Google Drive** to authorize read-only access separately from workspace sign-in. The first grant is short-lived; reconnect when it expires. Run the local source bridge only on the operator machine with its private machine credential and existing `nlm` authentication. The cloud app never receives the consumer NotebookLM browser session. See `QUEUES_AND_BRIDGES.md` for commands, capture recovery, receipts, and remaining capabilities.
 
-Temporary review mode: Wrangler variable `PUBLIC_REVIEW=true` opens app pages and document reads without Google sign-in. Agent configuration and special-processing intake are public. Set false and redeploy to restore private workspace access; Google OAuth remains configured for protected connector actions.
+Temporary review mode: Wrangler variable `PUBLIC_REVIEW=true` opens app pages and document reads without Google sign-in. Agent configuration, processing submissions, approvals, retries and acceptance require owner Google sign-in or the trusted machine token. Public visitors can read results. Set false and redeploy to restore private workspace access; Google OAuth remains configured for protected connector actions.
+
+## Hosted processor deployment
+
+Apply `20261004065447_processing_pilot.sql`. Deploy `processor/wrangler.jsonc`, install `CASEVAULT_API_TOKEN` and `OCR_SPACE_API_KEY` with Wrangler secrets, then build and deploy the app with its `PROCESSOR` service binding. The processor has R2 and app service bindings, no public route, and a five-minute cron. Set its `ENABLED` variable to false and redeploy to stop scheduled claims. No Container or local OCR runtime is used. The pilot manifest is immutable and must be installed before approving work.

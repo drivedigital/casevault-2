@@ -1,0 +1,14 @@
+{
+ "$schema":"../node_modules/wrangler/config-schema.json",
+ "name":"casevault-2-processor",
+ "account_id":"2eb39046954b68cb7fb92ce98a6679b4",
+ "main":"worker.ts",
+ "compatibility_date":"2026-10-04",
+ "compatibility_flags":["nodejs_compat","global_fetch_strictly_public"],
+ "workers_dev":false,
+ "services":[{"binding":"CASEVAULT","service":"casevault-2"}],
+ "r2_buckets":[{"binding":"EVIDENCE","bucket_name":"legal-evidence-arena"}],
+ "vars":{"ENABLED":"true"},
+ "triggers":{"crons":["*/5 * * * *"]},
+ "observability":{"enabled":true}
+}

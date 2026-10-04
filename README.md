@@ -3,7 +3,9 @@
 Private evidence workspace built from the supplied CaseVault prototype, with actual NYSCEF originals, Notion source records, and a durable ingestion queue.
 
 - Repository: https://github.com/drivedigital/casevault-2 (private)
-- Application: https://casevault-2.dan-2eb.workers.dev (sign-in required)
+- Application: https://casevault-2.dan-2eb.workers.dev (public viewing; authenticated processing controls)
+- [Hosted document-processing pilot](docs/PROCESSING_PILOT.md)
+- [Cloudflare AI Search OCR and Browser Run evaluation](docs/CLOUDFLARE_EVALUATION.md)
 - [Workflow methodologies and dependencies](docs/WORKFLOWS.md)
 - [Queues, Drive file selection, NYSCEF and NotebookLM bridges](docs/QUEUES_AND_BRIDGES.md)
 - [Settings, OCR and cloud AI providers](docs/SETTINGS_AND_PROVIDERS.md)

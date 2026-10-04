@@ -10,8 +10,7 @@ export async function proxy(req:NextRequest){
  let response=NextResponse.next({request:req});
  // Temporary public review: authenticated access remains required for privileged operations.
  const publicReview = env.PUBLIC_REVIEW === 'true' && (
-   (['GET','HEAD'].includes(req.method) && !path.startsWith('/api/drive/') && !path.startsWith('/api/bridges/')) ||
-   (path === '/api/agents' || path === '/api/processing-instructions')
+   (['GET','HEAD'].includes(req.method) && !path.startsWith('/api/drive/') && !path.startsWith('/api/bridges/'))
  );
  if(publicReview){
   if(!['GET','HEAD','OPTIONS'].includes(req.method)&&req.headers.get('origin')!==req.nextUrl.origin)return NextResponse.json({error:'Invalid request origin'},{status:403});

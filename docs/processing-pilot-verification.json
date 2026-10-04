@@ -1,0 +1,293 @@
+{
+  "verifiedAt": "2026-10-04T07:33:13.960Z",
+  "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+  "provider": "nvidia",
+  "publicViewing": true,
+  "concurrency": 1,
+  "maxAttempts": 3,
+  "legacyRequestsMigrated": 0,
+  "results": [
+    {
+      "documentId": 1,
+      "originalHash": "3f8886a52bf75b8cf68fbf35db7aa952cd60ee05aed0303c909c9c6f2f0c0e93",
+      "hashVerified": true,
+      "runId": "075f9b66-21e5-4616-b3db-173b0810f355",
+      "extraction": "complete",
+      "ai": "complete",
+      "review": "unreviewed",
+      "pages": 2,
+      "embeddedPages": 2,
+      "ocrPages": 0,
+      "unavailablePages": 0,
+      "supportedFacts": 8,
+      "unsupportedFacts": 0,
+      "inferenceCosts": [
+        null
+      ],
+      "error": null,
+      "extractionKey": "casevault-2/derivatives/3f8886a52bf75b8cf68fbf35db7aa952cd60ee05aed0303c909c9c6f2f0c0e93/text-first-ocrspace-v1/bb6bb7bfaf9481c13c231951e37a10409e790fe81cf4fcf91d75587ff27c91d1.json"
+    },
+    {
+      "documentId": 3,
+      "originalHash": "625ec88eebc9dc5203c1bd3b8ef1c67a10b507b52a76864ae1d70e9c2c00907e",
+      "hashVerified": true,
+      "runId": "87384956-b36f-4f86-b940-ae60c8f3afc7",
+      "extraction": "complete",
+      "ai": "complete",
+      "review": "unreviewed",
+      "pages": 2,
+      "embeddedPages": 2,
+      "ocrPages": 0,
+      "unavailablePages": 0,
+      "supportedFacts": 11,
+      "unsupportedFacts": 0,
+      "inferenceCosts": [
+        null
+      ],
+      "error": null,
+      "extractionKey": "casevault-2/derivatives/625ec88eebc9dc5203c1bd3b8ef1c67a10b507b52a76864ae1d70e9c2c00907e/text-first-ocrspace-v1/3f776e7fe7f3658aa6ab04202996d568d26342331024a4443e00a121131228aa.json"
+    },
+    {
+      "documentId": 4,
+      "originalHash": "b84a6bed94fc360d094cca957e3ddedec0d465fa2412e80473d784a40314ff2d",
+      "hashVerified": true,
+      "runId": "a1745cd5-314d-4008-83df-57ee64b2fa40",
+      "extraction": "complete",
+      "ai": "complete",
+      "review": "unreviewed",
+      "pages": 3,
+      "embeddedPages": 3,
+      "ocrPages": 0,
+      "unavailablePages": 0,
+      "supportedFacts": 3,
+      "unsupportedFacts": 9,
+      "inferenceCosts": [
+        null
+      ],
+      "error": null,
+      "extractionKey": "casevault-2/derivatives/b84a6bed94fc360d094cca957e3ddedec0d465fa2412e80473d784a40314ff2d/text-first-ocrspace-v1/d3c21e8026bfd938f7bae44bfd719ea9e49c538632c3921d2215c59a5445c6d9.json"
+    },
+    {
+      "documentId": 152,
+      "originalHash": "63308e769c8f77e6777f87202e04e8073b619e6cdb574f64aba8d439179d534e",
+      "hashVerified": true,
+      "runId": "88e9e4a8-74bf-4b70-9dfa-7a623a1e35be",
+      "extraction": "complete",
+      "ai": "complete",
+      "review": "unreviewed",
+      "pages": 3,
+      "embeddedPages": 3,
+      "ocrPages": 0,
+      "unavailablePages": 0,
+      "supportedFacts": 9,
+      "unsupportedFacts": 3,
+      "inferenceCosts": [
+        null
+      ],
+      "error": null,
+      "extractionKey": "casevault-2/derivatives/63308e769c8f77e6777f87202e04e8073b619e6cdb574f64aba8d439179d534e/text-first-ocrspace-v1/dce55f0fd58df84d4f1fe06ff6b67e94ed907fec23031208e6754547cd85f48e.json"
+    },
+    {
+      "documentId": 154,
+      "originalHash": "535849946523a3b79617f432013e24fc2e85bea203917ad8131d2b8e7db35f2f",
+      "hashVerified": true,
+      "runId": "191ade39-6d33-4141-9caf-e56cc3ada53e",
+      "extraction": "complete",
+      "ai": "complete",
+      "review": "unreviewed",
+      "pages": 10,
+      "embeddedPages": 10,
+      "ocrPages": 0,
+      "unavailablePages": 0,
+      "supportedFacts": 16,
+      "unsupportedFacts": 18,
+      "inferenceCosts": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "error": null,
+      "extractionKey": "casevault-2/derivatives/535849946523a3b79617f432013e24fc2e85bea203917ad8131d2b8e7db35f2f/text-first-ocrspace-v1/3e672a9e2728e6a8a546fdc79bb3fa806f83d618384e90e48bbe8678024cd7e2.json"
+    },
+    {
+      "documentId": 158,
+      "originalHash": "a8b1799262c486b5c8f4ba609c4af712782a35f8d413e7a2353f4ce106e479be",
+      "hashVerified": true,
+      "runId": "9b6a597b-0b5c-42a4-a6d6-49e7d5eb5433",
+      "extraction": "complete",
+      "ai": "complete",
+      "review": "unreviewed",
+      "pages": 1,
+      "embeddedPages": 1,
+      "ocrPages": 0,
+      "unavailablePages": 0,
+      "supportedFacts": 12,
+      "unsupportedFacts": 0,
+      "inferenceCosts": [
+        null
+      ],
+      "error": null,
+      "extractionKey": "casevault-2/derivatives/a8b1799262c486b5c8f4ba609c4af712782a35f8d413e7a2353f4ce106e479be/text-first-ocrspace-v1/908aab24703d23ae64e3e1b02d63653ba1e0f4ef74b363338211c64dd15bfbb8.json"
+    },
+    {
+      "documentId": 161,
+      "originalHash": "65fe9d30e7a9df4f6d7aecf581c98fe086546b313cc36b185b0dc3b2534b49fa",
+      "hashVerified": true,
+      "runId": "7f0ed576-6a48-4c58-ac45-939e695d8d58",
+      "extraction": "complete",
+      "ai": "complete",
+      "review": "unreviewed",
+      "pages": 1,
+      "embeddedPages": 1,
+      "ocrPages": 0,
+      "unavailablePages": 0,
+      "supportedFacts": 10,
+      "unsupportedFacts": 1,
+      "inferenceCosts": [
+        null
+      ],
+      "error": null,
+      "extractionKey": "casevault-2/derivatives/65fe9d30e7a9df4f6d7aecf581c98fe086546b313cc36b185b0dc3b2534b49fa/text-first-ocrspace-v1/8fdf44cd3bd045e0bd37ede705fcddc84b83b53a319d0b2324231dd80eb64dce.json"
+    },
+    {
+      "documentId": 167,
+      "originalHash": "98a0bce6c6b864115bceb6e986c4c28b9c973c724b305a48d33a5b182362d717",
+      "hashVerified": true,
+      "runId": "2471d863-ff33-46de-92c8-4ade5addb830",
+      "extraction": "complete",
+      "ai": "complete",
+      "review": "unreviewed",
+      "pages": 5,
+      "embeddedPages": 5,
+      "ocrPages": 0,
+      "unavailablePages": 0,
+      "supportedFacts": 11,
+      "unsupportedFacts": 0,
+      "inferenceCosts": [
+        null
+      ],
+      "error": null,
+      "extractionKey": "casevault-2/derivatives/98a0bce6c6b864115bceb6e986c4c28b9c973c724b305a48d33a5b182362d717/text-first-ocrspace-v1/6b5c506315465f859e850390caa7c74a5a51ac826f5d92f0692efbcd8c6ecfe7.json"
+    },
+    {
+      "documentId": 174,
+      "originalHash": "0dfae3bb4f909b88054155eecf8a01f18e0d584226c50541aa09f309cb27bebe",
+      "hashVerified": true,
+      "runId": "d9c6568c-2e1c-4b98-9321-3fb99c4f6be1",
+      "extraction": "complete",
+      "ai": "needs_human",
+      "review": "unreviewed",
+      "pages": 1,
+      "embeddedPages": 0,
+      "ocrPages": 1,
+      "unavailablePages": 0,
+      "supportedFacts": 0,
+      "unsupportedFacts": 0,
+      "error": "NVIDIA returned malformed JSON and an unsupported fact kind (entity). OCR text is saved. Submit a new request emphasizing valid JSON and person/date/event/statement kinds, or select another verified-free model.",
+      "extractionKey": "casevault-2/derivatives/0dfae3bb4f909b88054155eecf8a01f18e0d584226c50541aa09f309cb27bebe/text-first-ocrspace-v1/7494d0106feab5da312ddd70e6abc2060409d19421168ddd84aab9010e79f833.json"
+    },
+    {
+      "documentId": 1007,
+      "originalHash": "21b23cc929de7f819dd40f14eda13680f151180567bf03fa5f4e08de00ef26a3",
+      "hashVerified": true,
+      "runId": "89bc682b-73e8-438c-a1fe-03113410dec0",
+      "extraction": "complete",
+      "ai": "complete",
+      "review": "unreviewed",
+      "pages": 1,
+      "embeddedPages": 1,
+      "ocrPages": 0,
+      "unavailablePages": 0,
+      "supportedFacts": 4,
+      "unsupportedFacts": 2,
+      "inferenceCosts": [
+        null
+      ],
+      "error": null,
+      "extractionKey": "casevault-2/derivatives/21b23cc929de7f819dd40f14eda13680f151180567bf03fa5f4e08de00ef26a3/text-first-ocrspace-v1/0bff1a18369894cd980d3995b72258d7e88d4fe9d6a282ccc792d06609c16e6a.json"
+    }
+  ],
+  "accessChecks": [
+    {
+      "path": "/api/processing/pilot",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/processing/documents/1",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/processing-instructions",
+      "method": "POST",
+      "status": 401
+    },
+    {
+      "path": "/api/processing-instructions",
+      "method": "PATCH",
+      "status": 401
+    },
+    {
+      "path": "/api/processing/tick",
+      "method": "POST",
+      "status": 401
+    },
+    {
+      "path": "/api/processing/pilot",
+      "method": "POST",
+      "status": 401
+    },
+    {
+      "path": "/api/agents",
+      "method": "PATCH",
+      "status": 401
+    },
+    {
+      "case": "stale lease rejected",
+      "passed": true
+    },
+    {
+      "case": "approval idempotency",
+      "passed": true
+    },
+    {
+      "case": "outside-pilot approval rejected",
+      "passed": true
+    }
+  ],
+  "limitations": [
+    "Billing and remaining platform allowance not independently verified through account APIs.",
+    "All deliberate provider outages, quota-exhaustion scenarios and Worker crashes have not been reproduced live.",
+    "OCR/table fidelity requires human review; quote matching does not verify allegations."
+  ],
+  "totals": {
+    "documents": 10,
+    "pages": 29,
+    "embeddedPages": 28,
+    "ocrPages": 1,
+    "aiComplete": 9,
+    "needsAttention": 1,
+    "citationMatchedFacts": 84,
+    "unsupportedCitations": 33,
+    "humanAcceptances": 0,
+    "generalBacklogQueued": 507,
+    "outsidePilotJobsConsumed": 0
+  },
+  "snapshotCheck": {
+    "case": "approved snapshot survives later agent model change",
+    "passed": true,
+    "boundRunModel": "nvidia/nemotron-3.5-lightning-30b-a3b"
+  },
+  "deployments": {
+    "appVersion": "9363b37a-f563-4560-ac23-f93342ffe639",
+    "processorVersion": "58500ac4-d1f1-4a9c-89d6-83dd8e12a00f",
+    "processorSchedule": "*/5 * * * *"
+  },
+  "pricingBasis": {
+    "nvidia": "Documented free prototyping endpoint checked before each call; NVIDIA does not report a monetary cost field.",
+    "openrouter": "Smoke response receipt reported cost 0; invalid outputs and timeout runs were held."
+  },
+  "interpretationReviewFinding": "Smoke summary added service/appearance details and a fact interpreted a document date as possible accrual. These drafts require correction before human acceptance."
+}

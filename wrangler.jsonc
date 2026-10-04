@@ -13,6 +13,7 @@
     "binding": "ASSETS"
   },
   "services": [
+    {"binding":"PROCESSOR","service":"casevault-2-processor"},
     {
       "binding": "WORKER_SELF_REFERENCE",
       "service": "casevault-2"
