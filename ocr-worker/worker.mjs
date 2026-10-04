@@ -70,7 +70,7 @@ const worker = {
       try {
         const payload = modelKey === 'moondream'
           ? { task: 'query', image: dataUri(bytes, mime), question: prompt, reasoning: false, max_tokens: maxTokens, temperature: 0, stream: false }
-          : { prompt, image: Array.from(bytes), max_tokens: maxTokens, temperature: 0, stream: false };
+          : { messages: [{ role: 'user', content: [{ type: 'text', text: prompt }, { type: 'image_url', image_url: { url: dataUri(bytes, mime) } }] }], max_tokens: maxTokens, temperature: 0, stream: false };
         result = await env.AI.run(models[modelKey], payload);
       } catch (error) {
         const message = String(error?.message ?? error).slice(0, 2000).replaceAll(env.OCR_SECRET_KEY, '[redacted]');
