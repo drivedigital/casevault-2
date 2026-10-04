@@ -5,7 +5,7 @@ import { driveSearchQuery, driveImportSchema } from '../src/lib/drive-schema';
 import { bridgeCompletionSchema, validCourtUrl } from '../src/lib/bridge-schema';
 
 test('active model selection rejects unknown and non-text models or unavailable credentials', () => {
-  const provider: ProviderView = { id: 'openrouter', configured: true, status: 'ready', checkedAt: '', message: '', models: [{ id: 'synthetic-text', name: 'Synthetic text', output: ['text'] }, { id: 'synthetic-image', name: 'Synthetic image', output: ['image'] }], activeModel: null };
+  const provider: ProviderView = { id: 'openrouter', configured: true, status: 'ready', checkedAt: '', message: '', models: [{ id: 'synthetic-text', name: 'Synthetic text', output: ['text'] }, { id: 'synthetic-image', name: 'Synthetic image', output: ['image'] }], activeModel: null, activeModels: [] };
   assert.equal(validActiveModel(provider, 'synthetic-text'), true);
   assert.equal(validActiveModel(provider, 'synthetic-image'), false);
   assert.equal(validActiveModel(provider, 'another-provider/model'), false);
@@ -28,4 +28,11 @@ test('bridge receipts reject fabricated completion, duplicate filings, and misma
   assert.equal(bridgeCompletionSchema.safeParse({ ...envelope, result: { ...envelope.result, entries: [entry] } }).success, true);
   assert.equal(bridgeCompletionSchema.safeParse({ ...envelope, result: { ...envelope.result, entries: [entry, entry] } }).success, false);
   assert.equal(bridgeCompletionSchema.safeParse({ ...envelope, result: { ...envelope.result, entries: [{ ...entry, original: { sha256: 'a'.repeat(64), objectKey: 'casevault-2/originals/' + 'b'.repeat(64), filename: 'synthetic.pdf', bytes: 10, pageCount: 1 } }] } }).success, false);
+});
+
+test('multiple active model settings preserve legacy choices and reject duplicate IDs',()=>{
+ assert.deepEqual(modelSelectionSchema.parse({provider:'openrouter',model:'model-a'}),{provider:'openrouter',models:['model-a']});
+ assert.deepEqual(modelSelectionSchema.parse({provider:'gemini',model:null}),{provider:'gemini',models:[]});
+ assert.deepEqual(modelSelectionSchema.parse({provider:'nvidia',models:['model-a','model-b']}).models,['model-a','model-b']);
+ assert.equal(modelSelectionSchema.safeParse({provider:'nvidia',models:['model-a','model-a']}).success,false);
 });

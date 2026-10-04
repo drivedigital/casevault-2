@@ -87,7 +87,7 @@ export async function readProviders(): Promise<ProviderView[]> {
   return providerIds.map(id => {
     const configured = Boolean(credential(id));
     const previous = parsed.success ? parsed.data.providers.find(p => p.id === id) : undefined;
-    return { activeModel: selections[id] ?? null, ...(previous ?? { id, checkedAt: "", status: "missing", message: configured ? "Credential installed. Refresh connections to discover models." : "Credential has not been installed.", models: [] }), configured, ...(!configured ? { status: "missing" as const, message: "Credential has not been installed.", models: [] } : {}) };
+    return { activeModels: selections[id] ?? [], activeModel: selections[id]?.[0] ?? null, ...(previous ?? { id, checkedAt: "", status: "missing", message: configured ? "Credential installed. Refresh connections to discover models." : "Credential has not been installed.", models: [] }), configured, ...(!configured ? { status: "missing" as const, message: "Credential has not been installed.", models: [] } : {}) };
   });
 }
 export async function refreshProviders(): Promise<ProviderView[]> {
@@ -120,25 +120,26 @@ export async function generateText(provider: Exclude<ProviderId, "ocr">, model: 
 export { modelSchema };
 
 const selectionsPrefix = "casevault-2/settings/active-models/";
-async function readModelSelections(): Promise<Partial<Record<ProviderId, string>>> {
+async function readModelSelections(): Promise<Partial<Record<ProviderId, string[]>>> {
   const bucket = getCloudflareContext().env.EVIDENCE;
-  const selections: Partial<Record<ProviderId, string>> = {};
+  const selections: Partial<Record<ProviderId, string[]>> = {};
   await Promise.all((["openrouter", "nvidia", "gemini"] as const).map(async id => {
     const object = await bucket.get(`${selectionsPrefix}${id}.json`);
     const parsed = modelSelectionSchema.safeParse(object ? await object.json() : null);
-    if (parsed.success && parsed.data.model && parsed.data.provider === id) selections[id] = parsed.data.model;
+    if (parsed.success && parsed.data.provider === id) selections[id] = parsed.data.models;
   }));
   return selections;
 }
 export async function selectActiveModel(input: unknown) {
   const selection = modelSelectionSchema.parse(input);
   const provider = (await readProviders()).find(p => p.id === selection.provider);
-  if (!provider || !validActiveModel(provider, selection.model)) throw new Error("Choose a text model from this provider's available catalog.");
+  if (!provider || !selection.models.every(model => validActiveModel(provider, model))) throw new Error("Choose a text model from this provider's available catalog.");
   await getCloudflareContext().env.EVIDENCE.put(`${selectionsPrefix}${selection.provider}.json`, JSON.stringify(selection), { httpMetadata: { contentType: "application/json" } });
   return readProviders();
 }
-export async function generateWithActiveModel(provider: "openrouter" | "nvidia" | "gemini", prompt: string): Promise<string> {
+export async function generateWithActiveModel(provider: "openrouter" | "nvidia" | "gemini", prompt: string, model?: string): Promise<string> {
   const connection = (await readProviders()).find(p => p.id === provider);
-  if (!connection?.activeModel || !validActiveModel(connection, connection.activeModel)) throw new Error("Choose an available active model in Settings first.");
-  return generateText(provider, connection.activeModel, prompt);
+  const selected = model ?? connection?.activeModels[0];
+  if (!connection || !selected || !connection.activeModels.includes(selected) || !validActiveModel(connection,selected)) throw new Error("Choose an available active model in Settings first.");
+  return generateText(provider, selected, prompt);
 }

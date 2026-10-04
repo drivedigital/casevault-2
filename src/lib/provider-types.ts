@@ -11,11 +11,15 @@ export const catalogSchema = z.object({ version: z.literal(1), providers: z.arra
 export type ProviderCheck = z.infer<typeof providerCheckSchema>;
 export type Model = z.infer<typeof modelSchema>;
 export type ProviderCatalog = z.infer<typeof catalogSchema>;
-export const providerViewSchema = providerCheckSchema.extend({ configured: z.boolean(), activeModel: z.string().nullable().default(null) });
+export const providerViewSchema = providerCheckSchema.extend({ configured: z.boolean(), activeModel: z.string().nullable().default(null), activeModels: z.array(z.string()).default([]) });
 export const providerResponseSchema = z.object({ providers: z.array(providerViewSchema) });
 export type ProviderView = z.infer<typeof providerViewSchema>;
 export const providerNames: Record<ProviderId, string> = { openrouter: "OpenRouter", nvidia: "NVIDIA", gemini: "Google Gemini", ocr: "OCR.space" };
 
 export const inferenceProviderSchema = z.enum(["openrouter", "nvidia", "gemini"]);
-export const modelSelectionSchema = z.object({ provider: inferenceProviderSchema, model: z.string().min(1).max(256).nullable() }).strict();
+const selectionModel = z.string().min(1).max(256);
+export const modelSelectionSchema = z.union([
+ z.object({provider:inferenceProviderSchema,models:z.array(selectionModel).max(500).refine(models=>new Set(models).size===models.length,"Duplicate models")}).strict(),
+ z.object({provider:inferenceProviderSchema,model:selectionModel.nullable()}).strict().transform(({provider,model})=>({provider,models:model?[model]:[]})),
+]);
 export function validActiveModel(provider: ProviderView, model: string | null) { return model === null || (provider.configured && provider.status === "ready" && provider.models.some(candidate => candidate.id === model && (!candidate.output || candidate.output.includes("text")))); }
