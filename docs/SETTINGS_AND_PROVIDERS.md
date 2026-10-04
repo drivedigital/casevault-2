@@ -40,3 +40,5 @@ Knowledge Graph renders a static placeholder and does not call the graph API.
 ## Model selection and source controls
 
 Settings now includes persistent active-model pills for each cloud inference provider and a real Google Drive file selector. The source bridge controls are under **Court & NotebookLM**. See `QUEUES_AND_BRIDGES.md` for authorization, queue semantics, adapter execution and limits.
+
+Model filters appear inside each inference provider card. Filters independently match model names and IDs, ignore case and surrounding whitespace, show matching counts, and can be cleared. Filtering does not change the saved active model.

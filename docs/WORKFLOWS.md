@@ -62,3 +62,5 @@ The attached `Causes of Action Workflow.md` is a requirements reference, not an 
 ## Source bridge implementation — 2026-10-04
 
 The first local adapters are now in `bridges/`, with cloud queue/lease/completion contracts and app controls. NotebookLM source reconciliation was exercised against the existing LT notebook without adding duplicates. NYSCEF anonymous HTTP access paused for the supervised browser rather than importing an empty docket. A DOM capture adapter preserves observed court pagination in a private dated bundle. Google Drive has separate read-only OAuth, real file selection, and source-version ingestion. These additions preserve the historical methods above; they do not prove unattended court access or implement corpus OCR. See `QUEUES_AND_BRIDGES.md` and `workflow-verification.json`.
+
+Docket overview cards and detail pages link to the recorded live NYSCEF source URL in a new tab. Links preserve the court's opaque docket identifier; source URLs are not reconstructed from index numbers.

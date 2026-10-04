@@ -1,3 +1,4 @@
+import {liveNyscefUrl} from "@/lib/docket-links";
 import Link from "next/link";
 import { getAllData } from "@/lib/data";
 import { Badge, Card, SectionHeading } from "@/components/ui";
@@ -37,6 +38,7 @@ export default async function DocketKeyPage() {
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         {data.dockets.map((docket) => {
+          const liveUrl = liveNyscefUrl(docket.sourceUrl);
           const matter = data.matters.find((m) => m.id === docket.matterId);
           const entries = data.docketEntries
             .filter((e) => e.docketId === docket.id)
@@ -56,6 +58,7 @@ export default async function DocketKeyPage() {
                 <Badge className="bg-sky-50 text-sky-700 ring-sky-200">{docket.status}</Badge>
               </div>
 
+              {liveUrl ? <a href={liveUrl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-sky-600 hover:underline">Open live NYSCEF docket <ArrowUpRight size={14}/></a> : null}
               {matter ? (
                 <Link href={`/matters/${matter.id}`} className="mt-2 text-xs font-medium text-indigo-600 hover:underline">
                   {matter.name}

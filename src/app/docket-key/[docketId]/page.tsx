@@ -1,3 +1,4 @@
+import {liveNyscefUrl} from "@/lib/docket-links";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAllData } from "@/lib/data";
@@ -18,6 +19,7 @@ export default async function DocketDetailPage({
   const docket = data.dockets.find((d) => d.id === Number(docketId));
   if (!docket) notFound();
 
+  const liveUrl = liveNyscefUrl(docket.sourceUrl);
   const matter = data.matters.find((m) => m.id === docket.matterId);
   const entries = data.docketEntries
     .filter((e) => e.docketId === docket.id)
@@ -33,7 +35,7 @@ export default async function DocketDetailPage({
         eyebrow={docket.court}
         title={docket.indexNumber}
         description={docket.caption}
-        action={matter ? <Badge className="bg-emerald-50 text-emerald-700 ring-emerald-200">{matter.name}</Badge> : undefined}
+        action={<div className="flex flex-wrap items-center gap-3">{matter ? <Badge className="bg-emerald-50 text-emerald-700 ring-emerald-200">{matter.name}</Badge> : null}{liveUrl ? <a href={liveUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 rounded-lg bg-sky-600 px-3 py-2 text-sm font-medium text-white">Open live NYSCEF docket <ArrowUpRight size={14}/></a> : null}</div>}
       />
 
       <Card className="overflow-hidden">

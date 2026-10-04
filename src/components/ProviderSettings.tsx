@@ -8,7 +8,7 @@ import { providerNames, providerResponseSchema, type ProviderView } from "@/lib/
 export function ProviderSettings({ initialProviders }: { initialProviders: ProviderView[] }) {
   const [providers, setProviders] = useState(initialProviders);
   const [refreshing, setRefreshing] = useState(false);
-  const [query, setQuery] = useState("");
+  const [queries, setQueries] = useState<Record<string,string>>({});
   const [error, setError] = useState("");
   const [saving, setSaving] = useState<string | null>(null);
   async function chooseModel(provider: string, model: string | null) {
@@ -44,10 +44,10 @@ export function ProviderSettings({ initialProviders }: { initialProviders: Provi
       <button onClick={refresh} disabled={refreshing} className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white disabled:opacity-50">{refreshing ? <Loader2 size={15} className="animate-spin" /> : <RefreshCw size={15} />}{refreshing ? "Checking connections…" : "Refresh connections"}</button>
     </div>
     {error ? <p role="alert" className="text-sm text-rose-600">{error}</p> : null}
-    <label className="flex max-w-md items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2"><Search size={16} className="text-slate-400" /><input aria-label="Search available models" placeholder="Search available models…" value={query} onChange={e => setQuery(e.target.value)} className="w-full text-sm outline-none" /></label>
     <div className="grid items-start gap-5 xl:grid-cols-2">
       {providers.map(provider => {
-        const models = provider.models.filter(m => `${m.id} ${m.name}`.toLowerCase().includes(query.toLowerCase()));
+        const query = queries[provider.id] ?? "";
+        const models = provider.models.filter(m => `${m.id} ${m.name}`.toLowerCase().includes(query.trim().toLowerCase()));
         const ready = provider.status === "ready";
         return <Card key={provider.id} className="overflow-hidden">
           <div className="p-5"><div className="flex items-center justify-between gap-2"><h3 className="text-base font-semibold text-slate-800">{providerNames[provider.id]}</h3><span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium ${ready ? "bg-emerald-50 text-emerald-700" : provider.status === "error" ? "bg-rose-50 text-rose-700" : "bg-slate-100 text-slate-600"}`}>{ready ? <CheckCircle2 size={13} /> : <CircleAlert size={13} />}{ready ? "Connection verified" : provider.status === "error" ? "Check failed" : "Not checked"}</span></div>
@@ -57,6 +57,10 @@ export function ProviderSettings({ initialProviders }: { initialProviders: Provi
           </div>
           {provider.id !== "ocr" ? <div className="border-t border-slate-100 p-5">
             <p className="mb-3 text-sm font-medium text-slate-700">Active model: <span className="font-normal break-all">{provider.activeModel ?? "None selected"}</span></p>
+            <label className="mb-3 block text-xs font-medium text-slate-600">Filter {providerNames[provider.id]} models
+              <span className="mt-1 flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2"><Search size={16} className="text-slate-400" /><input type="search" aria-label={`Filter ${providerNames[provider.id]} models`} placeholder="Type a model name or ID…" value={query} onChange={e => setQueries(previous => ({...previous,[provider.id]:e.target.value}))} className="w-full text-sm outline-none" />{query ? <button type="button" onClick={()=>setQueries(previous=>({...previous,[provider.id]:""}))} aria-label={`Clear ${providerNames[provider.id]} model filter`} className="text-xs text-indigo-600">Clear</button> : null}</span>
+            </label>
+            {models.length===0 ? <p role="status" className="mb-3 text-sm text-slate-500">{query.trim() ? "No models match this filter." : "No models available."}</p> : null}
             <div role="group" aria-label={`${providerNames[provider.id]} active model`} className="flex max-h-72 flex-wrap gap-2 overflow-y-auto p-1">
               <button aria-pressed={provider.activeModel === null} disabled={saving === provider.id} onClick={() => chooseModel(provider.id, null)} className={`rounded-full border px-3 py-1.5 text-xs ${provider.activeModel === null ? "border-indigo-600 bg-indigo-600 text-white" : "border-slate-200 text-slate-600"}`}>None</button>
               {models.map(model => <button key={model.id} title={`${model.id}${model.contextWindow ? ` · ${model.contextWindow.toLocaleString()} token context` : ""}`} aria-pressed={provider.activeModel === model.id} disabled={saving === provider.id || refreshing || !ready || (model.output !== undefined && !model.output.includes("text"))} onClick={() => chooseModel(provider.id, model.id)} className={`max-w-full truncate rounded-full border px-3 py-1.5 text-xs transition disabled:opacity-40 ${provider.activeModel === model.id ? "border-indigo-600 bg-indigo-600 text-white" : "border-slate-200 bg-white text-slate-600 hover:border-indigo-400 hover:bg-indigo-50"}`}>{model.name}</button>)}
