@@ -5,13 +5,54 @@
   "imageDpi": 130,
   "model": "@cf/moondream/moondream3.1-9B-A2B",
   "calls": [
-    {"page": 13, "httpStatus": 200, "elapsedMs": 4415, "finishReason": "stop", "humanAccepted": false, "finding": "handwriting partially captured; character errors and omitted marginal marks"},
-    {"page": 12, "httpStatus": 200, "elapsedMs": 4198, "finishReason": "stop", "humanAccepted": false, "finding": "both strikeout paragraphs not identified"},
-    {"page": 1, "httpStatus": 200, "elapsedMs": 798, "finishReason": "stop", "humanAccepted": false, "finding": "most form omitted; checked incapacity box marked unchecked"}
+    {
+      "page": 13,
+      "httpStatus": 200,
+      "elapsedMs": 4415,
+      "finishReason": "stop",
+      "humanAccepted": false,
+      "finding": "handwriting partially captured; character errors and omitted marginal marks"
+    },
+    {
+      "page": 12,
+      "httpStatus": 200,
+      "elapsedMs": 4198,
+      "finishReason": "stop",
+      "humanAccepted": false,
+      "finding": "both strikeout paragraphs not identified"
+    },
+    {
+      "page": 1,
+      "httpStatus": 200,
+      "elapsedMs": 798,
+      "finishReason": "stop",
+      "humanAccepted": false,
+      "finding": "most form omitted; checked incapacity box marked unchecked"
+    }
   ],
-  "llama": {"errorCode": 5016, "status": "license acceptance pending", "inferenceOutput": false},
-  "workerDeployment": {"status": "blocked", "uploadAttempts": 2, "error": "No access to the specified resource"},
-  "gemini": {"testsPaused": true, "settingsPauseConfirmed": false, "credentialsRetained": true, "writeErrorCode": 10000},
+  "llama": {
+    "historicalFailure": {
+      "errorCode": 5016,
+      "status": "license acceptance pending",
+      "inferenceOutput": false
+    },
+    "status": "agreement accepted; page-12 OCR quality failed",
+    "agreementHttpStatus": 200,
+    "inferenceOutput": true,
+    "humanAccepted": false,
+    "followupReceipt": "llama-agreement-followup.json"
+  },
+  "workerDeployment": {
+    "status": "blocked",
+    "uploadAttempts": 2,
+    "error": "No access to the specified resource"
+  },
+  "gemini": {
+    "testsPaused": true,
+    "settingsPauseConfirmed": false,
+    "credentialsRetained": true,
+    "writeErrorCode": 10000
+  },
   "productionPilotModified": false,
   "billingAllowanceChecked": false
 }

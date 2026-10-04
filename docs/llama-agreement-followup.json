@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-04",
+  "transport": "Cloudflare integration",
+  "model": "@cf/meta/llama-3.2-11b-vision-instruct",
+  "agreement": {
+    "request": {
+      "prompt": "agree"
+    },
+    "operatorAuthorized": true,
+    "httpStatus": 200,
+    "success": true
+  },
+  "ocr": {
+    "page": 12,
+    "httpStatus": 200,
+    "elapsedMs": 26326,
+    "inputTokens": 6485,
+    "outputTokens": 635,
+    "humanAccepted": false,
+    "finding": "Generic description, invented sections and incorrect strikeouts; no literal transcription"
+  },
+  "productionPilotModified": false
+}

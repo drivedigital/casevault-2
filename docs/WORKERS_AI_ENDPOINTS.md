@@ -1,6 +1,6 @@
 # Workers AI endpoint/configuration review — 2026-10-04
 
-The Cloudflare plugin documentation and account-specific live model schema were checked through the integration. The previous Llama request reached the model and returned error 5016 (model agreement), rather than a model-not-found or authentication error. Configuration is substantially correct; the required agreement remains pending, and the image payload used a supported but deprecated representation.
+The Cloudflare plugin documentation and account-specific live model schema were checked through the integration. The previous Llama request returned error 5016 (model agreement). On the operator's explicit instruction, a subsequent `{"prompt":"agree"}` request succeeded with HTTP 200. A multimodal page-image request then succeeded, confirming that the agreement gate was cleared. The image payload now uses the current message format.
 
 ## Correct configuration
 
@@ -18,7 +18,7 @@ The schema still allows top-level `prompt` plus image bytes as an array, but mar
 
 Cloudflare requires an initial `{ "prompt": "agree" }` request to this exact model before normal use. This accepts Meta's Community License and Acceptable Use Policy; the actual account error additionally requires representing EU eligibility. No acceptance request has been sent without the operator's explicit authorization. Agreement and Worker deployment permissions are separate: error 5016 does not explain the earlier Worker upload or R2 write failures.
 
-An accepted agreement would allow a proper OCR quality test; it would not establish transcription accuracy or create a searchable PDF. The adapter changes are tested locally and are not a claim of successful live Llama OCR or a deployed OCR Worker.
+The authorized agreement request was sent on 2026-10-04 through the Cloudflare integration. Its generated text is not document evidence. A page-12 OCR test returned HTTP 200 in 26,326 ms, but failed quality review: it described ten invented sections instead of transcribing the five actual paragraphs, and misidentified the crossed-out passages. API execution succeeded; OCR acceptance did not. No searchable PDF was generated. The adapter changes remain locally tested; the separate OCR Worker is not deployed.
 
 ## Sources
 

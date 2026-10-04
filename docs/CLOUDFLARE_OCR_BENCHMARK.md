@@ -20,6 +20,8 @@ Moondream is an experimental option, not a validated replacement OCR engine for 
 
 ## Llama result
 
+Follow-up on 2026-10-04: the operator explicitly requested `{"prompt":"agree"}`. The Cloudflare integration returned HTTP 200. A subsequent current-schema multimodal request on page 12 also returned HTTP 200 (26,326 ms; 6,485 input and 635 output tokens), but produced a generic description rather than a literal transcription. It invented ten sections and alternating strikeouts; the actual page has five ORDERED AND ADJUDGED paragraphs, with the second and third struck through. This output is rejected for OCR use. Agreement is now resolved; the earlier failure below remains a historical observation.
+
 One direct call to `@cf/meta/llama-3.2-11b-vision-instruct` on page 13 returned Cloudflare error 5016: model agreement required. No OCR output was obtained. The integration requires a separate `agree` prompt accepting Meta's Community License/AUP and representing EU eligibility. Acceptance was not submitted; the operator was asked explicitly. The new Worker intentionally exposes no automatic agreement endpoint or implicit model fallback.
 
 Configuration follow-up: the Cloudflare plugin's live model schema confirms the original top-level image byte array is accepted but deprecated. The adapter now embeds page images in multimodal messages using `image_url` data URIs. Seven focused OCR Worker tests pass. This request-format update does not remove the agreement requirement or establish live OCR success. See [endpoint configuration review](WORKERS_AI_ENDPOINTS.md).
