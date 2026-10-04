@@ -44,3 +44,7 @@ Sources: [DeepSeek](https://build.nvidia.com/deepseek-ai/deepseek-v4.1-flash), [
 ## Round 2 endpoint resolution
 
 Nemotron OCR v2 specialized hosted inference is verified with HTTP 200 and word polygons/confidence. DeepSeek 4.1 Flash is now included in the opt-in vision benchmark allowlist; its image request and Kimi K3 timed out at 120 seconds. The HF OCR demos were exercised with reviewed API schemas. See [comparison results](OCR_COMPARISON_ROUND_2.md).
+
+## Candidate selection update
+
+The operator removed Dots3-Note from further comparisons. Preserve its prior receipt as historical evidence, but do not call or recommend it for future OCR testing. This does not remove the separately hosted Dots-OCR parser. The streaming benchmark `scripts/benchmark-vision-stream.mjs` only permits DeepSeek 4.1 Flash, Kimi K3 and Qwen3.8 free; it records partial responses and timing, bounds execution to five minutes, and uses low reasoning effort for Kimi instead of the prior max setting.

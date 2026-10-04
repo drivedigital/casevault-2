@@ -74,3 +74,7 @@ Recorded existing R2 extraction receipts and the proposed workspace-scoped searc
 ## OCR round 2 and storage inventory — 2026-10-04
 
 Verified specialized Nemotron OCR v2 inference at 130/300 DPI and exercised Dots/DeepSeek OCR 2 public API demos. Recognition/marking errors prevent promotion; DeepSeek Flash/Kimi timed out; some follow-up demo tests were blocked. No production jobs or deployed changes. See [comparison](OCR_COMPARISON_ROUND_2.md) and [Supabase/R2 file-library design](STORAGE_AND_FILE_LIBRARY.md).
+
+## Streaming retries and operator annotation review — 2026-10-04
+
+Qwen3.8 free completed in 13 seconds with cost zero reported; Kimi K3 completed with low reasoning effort in 66 seconds. Both identified the correct crossed-out paragraphs; the operator confirmed the underlying §81.16(c)(4) text and explained that its exact citation is not critical because the paragraph is invalidated. Fidelity warnings remain, but these models pass that annotation check. Qwen higher-resolution follow-up returned 429; DeepSeek streaming retry produced no events in five minutes. Dots3-Note is removed from future comparison candidates, while historical outputs remain. BHL published-license inventory is documented with Dots supplemental-agreement and SmolDocling metadata inconsistencies. No app deployment or production processing resulted.
