@@ -1,0 +1,72 @@
+{
+  "checkedAt": "2026-10-04T05:21:14.570738+00:00",
+  "deploymentVersion": "2b1b2c5d-a980-4504-a6af-fdbbdc9eaebc",
+  "providers": [
+    {
+      "id": "openrouter",
+      "configured": true,
+      "status": "ready",
+      "httpStatus": 200,
+      "checkedAt": "2026-10-04T05:20:25.353Z",
+      "message": "463 models discovered. Model access and inference limits depend on your provider account.",
+      "modelCount": 463
+    },
+    {
+      "id": "nvidia",
+      "configured": true,
+      "status": "ready",
+      "httpStatus": 200,
+      "checkedAt": "2026-10-04T05:20:25.353Z",
+      "message": "81 models discovered. Model access and inference limits depend on your provider account.",
+      "modelCount": 81
+    },
+    {
+      "id": "gemini",
+      "configured": true,
+      "status": "ready",
+      "httpStatus": 200,
+      "checkedAt": "2026-10-04T05:20:25.353Z",
+      "message": "44 models discovered. Model access and inference limits depend on your provider account.",
+      "modelCount": 44
+    },
+    {
+      "id": "ocr",
+      "configured": true,
+      "status": "ready",
+      "httpStatus": 200,
+      "checkedAt": "2026-10-04T05:20:25.353Z",
+      "message": "OCR connection verified using a synthetic test image. Engine 3 is available.",
+      "modelCount": 0
+    }
+  ],
+  "geminiGeneration": {
+    "model": "gemini-flash-latest",
+    "httpStatus": 200,
+    "response": "AI learns patterns from massive amounts of data to make predictions, solve problems, or create new content.",
+    "initialAttemptHttpStatus": 503,
+    "retrySucceeded": true
+  },
+  "nvidiaInference": {
+    "provider": "nvidia",
+    "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+    "status": 200,
+    "text": "Here's a thinking process:\n\n1.  **Analyze User Input:** The user says \"Reply with the word connected.\"\n2.  **Identify Intent",
+    "errorCode": null
+  },
+  "courtReviewBypass": {
+    "courtDocuments": 102,
+    "reviewQueueDocuments": 404,
+    "flagOverridesBypass": true,
+    "processingStatusUnchanged": true
+  },
+  "knowledgeGraph": "placeholder",
+  "checks": {
+    "anonymousSettingsApi": 401,
+    "typecheck": "passed",
+    "lint": "passed",
+    "testsPassed": 5,
+    "workerBuild": "passed",
+    "secretScan": "no matches in repository or built assets/server functions"
+  },
+  "processingRunner": "not implemented; 506 extraction jobs remain queued"
+}

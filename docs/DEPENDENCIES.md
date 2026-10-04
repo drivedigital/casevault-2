@@ -16,3 +16,7 @@ The lockfile is the exact JavaScript dependency receipt. Core versions at initia
 The prior browser and NotebookLM tooling is retained in the recent-work folder and chats. It is an external acquisition/delivery dependency, not vendored into the new Worker. Copying consumer authentication into browser code or GitHub would not wire up a safe cloud adapter. Record adapter version and session owner when reconnecting it.
 
 Supabase migrations include the private schema, grants, policies, indexes and job constraints. Role password generation is provisioning state, not a source-code dependency. `wrangler.jsonc` defines exact Cloudflare resource bindings; `.env.local` and macOS Keychain hold only private local operator state.
+
+## Provider connections — 2026-10-04
+
+OCR.space Engine 3, OpenRouter, NVIDIA, and Gemini credentials are installed as Worker secrets. Discovery uses server-side HTTP requests with bounded timeouts, fixed provider endpoints and Zod response validation. Sanitized model catalog receipts live in private R2; the Settings UI uses the authenticated app API. No additional provider SDK dependency was added. A server text inference adapter is available for the future processor; installation and model discovery do not complete corpus extraction. See `SETTINGS_AND_PROVIDERS.md`.

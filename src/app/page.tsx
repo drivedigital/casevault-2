@@ -1,3 +1,4 @@
+import { belongsInReviewQueue } from "@/lib/review-policy";
 import Link from "next/link";
 import { getAllData } from "@/lib/data";
 import { Badge, Card, SectionHeading, StatCard } from "@/components/ui";
@@ -24,7 +25,7 @@ export const dynamic = "force-dynamic";
 export default async function HomePage() {
   const data = await getAllData();
 
-  const pendingReview = data.documents.filter((d) => d.status === "pending_review").length;
+  const pendingReview = data.documents.filter((d) => d.status === "pending_review" && belongsInReviewQueue(d)).length;
   const flagged = data.documents.filter((d) => d.isFlagged).length;
   const proposalsPending = data.proposals.filter((p) => p.status === "proposed").length;
   const unresolvedAliases = data.aliases.filter((a) => !a.resolved).length;
@@ -49,7 +50,7 @@ export default async function HomePage() {
       <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-6">
         <StatCard label="Active Matters" value={data.matters.length} tone="indigo" hint="Across Supreme & Housing Court" />
         <StatCard label="Documents" value={data.documents.length} tone="slate" hint={`${data.dockets.length} dockets tracked`} />
-        <StatCard label="Pending Review" value={pendingReview} tone="amber" hint="Awaiting OCR / tagging" />
+        <StatCard label="Pending Review" value={pendingReview} tone="amber" hint="Awaiting document review" />
         <StatCard label="Flagged for Review" value={flagged} tone="rose" hint="AI-flagged documents" />
         <StatCard label="AI Proposals Open" value={proposalsPending} tone="amber" hint="Facts, aliases, summaries" />
         <StatCard label="Unresolved Aliases" value={unresolvedAliases} tone="indigo" hint="Fuzzy match candidates" />

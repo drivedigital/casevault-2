@@ -32,3 +32,7 @@ Run extraction/OCR through a leased cloud processor, preserve derivative receipt
 ## Google sign-in update
 
 Google OAuth through Supabase is enabled and verified for the authorized operator. The access-key browser login is retired; machine credentials remain separate. The authorized Google account completed sign-in and reached the dashboard with all 506 documents. See `GOOGLE_SIGN_IN.md` for configuration and authorization details.
+
+## Settings and workflow update — 2026-10-04
+
+Court filings bypass routine review, with explicit flags returning them to the queue. Knowledge Graph is a placeholder. Settings provides private credential status and model discovery for OCR.space, OpenRouter, NVIDIA, and Gemini. Provider secrets are installed in the deployed Worker. The new Gemini key passed a synthetic generation test after a temporary HTTP 503; see `SETTINGS_AND_PROVIDERS.md` and `provider-verification.json`. Extraction jobs still require a processor.

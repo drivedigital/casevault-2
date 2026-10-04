@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { belongsInReviewQueue } from "@/lib/review-policy";
 import { getAllData } from "@/lib/data";
 import { Badge, Card, SectionHeading, EmptyState } from "@/components/ui";
 import { formatDate } from "@/lib/format";
@@ -10,7 +11,7 @@ import clsx from "clsx";
 export const dynamic = "force-dynamic";
 
 const STATUS_FILTERS = ["all", "pending_review", "processing", "indexed", "verified", "flagged"];
-const SOURCE_FILTERS = ["all", "docket_filing", "drive", "upload", "email"];
+const SOURCE_FILTERS = ["all", "drive", "upload", "email"];
 
 export default async function DocumentsPage({
   searchParams,
@@ -24,7 +25,7 @@ export default async function DocumentsPage({
 
   const data = await getAllData();
 
-  let docs = data.documents;
+  let docs = data.documents.filter(belongsInReviewQueue);
   if (status !== "all") docs = docs.filter((d) => d.status === status);
   if (source !== "all") docs = docs.filter((d) => d.sourceType === source);
   if (q) docs = docs.filter((d) => d.title.toLowerCase().includes(q) || (d.ocrText ?? "").toLowerCase().includes(q));
@@ -40,7 +41,7 @@ export default async function DocumentsPage({
       <SectionHeading
         eyebrow="Docket-Key"
         title="Document Review Queue"
-        description="Every ingested PDF — court filings, Drive syncs, and manual uploads — queued for OCR, tagging, and human verification."
+        description="Review Drive, uploaded, and email documents. Court docket imports bypass routine review; explicitly flagged filings return here."
         action={
           <div className="flex gap-2">
             <IngestButton endpoint="/api/drive/sync" label="Sync Google Drive" icon="drive" variant="secondary" />
@@ -49,6 +50,7 @@ export default async function DocumentsPage({
         }
       />
 
+      <p className="text-sm text-slate-500">Court filings remain available in the <Link href="/docket-key" className="font-medium text-indigo-600 hover:underline">Docket Viewer</Link> and still await extraction.</p>
       <Card className="p-4">
         <form className="flex flex-wrap items-center gap-3" action="/documents">
           <input

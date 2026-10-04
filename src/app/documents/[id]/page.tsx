@@ -1,3 +1,4 @@
+import { bypassesDocumentReview } from "@/lib/review-policy";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAllData } from "@/lib/data";
@@ -40,8 +41,8 @@ export default async function DocumentDetailPage({
 
   return (
     <div className="space-y-5">
-      <Link href="/documents" className="flex items-center gap-1 text-xs font-medium text-slate-500 hover:text-slate-700">
-        <ChevronLeft size={14} /> Back to Review Queue
+      <Link href={bypassesDocumentReview(doc) ? `/docket-key${doc.docketId ? `/${doc.docketId}` : ""}` : "/documents"} className="flex items-center gap-1 text-xs font-medium text-slate-500 hover:text-slate-700">
+        <ChevronLeft size={14} /> {bypassesDocumentReview(doc) ? "Back to Docket" : "Back to Review Queue"}
       </Link>
 
       <div className="flex flex-wrap items-start justify-between gap-3">
@@ -58,6 +59,7 @@ export default async function DocumentDetailPage({
           </p>
         </div>
         <div className="flex items-center gap-2">
+          {bypassesDocumentReview(doc) && doc.status === "pending_review" ? <Badge className="bg-sky-50 text-sky-700 ring-sky-200">Review bypassed</Badge> : null}
           <DocumentStatusSelect documentId={doc.id} currentStatus={doc.status} />
           <AnalyzeButton documentId={doc.id} hasAnalysis={Boolean(doc.ocrText)} />
         </div>
@@ -74,6 +76,8 @@ export default async function DocumentDetailPage({
             <dl className="mt-3 grid grid-cols-2 gap-y-2 text-xs">
               <dt className="text-slate-400">Status</dt>
               <dd><Badge className={documentStatusStyles[doc.status]}>{doc.status.replace("_", " ")}</Badge></dd>
+              <dt className="text-slate-400">Review policy</dt>
+              <dd className="text-slate-700">{bypassesDocumentReview(doc) ? "Court import — routine review bypassed" : "Document review required"}</dd>
               <dt className="text-slate-400">Matter</dt>
               <dd className="text-slate-700">{matter ? <Link href={`/matters/${matter.id}`} className="text-indigo-600 hover:underline">{matter.name}</Link> : "Unassigned"}</dd>
               {docket ? (
@@ -104,7 +108,7 @@ export default async function DocumentDetailPage({
             {doc.aiSummary ? (
               <p className="mt-2 text-sm text-slate-600">{doc.aiSummary}</p>
             ) : (
-              <p className="mt-2 text-sm text-slate-400">No AI summary yet — run analysis to generate one.</p>
+              <p className="mt-2 text-sm text-slate-400">No AI summary yet. Extraction is queued; the processing service is being built.</p>
             )}
             {doc.keyConcepts && doc.keyConcepts.length > 0 ? (
               <div className="mt-3 flex flex-wrap gap-1.5">

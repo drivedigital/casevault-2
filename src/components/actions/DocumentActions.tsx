@@ -50,24 +50,30 @@ export function AnalyzeButton({ documentId, hasAnalysis }: { documentId: number;
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
+  const [message, setMessage] = useState("");
   async function handleClick() {
+    setMessage("");
     setLoading(true);
     try {
-      await fetch(`/api/documents/${documentId}/analyze`, { method: "POST" });
+      const response = await fetch(`/api/documents/${documentId}/analyze`, { method: "POST" });
+      if (!response.ok) throw new Error();
+      setMessage("Extraction request queued. Processing service pending.");
       router.refresh();
+    } catch {
+      setMessage("Could not queue extraction. Try again.");
     } finally {
       setLoading(false);
     }
   }
 
   return (
-    <button
+    <div className="text-right"><button
       onClick={handleClick}
       disabled={loading}
       className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-indigo-600 to-sky-500 px-3.5 py-2 text-sm font-medium text-white shadow-sm transition hover:opacity-90 disabled:opacity-60"
     >
       {loading ? <Loader2 size={14} className="animate-spin" /> : <Sparkles size={14} />}
-      {loading ? "Analyzing…" : hasAnalysis ? "Re-run AI Analysis" : "Run OCR + AI Analysis"}
-    </button>
+      {loading ? "Queuing…" : hasAnalysis ? "Queue re-extraction" : "Queue extraction"}
+    </button>{message ? <p role="status" className="mt-2 max-w-xs text-xs text-slate-500">{message}</p> : null}</div>
   );
 }
