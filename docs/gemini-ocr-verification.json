@@ -1,0 +1,72 @@
+{
+  "testedAt": "2026-10-04T18:19:35.595Z",
+  "keyLabel": "Key 3",
+  "model": "gemini-3.8-flash",
+  "tierEvidence": {
+    "keyLabel": "Key 3",
+    "project": "gen-lang-client-0885961933",
+    "source": "Google AI Studio API Keys visible row",
+    "billingTier": "Free tier",
+    "billingAction": "Set up billing",
+    "checkedAt": "2026-10-04T18:16:58.518Z"
+  },
+  "originalSha256": "9b7583985dfc3e190ff5b5eb7a6904f645c40eea1abb35032bfbc82880363cee",
+  "calls": [
+    {
+      "input": "one-page PDF derivative",
+      "pages": [
+        13
+      ],
+      "status": 503,
+      "durationMs": 5641,
+      "error": {
+        "code": 503,
+        "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+        "status": "UNAVAILABLE"
+      },
+      "receipt": "gemini-page-13.json"
+    },
+    {
+      "input": "one-page PDF derivative",
+      "pages": [
+        12
+      ],
+      "status": 503,
+      "durationMs": 6201,
+      "error": {
+        "code": 503,
+        "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+        "status": "UNAVAILABLE"
+      },
+      "receipt": "gemini-page-12.json"
+    },
+    {
+      "input": "one-page PDF derivative",
+      "pages": [
+        1
+      ],
+      "status": 503,
+      "durationMs": 2862,
+      "error": {
+        "code": 503,
+        "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+        "status": "UNAVAILABLE"
+      },
+      "receipt": "gemini-page-1.json"
+    },
+    {
+      "input": "original 13-page PDF",
+      "pages": 13,
+      "status": 503,
+      "durationMs": 13461,
+      "error": {
+        "code": 503,
+        "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+        "status": "UNAVAILABLE"
+      },
+      "receipt": "gemini-full.json"
+    }
+  ],
+  "qualityAssessment": "Unavailable: service errors produced no transcripts",
+  "productionChanged": false
+}
