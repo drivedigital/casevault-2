@@ -1,0 +1,24 @@
+{
+  "dockets": [
+    {
+      "case_number": "153243/2026",
+      "entries": 84,
+      "pdfs": 70,
+      "pages": 480
+    },
+    {
+      "case_number": "LT-316530-24/NY",
+      "entries": 33,
+      "pdfs": 32,
+      "pages": 277
+    }
+  ],
+  "legacy": {
+    "records": 404,
+    "unique_legacy_ids": 403,
+    "live_inventory_records": 404,
+    "actual_pdf_pages": 2407,
+    "bytes": 157626693,
+    "unique_hashes": 390
+  }
+}

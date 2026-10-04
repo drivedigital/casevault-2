@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+:root {
+  --cv-bg: #0b0f1a;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: #f4f5f9;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd2e1 transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #cbd2e1;
+  border-radius: 999px;
+}
+
+.scrollbar-dark::-webkit-scrollbar-thumb {
+  background-color: #334155;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+.pulse-dot {
+  animation: pulse-dot 1.8s ease-in-out infinite;
+}
+
+.react-flow__attribution {
+  display: none;
+}

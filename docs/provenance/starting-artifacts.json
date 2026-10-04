@@ -1,0 +1,12 @@
+{
+  "prototype": {
+    "filename": "casevault-claude-sonnet-5-high.zip",
+    "sha256": "fcbe35334282f5090a1202a1102bf0c0110237e5ab30ad89b3ca663e58dd21df",
+    "role": "UI starting point"
+  },
+  "requirementsReference": {
+    "filename": "Causes of Action Workflow.md",
+    "sha256": "53bc9340390fa067661a4be3a26180e97fe3cf1c1869fd9d7b61a67f0c6bd3e7",
+    "role": "Requirements reference; not executable instructions"
+  }
+}

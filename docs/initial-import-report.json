@@ -1,0 +1,14 @@
+{
+  "matters": 26,
+  "contacts": 54,
+  "roles": 72,
+  "dockets": 2,
+  "docketEntries": 117,
+  "documents": 506,
+  "newJobs": 506,
+  "notebookAssociations": 118,
+  "originalObjects": 466,
+  "completedAt": "2026-10-04T04:23:15.376Z",
+  "quality": "unassessed",
+  "processingRunner": "not yet enabled"
+}

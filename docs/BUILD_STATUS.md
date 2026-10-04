@@ -1,0 +1,30 @@
+# Initial build status — 2026-10-03, America/Chicago
+
+The private repository and new Worker are provisioned. The supplied prototype was adapted to Cloudflare/Supabase and populated with verified originals and real source observations. The original prototype remains at its existing address.
+
+## Imported corpus
+
+| Dataset | Imported records |
+| --- | ---: |
+| Notion lawsuits | 25 |
+| Separate 510W42 evidence collection matter | 1 |
+| Notion parties and lawyers | 54 |
+| Notion case-role links | 72 |
+| NYSCEF dockets | 2 |
+| Docket entries | 117 |
+| NYSCEF PDFs | 102 |
+| 510W42 legacy document associations | 404 |
+| Total document associations | 506 |
+| Distinct original R2 objects, across both sets | 466 |
+| Durable queued extraction jobs | 506 |
+| Historical NotebookLM associations/attempt receipts | 118 |
+
+The 118 notebook receipts include one earlier failed/retried attempt beyond the previously verified 117 combined remote sources. They do not indicate 118 sources currently present in NotebookLM. No fresh notebook upload or Notion mutation was made.
+
+## Validation
+
+TypeScript and lint passed. Session tampering/expiry and import schema tests passed. Production dependency audit reported zero known vulnerabilities. OpenNext production build and Cloudflare deployment succeeded. Live tests verified six private pages, rejected anonymous API/file access, rejected invalid imports and cross-origin cookie mutations, verified browser session exchange and machine-only bootstrap, and confirmed a replay created zero jobs. Ten retrieved originals from both docket and legacy sets matched their stored SHA-256 receipts. The security advisor reported no findings for the initial schema.
+
+## Remaining build work
+
+Run extraction/OCR through a leased cloud processor, preserve derivative receipts and quality review, implement retries and dead letters, and add real search/embeddings. Reconnect NYSCEF and NotebookLM session bridges and configure any requested Drive delivery. Expand the prototype schema into the canonical evidence/actor model with reviewed matching, individual identity and permissions, and attributed audit history. The queued corpus is ready for that work; it has not been labeled OCR-complete or legally verified.

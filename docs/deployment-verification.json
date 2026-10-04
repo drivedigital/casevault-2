@@ -1,0 +1,88 @@
+{
+  "verifiedAt": "2026-10-04T04:25:09.444Z",
+  "queueCount": 506,
+  "pages": [
+    {
+      "route": "/",
+      "status": 200
+    },
+    {
+      "route": "/documents",
+      "status": 200
+    },
+    {
+      "route": "/ingestion",
+      "status": 200
+    },
+    {
+      "route": "/matters",
+      "status": 200
+    },
+    {
+      "route": "/docket-key",
+      "status": 200
+    },
+    {
+      "route": "/converge",
+      "status": 200
+    }
+  ],
+  "originalReadback": [
+    {
+      "documentId": 1,
+      "sha256": "3f8886a52bf75b8cf68fbf35db7aa952cd60ee05aed0303c909c9c6f2f0c0e93",
+      "bytes": 81117
+    },
+    {
+      "documentId": 36,
+      "sha256": "ced8149aa549a33082966071069011043494f05ce1696bf60e584eb224792a6e",
+      "bytes": 255836
+    },
+    {
+      "documentId": 70,
+      "sha256": "db1acf7439603e1d806d7213d3f2b73db5a65b79fe9c66ed7ea2174f50368162",
+      "bytes": 216269
+    },
+    {
+      "documentId": 71,
+      "sha256": "653c596f7d14088bd576ac8e63f4e18fce818ce859d0c97cf59ced35a2e0d5fe",
+      "bytes": 206760
+    },
+    {
+      "documentId": 86,
+      "sha256": "5346efed23b3bb23f9aa2f34eb532d51fecf1d876cd6206834ac19241bc53d21",
+      "bytes": 461470
+    },
+    {
+      "documentId": 102,
+      "sha256": "55ea35346c6d2cfdc656c43046e06855f29f8419a06c0f8ffa0e8bcdbfb2f3e4",
+      "bytes": 339202
+    },
+    {
+      "documentId": 103,
+      "sha256": "6e0a5600ac163a94343028c5339594b52b8664e10e6ac6b6ee99752afdbed168",
+      "bytes": 99023
+    },
+    {
+      "documentId": 201,
+      "sha256": "b5c15913fe0bd51127752b0dbaf5f2272532e99800279fb9797b269472477faa",
+      "bytes": 472950
+    },
+    {
+      "documentId": 351,
+      "sha256": "e40ea6c8e50ade9073fe61c3b2a9aa00e29d011f1b822b0115576a5181c87964",
+      "bytes": 197758
+    },
+    {
+      "documentId": 1006,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "bytes": 1
+    }
+  ],
+  "unauthenticatedApiRejected": true,
+  "invalidImportRejected": true,
+  "browserSessionVerified": true,
+  "cookieBootstrapRejected": true,
+  "crossOriginMutationRejected": true,
+  "queueReplayCreated": 0
+}
