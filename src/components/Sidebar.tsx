@@ -47,6 +47,7 @@ const groups: NavGroup[] = [
       { href: "/docket-key", label: "Docket Viewer", icon: Gavel },
       { href: "/ingestion", label: "Ingestion Queue", icon: Inbox },
       { href: "/documents", label: "Document Review Queue", icon: Inbox },
+      { href: "/docket-key/bridges", label: "Court & NotebookLM", icon: Network },
       { href: "/docket-key/connectors", label: "Drive & Ingest Connectors", icon: HardDriveUpload },
     ],
   },
@@ -77,6 +78,7 @@ const groups: NavGroup[] = [
     accent: "text-amber-600",
     dotColor: "bg-amber-500",
     items: [
+      { href: "/agents", label: "AI Agents", icon: Sparkles },
       { href: "/intelligence", label: "AI Proposals", icon: Sparkles },
       { href: "/intelligence/graph", label: "Knowledge Graph", icon: Share2 },
     ],
@@ -92,14 +94,15 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="flex h-screen w-72 flex-shrink-0 flex-col border-r border-slate-800 bg-[#0b0f1a] text-slate-200">
+    <aside className="min-h-screen w-72 self-stretch flex-shrink-0 border-r border-slate-800 bg-[#0b0f1a] text-slate-200">
+      <div className="sticky top-0 flex h-screen flex-col">
       <div className="flex items-center gap-2.5 border-b border-slate-800 px-5 py-5">
         <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-sky-400 text-white shadow-lg shadow-indigo-900/40">
           <ShieldCheck size={20} />
         </div>
         <div>
           <p className="text-sm font-semibold tracking-wide text-white">CASEVAULT 2.0</p>
-          <p className="text-[11px] text-slate-500">Single-user litigation vault</p>
+          <p className="text-[11px] text-slate-500">Litigation workspace</p>
         </div>
       </div>
 
@@ -157,8 +160,9 @@ export default function Sidebar() {
           <span className="relative flex h-2 w-2">
             <span className="pulse-dot absolute inline-flex h-full w-full rounded-full bg-emerald-400" />
           </span>
-          Private evidence workspace
+          Open review workspace
         </div>
+      </div>
       </div>
     </aside>
   );

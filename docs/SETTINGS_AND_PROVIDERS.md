@@ -36,3 +36,7 @@ Knowledge Graph renders a static placeholder and does not call the graph API.
 - [NVIDIA LLM API reference](https://docs.api.nvidia.com/nim/reference/llm-apis)
 - [Gemini model discovery](https://ai.google.dev/api/models)
 - [Gemini content generation](https://ai.google.dev/api/generate-content)
+
+## Model selection and source controls
+
+Settings now includes persistent active-model pills for each cloud inference provider and a real Google Drive file selector. The source bridge controls are under **Court & NotebookLM**. See `QUEUES_AND_BRIDGES.md` for authorization, queue semantics, adapter execution and limits.

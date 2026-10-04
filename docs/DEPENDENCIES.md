@@ -20,3 +20,7 @@ Supabase migrations include the private schema, grants, policies, indexes and jo
 ## Provider connections — 2026-10-04
 
 OCR.space Engine 3, OpenRouter, NVIDIA, and Gemini credentials are installed as Worker secrets. Discovery uses server-side HTTP requests with bounded timeouts, fixed provider endpoints and Zod response validation. Sanitized model catalog receipts live in private R2; the Settings UI uses the authenticated app API. No additional provider SDK dependency was added. A server text inference adapter is available for the future processor; installation and model discovery do not complete corpus extraction. See `SETTINGS_AND_PROVIDERS.md`.
+
+## Source adapters and Drive selection — 2026-10-04
+
+Local source bridge: Node 24 LTS, Python 3 standard library, optional PyMuPDF 1.28.2 for PDF page counts, and the existing authenticated `nlm` CLI 0.15.1. The supervised DOM capture adapter uses a tab supplied by the supported Codex browser runtime. Consumer sessions and acquisition files remain local. The Worker uses the existing Hyperdrive/R2 bindings and restricted schema; no new database tables were required. Google Drive browsing uses a separate `drive.readonly` authorization and an enabled Drive API. Access tokens are encrypted in private R2 with the server secret and expire; automatic refresh is pending. See `QUEUES_AND_BRIDGES.md`.

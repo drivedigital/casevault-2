@@ -1,3 +1,6 @@
+import {DocumentProcessingPrompt} from "@/components/AgentWorkspace";
+import {readAgents} from "@/lib/agent-workspace";
+import { DriveFileSelector } from "@/components/DriveFileSelector";
 import Link from "next/link";
 import { belongsInReviewQueue } from "@/lib/review-policy";
 import { getAllData } from "@/lib/data";
@@ -23,7 +26,7 @@ export default async function DocumentsPage({
   const source = params.source ?? "all";
   const q = (params.q ?? "").toLowerCase().trim();
 
-  const data = await getAllData();
+  const [data,agents] = await Promise.all([getAllData(),readAgents()]);
 
   let docs = data.documents.filter(belongsInReviewQueue);
   if (status !== "all") docs = docs.filter((d) => d.status === status);
@@ -44,8 +47,8 @@ export default async function DocumentsPage({
         description="Review Drive, uploaded, and email documents. Court docket imports bypass routine review; explicitly flagged filings return here."
         action={
           <div className="flex gap-2">
-            <IngestButton endpoint="/api/drive/sync" label="Sync Google Drive" icon="drive" variant="secondary" />
-            <IngestButton endpoint="/api/intake/court-filing" label="Ingest Court Filing" icon="webhook" />
+            <DriveFileSelector />
+            <Link href="/docket-key/bridges" className="rounded-lg bg-slate-900 px-3 py-2 text-sm font-medium text-white">Court imports</Link>
           </div>
         }
       />
@@ -97,6 +100,7 @@ export default async function DocumentsPage({
         </div>
       </Card>
 
+      <DocumentProcessingPrompt documents={docs.map(d=>({id:d.id,title:d.title}))} agents={agents}/>
       <Card className="overflow-hidden">
         <table className="w-full text-left text-sm">
           <thead className="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">

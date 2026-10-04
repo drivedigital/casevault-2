@@ -44,3 +44,9 @@ Stage the two prior docket manifests and PDFs, the legacy inventory/original fil
 Run `node scripts/import-corpus.mjs` with the private `.env.local` machine token and optional `CASEVAULT_ENDPOINT`. The script resumes object uploads using `.private/object-checkpoint.json`, retains stable source identities, and queues only absent idempotency keys. A replay is not an update API: changed records must use an explicitly reviewed update path. Keep the checkpoint, source receipts and input snapshots in private evidence storage; GitHub holds code and sanitized aggregate reports only.
 
 The import client retries transient failures with backoff. Node 26's experimental HTTP/2 fetch encountered TLS/session errors during this initial run; use Node 22 or 24 LTS. Never disable TLS validation to bypass those failures.
+
+## Drive and local source bridge
+
+The existing `SESSION_SECRET` now also protects encrypted Drive connection tokens. Rotating it requires reconnecting Drive. Use **Choose Drive files → Connect Google Drive** to authorize read-only access separately from workspace sign-in. The first grant is short-lived; reconnect when it expires. Run the local source bridge only on the operator machine with its private machine credential and existing `nlm` authentication. The cloud app never receives the consumer NotebookLM browser session. See `QUEUES_AND_BRIDGES.md` for commands, capture recovery, receipts, and remaining capabilities.
+
+Temporary review mode: Wrangler variable `PUBLIC_REVIEW=true` opens app pages and document reads without Google sign-in. Agent configuration and special-processing intake are public. Set false and redeploy to restore private workspace access; Google OAuth remains configured for protected connector actions.

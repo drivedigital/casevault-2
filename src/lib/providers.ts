@@ -1,7 +1,7 @@
 import "server-only";
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { z } from "zod";
-import { catalogSchema, modelSchema, providerIds, type ProviderId, type ProviderCheck, type ProviderView, type Model } from "./provider-types";
+import { catalogSchema, modelSchema, providerIds, type ProviderId, type ProviderCheck, type ProviderView, type Model, modelSelectionSchema, validActiveModel } from "./provider-types";
 
 const catalogKey = "casevault-2/settings/provider-catalog-v1.json";
 const openAIModels = z.object({ data: z.array(z.object({ id: z.string(), name: z.string().optional(), context_length: z.number().optional(), architecture: z.object({ input_modalities: z.array(z.string()).optional(), output_modalities: z.array(z.string()).optional() }).optional() })) });
@@ -83,16 +83,17 @@ export async function discoverProvider(id: ProviderId): Promise<ProviderCheck> {
 export async function readProviders(): Promise<ProviderView[]> {
   const object = await getCloudflareContext().env.EVIDENCE.get(catalogKey);
   const parsed = catalogSchema.safeParse(object ? await object.json() : null);
+  const selections = await readModelSelections();
   return providerIds.map(id => {
     const configured = Boolean(credential(id));
     const previous = parsed.success ? parsed.data.providers.find(p => p.id === id) : undefined;
-    return { ...(previous ?? { id, checkedAt: "", status: "missing", message: configured ? "Credential installed. Refresh connections to discover models." : "Credential has not been installed.", models: [] }), configured, ...(!configured ? { status: "missing" as const, message: "Credential has not been installed.", models: [] } : {}) };
+    return { activeModel: selections[id] ?? null, ...(previous ?? { id, checkedAt: "", status: "missing", message: configured ? "Credential installed. Refresh connections to discover models." : "Credential has not been installed.", models: [] }), configured, ...(!configured ? { status: "missing" as const, message: "Credential has not been installed.", models: [] } : {}) };
   });
 }
 export async function refreshProviders(): Promise<ProviderView[]> {
   const providers = await Promise.all(providerIds.map(discoverProvider));
   await getCloudflareContext().env.EVIDENCE.put(catalogKey, JSON.stringify({ version: 1, providers }), { httpMetadata: { contentType: "application/json" } });
-  return providers.map(p => ({ ...p, configured: Boolean(credential(p.id)) }));
+  return readProviders();
 }
 
 // Ready for the future leased processor. Callers must explicitly choose provider/model;
@@ -117,3 +118,27 @@ export async function generateText(provider: Exclude<ProviderId, "ocr">, model: 
   return text;
 }
 export { modelSchema };
+
+const selectionsPrefix = "casevault-2/settings/active-models/";
+async function readModelSelections(): Promise<Partial<Record<ProviderId, string>>> {
+  const bucket = getCloudflareContext().env.EVIDENCE;
+  const selections: Partial<Record<ProviderId, string>> = {};
+  await Promise.all((["openrouter", "nvidia", "gemini"] as const).map(async id => {
+    const object = await bucket.get(`${selectionsPrefix}${id}.json`);
+    const parsed = modelSelectionSchema.safeParse(object ? await object.json() : null);
+    if (parsed.success && parsed.data.model && parsed.data.provider === id) selections[id] = parsed.data.model;
+  }));
+  return selections;
+}
+export async function selectActiveModel(input: unknown) {
+  const selection = modelSelectionSchema.parse(input);
+  const provider = (await readProviders()).find(p => p.id === selection.provider);
+  if (!provider || !validActiveModel(provider, selection.model)) throw new Error("Choose a text model from this provider's available catalog.");
+  await getCloudflareContext().env.EVIDENCE.put(`${selectionsPrefix}${selection.provider}.json`, JSON.stringify(selection), { httpMetadata: { contentType: "application/json" } });
+  return readProviders();
+}
+export async function generateWithActiveModel(provider: "openrouter" | "nvidia" | "gemini", prompt: string): Promise<string> {
+  const connection = (await readProviders()).find(p => p.id === provider);
+  if (!connection?.activeModel || !validActiveModel(connection, connection.activeModel)) throw new Error("Choose an available active model in Settings first.");
+  return generateText(provider, connection.activeModel, prompt);
+}

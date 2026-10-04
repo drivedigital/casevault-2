@@ -5,6 +5,7 @@ Private evidence workspace built from the supplied CaseVault prototype, with act
 - Repository: https://github.com/drivedigital/casevault-2 (private)
 - Application: https://casevault-2.dan-2eb.workers.dev (sign-in required)
 - [Workflow methodologies and dependencies](docs/WORKFLOWS.md)
+- [Queues, Drive file selection, NYSCEF and NotebookLM bridges](docs/QUEUES_AND_BRIDGES.md)
 - [Settings, OCR and cloud AI providers](docs/SETTINGS_AND_PROVIDERS.md)
 - [Document previews](docs/DOCUMENT_PREVIEWS.md)
 - [Google sign-in](docs/GOOGLE_SIGN_IN.md)

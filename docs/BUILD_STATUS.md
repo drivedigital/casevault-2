@@ -36,3 +36,9 @@ Google OAuth through Supabase is enabled and verified for the authorized operato
 ## Settings and workflow update — 2026-10-04
 
 Court filings bypass routine review, with explicit flags returning them to the queue. Knowledge Graph is a placeholder. Settings provides private credential status and model discovery for OCR.space, OpenRouter, NVIDIA, and Gemini. Provider secrets are installed in the deployed Worker. The new Gemini key passed a synthetic generation test after a temporary HTTP 503; see `SETTINGS_AND_PROVIDERS.md` and `provider-verification.json`. Extraction jobs still require a processor.
+
+## Source controls update — 2026-10-04
+
+Settings offers persistent active-model pills, and Drive file selection is connected. The sidebar background spans the entire document while navigation remains visible during scrolling. Ingestion and human review queues are explained separately in the app. Local source adapters and leased cloud contracts are implemented. The LT notebook completed fresh reconciliation of all 32 sources with zero uploads; both corpus plans require no new uploads. NYSCEF HTTP acquisition encountered the court access gate and paused for a supervised browser capture. This is an initial bridge implementation; automatic browser downloads, unattended hosting, Drive token refresh, and the OCR processor remain open work.
+
+2026-10-04: Added AI Agents configuration page and document-specific special-processing prompts. Requests are durable and awaiting the processing worker. Temporary public review is enabled by owner request; document reads are public, privileged connector and execution actions remain authenticated. No credentials are exposed.

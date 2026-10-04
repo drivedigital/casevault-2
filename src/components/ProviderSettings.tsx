@@ -10,6 +10,16 @@ export function ProviderSettings({ initialProviders }: { initialProviders: Provi
   const [refreshing, setRefreshing] = useState(false);
   const [query, setQuery] = useState("");
   const [error, setError] = useState("");
+  const [saving, setSaving] = useState<string | null>(null);
+  async function chooseModel(provider: string, model: string | null) {
+    setSaving(provider); setError("");
+    try {
+      const response = await fetch("/api/settings/providers", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ provider, model }) });
+      if (!response.ok) throw new Error();
+      setProviders(providerResponseSchema.parse(await response.json()).providers);
+    } catch { setError("Could not save that model. Refresh connections and try again."); }
+    finally { setSaving(null); }
+  }
   async function refresh() {
     setRefreshing(true); setError("");
     try {
@@ -45,7 +55,15 @@ export function ProviderSettings({ initialProviders }: { initialProviders: Provi
             <p className="mt-2 text-sm text-slate-600">{provider.message}</p>
             {provider.checkedAt ? <p className="mt-2 text-xs text-slate-400">Last checked: {new Date(provider.checkedAt).toLocaleString()}</p> : null}
           </div>
-          {provider.models.length ? <div className="border-t border-slate-100"><div className="bg-slate-50 px-5 py-2 text-xs font-medium text-slate-500">{models.length} of {provider.models.length} discovered models</div><ul aria-label={`${providerNames[provider.id]} available models`} className="max-h-72 divide-y divide-slate-100 overflow-y-auto">{models.map(model => <li key={model.id} className="px-5 py-2.5"><p className="text-sm font-medium text-slate-700">{model.name}</p><p className="break-all text-xs text-slate-400">{model.id}{model.contextWindow ? ` · ${model.contextWindow.toLocaleString()} token context` : ""}</p></li>)}</ul>{!models.length ? <p className="px-5 py-3 text-sm text-slate-500">No models match your search.</p> : null}</div> : null}
+          {provider.id !== "ocr" ? <div className="border-t border-slate-100 p-5">
+            <p className="mb-3 text-sm font-medium text-slate-700">Active model: <span className="font-normal break-all">{provider.activeModel ?? "None selected"}</span></p>
+            <div role="group" aria-label={`${providerNames[provider.id]} active model`} className="flex max-h-72 flex-wrap gap-2 overflow-y-auto p-1">
+              <button aria-pressed={provider.activeModel === null} disabled={saving === provider.id} onClick={() => chooseModel(provider.id, null)} className={`rounded-full border px-3 py-1.5 text-xs ${provider.activeModel === null ? "border-indigo-600 bg-indigo-600 text-white" : "border-slate-200 text-slate-600"}`}>None</button>
+              {models.map(model => <button key={model.id} title={`${model.id}${model.contextWindow ? ` · ${model.contextWindow.toLocaleString()} token context` : ""}`} aria-pressed={provider.activeModel === model.id} disabled={saving === provider.id || refreshing || !ready || (model.output !== undefined && !model.output.includes("text"))} onClick={() => chooseModel(provider.id, model.id)} className={`max-w-full truncate rounded-full border px-3 py-1.5 text-xs transition disabled:opacity-40 ${provider.activeModel === model.id ? "border-indigo-600 bg-indigo-600 text-white" : "border-slate-200 bg-white text-slate-600 hover:border-indigo-400 hover:bg-indigo-50"}`}>{model.name}</button>)}
+            </div>
+            <p className="mt-3 text-xs text-slate-400">{saving === provider.id ? "Saving selection…" : `${models.length} of ${provider.models.length} discovered models. Select a pill to activate it.`}</p>
+            {provider.activeModel && !provider.models.some(m => m.id === provider.activeModel) ? <p className="mt-2 text-xs text-amber-700">The selected model is unavailable in the current catalog. Choose another model or refresh.</p> : null}
+          </div> : null}
         </Card>;
       })}
     </div>

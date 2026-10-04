@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-04",
+  "deploymentVersion": "b687e445-b471-430e-9f79-5cad801cd13a",
+  "checks": {
+    "typecheck": "passed",
+    "lint": "passed",
+    "nodeTests": 10,
+    "pythonTests": 5,
+    "productionBuild": "passed",
+    "secretScan": {
+      "files": 1757,
+      "matches": 0
+    }
+  },
+  "live": {
+    "publicPages": {
+      "docket-key": 200,
+      "documents": 200,
+      "agents": 200
+    },
+    "anonymousDocumentPreview": 200,
+    "unauthenticatedDriveFiles": 401,
+    "unauthenticatedBridgeManifest": 401,
+    "unauthenticatedProviderMutation": 401,
+    "agentCreation": 201,
+    "invalidProcessingPrompt": 400,
+    "driveImports": 1,
+    "sidebarFullDocumentHeight": true,
+    "modelSelectionPersistence": "passed before user-selected model; selections preserved",
+    "notebookJobs": {
+      "540": "32 ready; succeeded",
+      "545": "70 reconciled; 69 ready; partial",
+      "546": "32 ready; succeeded"
+    },
+    "historicalNotebookReceiptsPreserved": 32,
+    "latestNotebookObservations": 32,
+    "nyscef": "needs_human at court access gate"
+  },
+  "limitations": [
+    "AI processing instructions await background processor",
+    "507 extraction jobs remain queued",
+    "Drive grants expire and require reconnect",
+    "Full supervised-browser court PDF download adapter remains to be completed"
+  ]
+}

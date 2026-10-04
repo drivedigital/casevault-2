@@ -58,3 +58,7 @@ Read the lawsuit, litigant and lawyer data sources. Retain original Notion page 
 ## Causes of action workflow
 
 The attached `Causes of Action Workflow.md` is a requirements reference, not an instruction to make legal findings. The future workflow should support jurisdiction-specific claim research, elements and burden, evidence-to-element links, defenses, procedural gates, remedies, and reviewed drafting. Each proposition needs a source and review state. No claim viability, deadlines, or legal conclusions were generated during this import.
+
+## Source bridge implementation — 2026-10-04
+
+The first local adapters are now in `bridges/`, with cloud queue/lease/completion contracts and app controls. NotebookLM source reconciliation was exercised against the existing LT notebook without adding duplicates. NYSCEF anonymous HTTP access paused for the supervised browser rather than importing an empty docket. A DOM capture adapter preserves observed court pagination in a private dated bundle. Google Drive has separate read-only OAuth, real file selection, and source-version ingestion. These additions preserve the historical methods above; they do not prove unattended court access or implement corpus OCR. See `QUEUES_AND_BRIDGES.md` and `workflow-verification.json`.

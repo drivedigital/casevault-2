@@ -1,0 +1,6 @@
+import { NextResponse } from 'next/server';
+import { instructionSchema,readAgents,readInstructions } from '@/lib/agent-workspace';
+import { getAllData } from '@/lib/data';
+import { getCloudflareContext } from '@opennextjs/cloudflare';
+export async function GET(req:Request){const id=Number(new URL(req.url).searchParams.get('documentId'));if(!Number.isSafeInteger(id)||id<1)return NextResponse.json({error:'Invalid document'},{status:400});return NextResponse.json({instructions:await readInstructions(id)});}
+export async function POST(req:Request){try{const input=instructionSchema.parse(await req.json());const [agents,data]=await Promise.all([readAgents(),getAllData()]);if(!agents.some(a=>a.id===input.agentId&&a.active)||!data.documents.some(d=>d.id===input.documentId))return NextResponse.json({error:'Choose an existing document and active agent.'},{status:400});const instruction={...input,id:crypto.randomUUID(),createdAt:new Date().toISOString(),status:'awaiting_processor'};await getCloudflareContext().env.EVIDENCE.put(`casevault-2/processing-instructions/${input.documentId}/${instruction.id}.json`,JSON.stringify(instruction));return NextResponse.json({instruction},{status:201});}catch{return NextResponse.json({error:'Provide a document, active agent and processing instructions.'},{status:400});}}

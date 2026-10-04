@@ -1,3 +1,6 @@
+import { driveStatus } from "@/lib/drive";
+import { DriveFileSelector } from "@/components/DriveFileSelector";
+import Link from "next/link";
 import { getAllData } from "@/lib/data";
 import { Badge, Card, SectionHeading } from "@/components/ui";
 import { formatDateTime } from "@/lib/format";
@@ -16,6 +19,7 @@ const ICONS: Record<string, typeof HardDriveUpload> = {
 
 export default async function ConnectorsPage() {
   const data = await getAllData();
+  const drive = await driveStatus();
 
   return (
     <div className="space-y-8">
@@ -26,7 +30,8 @@ export default async function ConnectorsPage() {
       />
 
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-        {data.connectors.map((connector) => {
+        {data.connectors.map((stored) => {
+          const connector = stored.kind === "google_drive" ? { ...stored, status: drive.connected ? "connected" : "disconnected", detail: drive.connected ? `Connected as ${drive.account}. Choose individual files to import.` : "Connect Drive and select the files you want to import." } : stored;
           const Icon = ICONS[connector.kind] ?? Database;
           return (
             <Card key={connector.id} className="p-5">
@@ -47,7 +52,7 @@ export default async function ConnectorsPage() {
               <p className="mt-3 text-sm text-slate-500">{connector.detail}</p>
               {connector.kind === "google_drive" ? (
                 <div className="mt-4">
-                  <IngestButton endpoint="/api/drive/sync" label="Sync Google Drive" icon="refresh" variant="secondary" />
+                  <DriveFileSelector />
                 </div>
               ) : null}
               {connector.kind === "docket_key_webhook" ? (
@@ -60,21 +65,7 @@ export default async function ConnectorsPage() {
         })}
       </div>
 
-      <Card className="p-5">
-        <h2 className="text-sm font-semibold text-slate-800">Webhook contract</h2>
-        <div className="mt-3 grid grid-cols-1 gap-3 font-mono text-xs text-slate-600 md:grid-cols-2">
-          <div className="rounded-lg bg-slate-900 p-3 text-slate-100">
-            POST /api/intake/docket-snapshot
-            <br />
-            {"{ docketId?, docType?, description?, filedDate? }"}
-          </div>
-          <div className="rounded-lg bg-slate-900 p-3 text-slate-100">
-            POST /api/intake/court-filing
-            <br />
-            {"{ matterId?, title? }"}
-          </div>
-        </div>
-      </Card>
+      <Card className="p-5"><h2 className="text-sm font-semibold text-slate-800">Court and NotebookLM bridge</h2><p className="mt-2 text-sm text-slate-500">Request court refreshes and notebook updates through the local source bridge. Challenges and expired sessions pause work for your attention.</p><Link href="/docket-key/bridges" className="mt-3 inline-block text-sm font-medium text-indigo-600">Open bridge controls</Link></Card>
     </div>
   );
 }

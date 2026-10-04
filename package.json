@@ -12,7 +12,9 @@
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
     "test": "tsx --test tests/*.test.ts",
     "prebuild": "node scripts/prepare-pdf-assets.mjs",
-    "predev": "node scripts/prepare-pdf-assets.mjs"
+    "predev": "node scripts/prepare-pdf-assets.mjs",
+    "bridge:once": "node bridges/runner.mjs",
+    "bridge:watch": "node bridges/runner.mjs --watch"
   },
   "dependencies": {
     "@opennextjs/cloudflare": "1.20.8",
