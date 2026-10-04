@@ -1,0 +1,15 @@
+{
+  "verifiedAt": "2026-10-04T04:56:07.205751+00:00",
+  "pdfDocument": 1001,
+  "pdfPages": 10,
+  "firstPageRendered": true,
+  "secondPageRendered": true,
+  "zoomVerified": "125%",
+  "imageDocument": 491,
+  "imageNaturalWidth": 1170,
+  "courtPdfDocument": 11,
+  "authenticatedDownloadStatus": 200,
+  "downloadDisposition": "attachment",
+  "anonymousDownloadStatus": 401,
+  "productionDependencyAuditVulnerabilities": 0
+}

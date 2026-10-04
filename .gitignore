@@ -9,3 +9,5 @@ node_modules/
 .private/
 *.tsbuildinfo
 .DS_Store
+
+public/pdfjs/

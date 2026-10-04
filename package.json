@@ -10,7 +10,9 @@
     "build:worker": "opennextjs-cloudflare build",
     "deploy": "opennextjs-cloudflare deploy",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
-    "test": "tsx --test tests/*.test.ts"
+    "test": "tsx --test tests/*.test.ts",
+    "prebuild": "node scripts/prepare-pdf-assets.mjs",
+    "predev": "node scripts/prepare-pdf-assets.mjs"
   },
   "dependencies": {
     "@opennextjs/cloudflare": "1.20.8",
@@ -23,6 +25,7 @@
     "drizzle-orm": "0.45.2",
     "lucide-react": "^1.51.0",
     "next": "16.3.8",
+    "pdfjs-dist": "6.4.299",
     "pg": "8.20.0",
     "react": "19.2.6",
     "react-dom": "19.2.6",

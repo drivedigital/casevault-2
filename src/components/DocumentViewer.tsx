@@ -1,5 +1,6 @@
 "use client";
 
+import {FilePreview} from "./FilePreview";
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, FileText } from "lucide-react";
 
@@ -34,7 +35,7 @@ export function DocumentViewer({
     );
   }
 
-  if (fileUrl) return <iframe title={title} src={fileUrl} className="h-full w-full rounded-xl border" />;
+  if (fileUrl) return <FilePreview key={fileUrl} title={title} fileUrl={fileUrl} />;
 
   return (
     <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-slate-100">
