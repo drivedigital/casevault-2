@@ -18,3 +18,8 @@ export async function validSession(value: string, secret: string) {
   if (!/^\d+$/.test(expires) || Number(expires) < Date.now()) return false;
   return equalSecret(value, await signSession(expires, secret));
 }
+
+// Authorization uses the server-verified identity, never editable user_metadata.
+export function authorizedGoogleUser(user:{email?:string;email_confirmed_at?:string;identities?:{provider:string}[]}|null,allowedEmail:string){
+ return !!user?.email_confirmed_at && !!allowedEmail && user.email?.toLowerCase()===allowedEmail.trim().toLowerCase() && user.identities?.some(identity=>identity.provider==='google')===true;
+}

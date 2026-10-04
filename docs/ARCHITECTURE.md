@@ -6,7 +6,7 @@ The supplied ZIP is the UI starting point. Next.js 16 / React 19 run on Cloudfla
 
 - Dedicated private GitHub repository and Worker, preserving the old prototype.
 - Isolated database schema, restricted role, private-workspace RLS, unique import identities and queue keys, foreign-key indexes.
-- Private machine API token and signed eight-hour HttpOnly/Secure/SameSite session cookie. Cookie mutations check Origin. Public health endpoint exposes no corpus data.
+- Separate machine API credential and Supabase Google sign-in with an authorized-account check. Server-managed HttpOnly/Secure cookies; cookie mutations check Origin. Public health exposes no corpus data.
 - Real Notion seed records, two complete docket snapshots, inspected original files, notebook source receipts and the 510W42 extraction backlog.
 - Original-file viewing and actual ingestion queue status.
 - Manifest validation; repeat-safe imports; content-addressed R2 storage.
@@ -14,7 +14,7 @@ The supplied ZIP is the UI starting point. Next.js 16 / React 19 run on Cloudfla
 
 ## Current limitations and next build
 
-This is a single private workspace using a shared operator credential. Supabase Auth, individual users and memberships, audit attribution, multiple tenants, fine-grained access, and production abuse controls remain work before broader access. The database's fixed workspace policy is not a complete multi-tenant design.
+This is a single private workspace using Google identity for the authorized operator and a separate machine credential. Individual memberships, audit attribution, multiple tenants, fine-grained access, and production abuse controls remain work before broader access. The database's fixed workspace policy is not a complete multi-tenant design.
 
 The application records jobs but does not yet run OCR, extraction, embeddings or downstream delivery automatically. Build a leased runner with attempt limits, retry/dead-letter state, artifact receipts, and quality review. The recent plans place heavy processing in a cloud processor such as Cloud Run; local work should be reserved for exceptional court/consumer sessions. Existing optional OCR API credentials are not evidence of a live processing pipeline.
 

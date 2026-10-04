@@ -17,11 +17,11 @@ Existing `casevault`, `casevault-worker`, `docket-key`, notebooks and Notion rec
 
 ## Secrets and sign-in
 
-The machine credential is `CASEVAULT_API_TOKEN`; `SESSION_SECRET` signs browser sessions. Both are Cloudflare Worker secrets. The restricted database password is configured in the Hyperdrive origin. Supabase's publishable key and URL are public configuration, not administrative credentials; runtime SQL does not use a Supabase service-role key.
+The browser signs in with Google through Supabase Auth. Access is restricted to the configured authorized account. See [Google sign-in configuration](GOOGLE_SIGN_IN.md). Service credentials cannot create browser sessions, and the old access-key login is retired.
 
-On the initial workstation, secrets are also saved in macOS Keychain under `casevault-2/CASEVAULT_API_TOKEN`, `casevault-2/SESSION_SECRET`, and `casevault-2/DB_PASSWORD`. Open Keychain Access and retrieve the machine token to sign in at the new application. Ignored `.env.local` provides the same machine token for operator scripts; do not attach or copy this file into source control. No secret value is printed in these documents.
+Machine requests continue to send `Authorization: Bearer <CASEVAULT_API_TOKEN>`. The token is a Cloudflare secret and is also saved privately in the initial workstation's Keychain and ignored `.env.local` for operator scripts. Bootstrap imports require the machine credential; a browser session alone cannot import batches. The restricted database password remains in the Hyperdrive origin.
 
-Machine requests send `Authorization: Bearer <CASEVAULT_API_TOKEN>`. Browser sign-in exchanges that token for an eight-hour signed cookie. Bootstrap imports additionally require the machine credential; a browser cookie alone cannot import batches.
+Google's client secret belongs only in the Supabase Google provider configuration. The Supabase publishable key is public configuration; no administrative/service-role key is sent to the browser.
 
 If a future processor needs access, install the same machine token as a secret on that trusted endpoint, or introduce scoped per-service credentials before broadening access. No nonexistent processor endpoint has been configured. Optional local OCR-provider keys are private staging configuration and are not activated by this foundation.
 
@@ -29,7 +29,7 @@ If a future processor needs access, install the same machine token as a secret o
 
 1. Use Node 22 or 24 LTS, `npm ci`, and Cloudflare login for the account above.
 2. Provision the database role with a generated password through a private administrative connection. Apply the SQL migrations in `supabase/migrations` and set that password on the Hyperdrive origin. The secret-bearing role creation is intentionally not committed in migrations.
-3. Set `CASEVAULT_API_TOKEN` and `SESSION_SECRET` with Wrangler's secret mechanism; configure the bindings in `wrangler.jsonc` for the target environment. Generate fresh credentials for a new environment.
+3. Set `CASEVAULT_API_TOKEN` with Wrangler's secret mechanism; configure the bindings in `wrangler.jsonc` for the target environment. Generate fresh credentials for a new environment and configure the Supabase Google provider and allowed callback.
 4. Run type checking, security/import validation tests, lint, and `npm run build:worker`; deploy with `npm run deploy`.
 5. Confirm public health, private-route rejection, authenticated metadata and original-file retrieval. Never use disabling TLS verification as a database workaround.
 

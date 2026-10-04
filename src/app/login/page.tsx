@@ -1,8 +1,5 @@
-"use client";
-import { useState } from "react";
-import {useRouter} from "next/navigation";
-export default function Login() {
-  const router=useRouter();
-  const [error,setError]=useState("");
-  return <div className="mx-auto mt-20 max-w-md rounded-2xl bg-white p-8 shadow"><h1 className="text-2xl font-semibold">Open CaseVault 2.0</h1><p className="my-4 text-slate-500">Enter your private workspace access key.</p><form onSubmit={async e=>{e.preventDefault();const token=new FormData(e.currentTarget).get("token");const r=await fetch("/api/session",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({token})});if(r.ok)router.push("/");else setError("The access key was not accepted.");}}><input name="token" type="password" required autoComplete="current-password" className="w-full rounded border p-3"/><button className="mt-4 w-full rounded bg-indigo-600 p-3 text-white">Open workspace</button><p className="mt-3 text-red-600">{error}</p></form></div>;
+const errors:Record<string,string>={not_authorized:'This Google account does not have access to the workspace.',sign_in_failed:'Sign-in could not be completed. Please try again.',provider_unavailable:'Google sign-in is not available yet. Please try again after setup is complete.'};
+export default async function Login({searchParams}:{searchParams:Promise<{error?:string}>}){
+ const {error}=await searchParams;
+ return <div className="mx-auto mt-20 max-w-md rounded-2xl bg-white p-8 shadow"><h1 className="text-2xl font-semibold">Welcome to CaseVault</h1><p className="my-4 text-slate-500">Sign in to open your private workspace.</p><a href="/auth/google" className="flex w-full items-center justify-center gap-3 rounded-lg border border-slate-300 bg-white p-3 font-medium text-slate-800 hover:bg-slate-50"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M21.6 12.2c0-.7-.1-1.4-.2-2.1H12v4h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.4Z"/><path fill="#34A853" d="M12 22c2.7 0 5-1 6.6-2.4l-3.2-2.5c-.9.6-2 .9-3.4.9-2.6 0-4.8-1.8-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22Z"/><path fill="#FBBC05" d="M6.4 13.9a6 6 0 0 1 0-3.8V7.5H3.1a10 10 0 0 0 0 9l3.3-2.6Z"/><path fill="#EA4335" d="M12 6c1.5 0 2.8.5 3.9 1.5l2.9-2.9A9.7 9.7 0 0 0 12 2a10 10 0 0 0-8.9 5.5l3.3 2.6C7.2 7.8 9.4 6 12 6Z"/></svg>Continue with Google</a><p className="mt-4 text-sm text-slate-500">Use your authorized Google account.</p>{error&&<p role="alert" className="mt-4 text-sm text-red-600">{errors[error]??errors.sign_in_failed}</p>}</div>;
 }

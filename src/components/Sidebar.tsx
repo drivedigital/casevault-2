@@ -150,6 +150,7 @@ export default function Sidebar() {
       </nav>
 
       <div className="border-t border-slate-800 px-4 py-4">
+        <form action="/api/logout" method="post"><button type="submit" className="mb-3 w-full rounded-lg px-3 py-2 text-left text-sm text-slate-400 hover:bg-white/5 hover:text-white">Sign out</button></form>
         <div className="flex items-center gap-2 rounded-lg bg-white/5 px-3 py-2.5 text-xs text-slate-400">
           <span className="relative flex h-2 w-2">
             <span className="pulse-dot absolute inline-flex h-full w-full rounded-full bg-emerald-400" />

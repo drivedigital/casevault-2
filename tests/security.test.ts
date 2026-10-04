@@ -18,3 +18,14 @@ test('imports reject unknown properties and malformed hashes',()=>{
  assert.equal(importSchemas.documents.safeParse({...row,pageCount:-1}).success,false);
  assert.equal(importSchemas.jobs.safeParse({idempotencyKey:'x',kind:'extract',payload:{},status:'complete'}).success,false);
 });
+
+test('workspace accepts only the verified authorized Google identity',async()=>{
+ const {authorizedGoogleUser}=await import('../src/lib/auth');
+ const owner={email:'dgeorgenyc@gmail.com',email_confirmed_at:'2026-10-04',identities:[{provider:'google'}]};
+ assert.equal(authorizedGoogleUser(owner,'dgeorgenyc@gmail.com'),true);
+ assert.equal(authorizedGoogleUser({...owner,email:'another@example.com'},'dgeorgenyc@gmail.com'),false);
+ assert.equal(authorizedGoogleUser({...owner,email_confirmed_at:undefined},'dgeorgenyc@gmail.com'),false);
+ assert.equal(authorizedGoogleUser({...owner,identities:[{provider:'email'}]},'dgeorgenyc@gmail.com'),false);
+ assert.equal(authorizedGoogleUser(owner,''),false);
+ assert.equal(authorizedGoogleUser(null,'dgeorgenyc@gmail.com'),false);
+});
