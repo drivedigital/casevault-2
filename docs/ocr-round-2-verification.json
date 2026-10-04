@@ -1,0 +1,108 @@
+{
+  "date": "2026-10-04",
+  "calls": [
+    {
+      "test": "nemotron-ocr-v2-p12",
+      "page": 12,
+      "model": "nvidia/nemotron-ocr-v2",
+      "httpStatus": 200,
+      "elapsedMs": 923,
+      "error": null,
+      "applicationError": false,
+      "humanAccepted": false
+    },
+    {
+      "test": "nemotron-ocr-v2-p12-300dpi",
+      "page": 12,
+      "model": "nvidia/nemotron-ocr-v2",
+      "httpStatus": 200,
+      "elapsedMs": 1065,
+      "error": null,
+      "applicationError": false,
+      "humanAccepted": false
+    },
+    {
+      "test": "deepseek41-p12",
+      "page": 12,
+      "model": "deepseek-ai/deepseek-v4.1-flash",
+      "httpStatus": null,
+      "elapsedMs": 120002,
+      "error": "TimeoutError",
+      "applicationError": false,
+      "humanAccepted": false
+    },
+    {
+      "test": "kimi3-p12",
+      "page": 12,
+      "model": "moonshotai/kimi-k3",
+      "httpStatus": null,
+      "elapsedMs": 120005,
+      "error": "TimeoutError",
+      "applicationError": false,
+      "humanAccepted": false
+    },
+    {
+      "test": "hf-dots-p12",
+      "page": 12,
+      "model": "dots",
+      "httpStatus": 200,
+      "elapsedMs": 17605,
+      "error": null,
+      "applicationError": false,
+      "humanAccepted": false
+    },
+    {
+      "test": "hf-deepseekocr2-p12",
+      "page": 12,
+      "model": "deepseekocr2",
+      "httpStatus": 200,
+      "elapsedMs": 16516,
+      "error": null,
+      "applicationError": false,
+      "humanAccepted": false
+    },
+    {
+      "test": "hf-dots-p1",
+      "page": 1,
+      "model": "dots",
+      "httpStatus": 200,
+      "elapsedMs": 904,
+      "error": null,
+      "applicationError": true,
+      "humanAccepted": false
+    },
+    {
+      "test": "hf-dots-p13",
+      "page": 13,
+      "model": "dots",
+      "httpStatus": 200,
+      "elapsedMs": 907,
+      "error": null,
+      "applicationError": true,
+      "humanAccepted": false
+    },
+    {
+      "test": "hf-deepseekocr2-p1",
+      "page": 1,
+      "model": "deepseekocr2",
+      "httpStatus": 200,
+      "elapsedMs": 22793,
+      "error": null,
+      "applicationError": false,
+      "humanAccepted": false
+    },
+    {
+      "test": "hf-deepseekocr2-p13",
+      "page": 13,
+      "model": "deepseekocr2",
+      "httpStatus": 200,
+      "elapsedMs": 626,
+      "error": null,
+      "applicationError": true,
+      "humanAccepted": false
+    }
+  ],
+  "productionJobsConsumed": false,
+  "searchablePdfCreated": false,
+  "interpretation": "HTTP 200 may contain demo errors. See OCR_COMPARISON_ROUND_2.md for quality review."
+}

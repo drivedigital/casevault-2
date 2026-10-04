@@ -9,6 +9,7 @@ const allowed = new Set([
   'google/gemma-4-31b-it', 'google/diffusiongemma-26b-a4b-it',
   'meta/llama-3.2-11b-vision-instruct',
   'meta/llama-3.2-90b-vision-instruct', 'moonshotai/kimi-k3',
+  'deepseek-ai/deepseek-v4.1-flash',
 ]);
 const [model, imagePath, pageArgument, outputPath] = process.argv.slice(2);
 const page = Number(pageArgument);

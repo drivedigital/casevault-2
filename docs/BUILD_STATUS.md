@@ -70,3 +70,7 @@ The explicitly requested Llama agree call returned HTTP 200 through the Cloudfla
 ## Derivative UX design and NVIDIA/OpenRouter comparison — 2026-10-04
 
 Recorded existing R2 extraction receipts and the proposed workspace-scoped searchable-PDF version registry, reader selector, independent PDF/AI review and version-pinned citations. NVIDIA Llama 11B and 90B image calls returned HTTP 200 but failed markings/reference/structure checks. OpenRouter Dots returned truncated output; Qwen returned upstream 429. No searchable PDF, deployed UI, schema migration or production job consumption resulted. Provider request conventions and sanitized benchmark receipts are saved in documentation.
+
+## OCR round 2 and storage inventory — 2026-10-04
+
+Verified specialized Nemotron OCR v2 inference at 130/300 DPI and exercised Dots/DeepSeek OCR 2 public API demos. Recognition/marking errors prevent promotion; DeepSeek Flash/Kimi timed out; some follow-up demo tests were blocked. No production jobs or deployed changes. See [comparison](OCR_COMPARISON_ROUND_2.md) and [Supabase/R2 file-library design](STORAGE_AND_FILE_LIBRARY.md).

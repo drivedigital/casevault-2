@@ -40,3 +40,7 @@ The Hugging Face integration confirmed the Dots-OCR and DeepSeek-OCR-2-Unlimited
 The BHL leaderboard evaluates historical printed text against human ground truth and separates reading/fidelity and sparse-page errors. Use it to shortlist models and track hallucination; its rankings do not establish checkbox, handwriting or strikeout accuracy on our court documents.
 
 Sources: [DeepSeek](https://build.nvidia.com/deepseek-ai/deepseek-v4.1-flash), [Kimi](https://build.nvidia.com/moonshotai/kimi-k3), [Ultra](https://build.nvidia.com/nvidia/nemotron-3-ultra-550b-a55b), [Super](https://build.nvidia.com/nvidia/nemotron-3-super-120b-a12b), [GLM](https://build.nvidia.com/z-ai/glm-5-3), [OCR v2](https://build.nvidia.com/nvidia/nemotron-ocr-v2), [Dots Space](https://huggingface.co/spaces/MohamedRashad/Dots-OCR), [DeepSeek Space](https://huggingface.co/spaces/prithivMLmods/DeepSeek-OCR-2-Unlimited-OCR), [BHL](https://huggingface.co/spaces/finebooks/bhl-ocr-leaderboard).
+
+## Round 2 endpoint resolution
+
+Nemotron OCR v2 specialized hosted inference is verified with HTTP 200 and word polygons/confidence. DeepSeek 4.1 Flash is now included in the opt-in vision benchmark allowlist; its image request and Kimi K3 timed out at 120 seconds. The HF OCR demos were exercised with reviewed API schemas. See [comparison results](OCR_COMPARISON_ROUND_2.md).
