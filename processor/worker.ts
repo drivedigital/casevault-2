@@ -1,7 +1,8 @@
 import { extractPdf } from './pdf';
 import { z } from 'zod';
-import { extractionSchema, usableText,validateOriginalSize } from '../src/lib/processing-types';
+import { extractionSchema, extractionVersion, usableText,validateOriginalSize } from '../src/lib/processing-types';
 import { equalSecret } from '../src/lib/auth';
+import { requireProviderEnabled } from '../src/lib/provider-controls';
 interface Env {
     EVIDENCE: R2Bucket;
     CASEVAULT: Fetcher;
@@ -33,12 +34,12 @@ export default {
                 throw new Error('Processing lease expired'); };
             let previous = null;
             if (input.previousExtractionKey) {
-                if (!input.previousExtractionKey.startsWith(`casevault-2/derivatives/${digest}/text-first-ocrspace-v1/`))
+                if (!input.previousExtractionKey.startsWith(`casevault-2/derivatives/${digest}/${extractionVersion}/`))
                     throw new Error('Previous receipt identity mismatch');
                 const saved = await env.EVIDENCE.get(input.previousExtractionKey);
                 if (saved) {
                     previous = extractionSchema.parse(await saved.json());
-                    if (previous.originalHash !== digest)
+                    if (previous.originalHash !== digest || previous.version !== extractionVersion)
                         throw new Error('Previous receipt hash mismatch');
                 }
             }
@@ -47,6 +48,7 @@ export default {
                 const saved = previous?.pages.find(p => p.page === page && p.method === 'ocrspace' && usableText(p.text));
                 if (saved)
                     return saved.text;
+                await requireProviderEnabled(env.EVIDENCE, 'ocr');
                 if (++calls > 30)
                     throw new Error('Pilot OCR request cap reached (30 pages per run)');
                 if (!env.OCR_SPACE_API_KEY)

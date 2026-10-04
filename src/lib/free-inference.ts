@@ -2,7 +2,10 @@ import 'server-only';
 import { getCloudflareContext } from '@opennextjs/cloudflare';
 import { isFreePricing,hasNvidiaFreeEntitlement } from './processing-types';
 import { z } from 'zod';
+import { providerIds } from './provider-types';
+import { requireProviderEnabled } from './provider-controls';
 export async function freeModelCheck(provider: string, model: string) {
+    await requireProviderEnabled(getCloudflareContext().env.EVIDENCE, z.enum(providerIds).parse(provider));
     if (provider === 'nvidia' && model === 'nvidia/nemotron-3.5-lightning-30b-a3b') {
         const evidenceUrl='https://build.nvidia.com/nvidia/nemotron-3.5-lightning-30b-a3b';
         const page=await fetch(evidenceUrl,{signal:AbortSignal.timeout(20000),redirect:'manual',cache:'no-store'});
@@ -34,6 +37,7 @@ export async function freeInference(provider: string, model: string, system: str
     const env=getCloudflareContext().env;const key = provider==='nvidia'?env.NVIDIA_KEY:env.OPEN_ROUTER_KEY;
     if (!key)
         throw new Error('OpenRouter credential missing');
+    await requireProviderEnabled(env.EVIDENCE, z.enum(providerIds).parse(provider));
     const response = await fetch(provider==='nvidia'?'https://integrate.api.nvidia.com/v1/chat/completions':'https://openrouter.ai/api/v1/chat/completions', { method: 'POST', headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ model, messages: [{ role: 'system', content: system }, { role: 'user', content: prompt }], max_tokens: 6000, reasoning: { enabled: false, exclude: true }, temperature: 0, stream: false, ...(provider==='nvidia'?{chat_template_kwargs:{enable_thinking:false}}:{provider: { allow_fallbacks: false }}) }), signal: AbortSignal.timeout(90000), redirect: 'manual' });
     if (!response.ok) {
         await response.body?.cancel();

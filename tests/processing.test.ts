@@ -4,10 +4,32 @@ import { PDFDocument, StandardFonts, degrees, PDFDict } from 'pdf-lib';
 import { extractPdf, inspectPdf } from '../processor/pdf';
 import { analysisSchema, citedFacts, isFreePricing, liveLease, usableText, extractionSchema, parseAnalysis,hasNvidiaFreeEntitlement,validateOriginalSize } from '../src/lib/processing-types';
 const hash = '0'.repeat(64);
-async function digitalPdf() { const pdf = await PDFDocument.create(); const font = await pdf.embedFont(StandardFonts.Helvetica); pdf.addPage().drawText('On January 10, 2024, Alice signed the contract in New York. This is source evidence.', { font, size: 12 }); return pdf; }
+async function digitalPdf() { const pdf = await PDFDocument.create(); const font = await pdf.embedFont(StandardFonts.Helvetica); pdf.addPage().drawText('On January 10, 2024, Alice signed the contract in New York. This is source evidence.', { font, size: 12, x: 60, y: 600 }); return pdf; }
 test('digital PDF text extraction never calls OCR', async () => { const pdf = await digitalPdf(); let calls = 0; const result = await extractPdf(await pdf.save(), hash, async () => { calls++; return ''; }); assert.equal(calls, 0); assert.equal(result.pages[0].method, 'embedded'); assert.equal(result.status, 'complete'); });
+test('a court filing header alone never establishes searchable body text', async () => {
+    const pdf = await PDFDocument.create();
+    const page = pdf.addPage();
+    page.drawText('Case 1-26-44227-jmm Doc 8 Filed 09/16/26 Entered 09/16/26 10:05:05', { x: 35, y: page.getHeight() - 15, size: 12 });
+    let calls = 0;
+    const result = await extractPdf(await pdf.save(), hash, async () => { calls++; throw new Error('OCR is paused'); });
+    assert.equal(calls, 1);
+    assert.equal(result.status, 'partial');
+    assert.equal(result.pages[0].method, 'unavailable');
+    assert.match(result.pages[0].warnings.join(' '), /page-body/);
+    assert.equal(result.version, 'text-first-ocrspace-body-v2');
+});
+test('body validation also accepts genuinely embedded text on rotated pages', async () => {
+    const pdf = await digitalPdf(); pdf.getPage(0).setRotation(degrees(90));
+    let calls = 0;
+    const result = await extractPdf(await pdf.save(), hash, async () => { calls++; return ''; });
+    assert.equal(calls, 0); assert.equal(result.status, 'complete');
+});
+test('historical v1 receipts remain readable without becoming current cache receipts', () => {
+    const old = { version: 'text-first-ocrspace-v1', originalHash: hash, pageCount: 1, pages: [{ page: 1, text: 'Historical extraction text', method: 'embedded', warnings: [] }], status: 'complete', engines: {} };
+    assert.equal(extractionSchema.parse(old).version, 'text-first-ocrspace-v1');
+});
 test('mixed PDF retains embedded pages and sends only a one-page derivative for OCR', async () => { const pdf = await digitalPdf(); pdf.addPage().setRotation(degrees(90)); let calls = 0; const result = await extractPdf(await pdf.save(), hash, async (bytes) => { calls++; assert.equal((await PDFDocument.load(bytes)).getPageCount(), 1); return 'This scanned page contains enough readable source text for the processing pilot.'; }); assert.equal(calls, 1); assert.deepEqual(result.pages.map(p => p.method), ['embedded', 'ocrspace']); assert.equal(result.status, 'complete'); });
-test('OCR failures preserve good pages and mark extraction partial', async () => { const pdf = await digitalPdf(); pdf.addPage(); const result = await extractPdf(await pdf.save(), hash, async () => { throw new Error('Quota exhausted'); }); assert.equal(result.status, 'partial'); assert.equal(result.pages[0].method, 'embedded'); assert.equal(result.pages[1].method, 'unavailable'); assert.match(result.pages[1].warnings[0], /Quota/); });
+test('OCR failures preserve good pages and mark extraction partial', async () => { const pdf = await digitalPdf(); pdf.addPage(); const result = await extractPdf(await pdf.save(), hash, async () => { throw new Error('Quota exhausted'); }); assert.equal(result.status, 'partial'); assert.equal(result.pages[0].method, 'embedded'); assert.equal(result.pages[1].method, 'unavailable'); assert.match(result.pages[1].warnings.join(' '), /Quota/); });
 test('corrupt, encrypted and oversized page-count PDFs fail without OCR', async () => { await assert.rejects(inspectPdf(new TextEncoder().encode('not a PDF'))); const large = await PDFDocument.create(); for (let i = 0; i < 201; i++)
     large.addPage(); await assert.rejects(inspectPdf(await large.save()), /200-page/); const encrypted = await digitalPdf(); encrypted.context.trailerInfo.Encrypt = encrypted.context.register(PDFDict.withContext(encrypted.context)); await assert.rejects(inspectPdf(await encrypted.save()), /encrypted/i); });
 test('free-only pricing fails closed for missing, paid and undeclared free variants', () => { assert.equal(isFreePricing({ id: 'test:free', pricing: { prompt: '0', completion: '0', request: '0' } }), true); assert.equal(isFreePricing({ id: 'test:free' }), false); assert.equal(isFreePricing({ id: 'test', pricing: { prompt: '0', completion: '0' } }), false); assert.equal(isFreePricing({ id: 'test:free', pricing: { prompt: '0', completion: '.001' } }), false); assert.equal(isFreePricing({ id: 'test:free', pricing: { prompt: '0', completion: '0', image: '1' } }), false); });

@@ -20,7 +20,15 @@ export async function extractPdf(bytes: Uint8Array, hash: string, ocr: (bytes: U
             const page = await pdf.getPage(number);
             const content = await page.getTextContent();
             const text = content.items.map(item => 'str' in item ? item.str + ('hasEOL' in item && item.hasEOL ? '\n' : ' ') : '').join('').trim();
-            if (usableText(text)) {
+            // Classify against the PDF's unrotated page box, not the viewer rotation.
+            const viewport = page.getViewport({ scale: 1, rotation: 0 });
+            const bodyText = content.items.filter(item => {
+                if (!('str' in item)) return false;
+                const position = pdfjs.Util.transform(viewport.transform, item.transform);
+                const centerY = position[5] - Math.abs(item.height) / 2;
+                return centerY >= viewport.height * .12 && centerY <= viewport.height * .92;
+            }).map(item => 'str' in item ? item.str : '').join(' ').trim();
+            if (usableText(bodyText)) {
                 pages.push({ page: number, text, method: 'embedded', warnings: [] });
                 continue;
             }
@@ -34,10 +42,10 @@ export async function extractPdf(bytes: Uint8Array, hash: string, ocr: (bytes: U
                 const result = await ocr(isolated, number);
                 if (!usableText(result))
                     throw new Error('OCR returned insufficient usable text; inspect this page');
-                pages.push({ page: number, text: result, method: 'ocrspace', warnings: ['OCR text requires quality review'] });
+                pages.push({ page: number, text: result, method: 'ocrspace', warnings: [usableText(text) ? 'Embedded text was readable only in page margins; OCR was required for the body' : 'Embedded body text was insufficient or corrupted', 'OCR text requires quality review'] });
             }
             catch (error) {
-                pages.push({ page: number, text, method: 'unavailable', warnings: [error instanceof Error ? error.message : 'OCR failed'] });
+                pages.push({ page: number, text, method: 'unavailable', warnings: ['Embedded text does not establish readable page-body content', error instanceof Error ? error.message : 'OCR failed'] });
             }
         }
     }

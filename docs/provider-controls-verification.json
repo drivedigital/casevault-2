@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-04",
+  "implementation": "provider toggles and body-readability v2",
+  "providerControls": {
+    "geminiDefaultEnabled": false,
+    "credentialsRetained": true,
+    "modelSelectionsIndependent": true,
+    "disabledProvidersSkippedByRefresh": true,
+    "newInferenceGuardedServerSide": true
+  },
+  "readabilityDiagnostic": {
+    "sourceSha256": "9b7583985dfc3e190ff5b5eb7a6904f645c40eea1abb35032bfbc82880363cee",
+    "version": "text-first-ocrspace-body-v2",
+    "pageCount": 13,
+    "embeddedPages": 0,
+    "pagesRequiringOcr": 13,
+    "statusWithOcrDisabled": "partial",
+    "externalCalls": 0,
+    "productionArtifactsModified": false
+  },
+  "deployment": {
+    "transport": "Cloudflare integration",
+    "status": "blocked",
+    "workerAssetsUploadSession": "No access to the specified resource",
+    "geminiControlWriteErrorCode": 10000,
+    "liveGeminiOffConfirmed": false,
+    "liveAppUpdated": false
+  },
+  "plannedNotImplemented": [
+    "searchable PDF generation",
+    "OCR model/version comparison and redo controls",
+    "reusable search chunk index",
+    "automatic case-scoped recognition hints",
+    "docket context retrieval and multi-document citations"
+  ]
+}

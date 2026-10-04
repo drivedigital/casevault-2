@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { readProviders, refreshProviders, selectActiveModel } from "@/lib/providers";
+import { readProviders, refreshProviders, selectActiveModel, setProviderEnabled } from "@/lib/providers";
 
 export async function GET() {
   return NextResponse.json({ providers: await readProviders() }, { headers: { "Cache-Control": "private, no-store" } });
@@ -9,6 +9,9 @@ export async function POST() {
 }
 
 export async function PATCH(request: Request) {
-  try { return NextResponse.json({ providers: await selectActiveModel(await request.json()) }); }
-  catch { return NextResponse.json({ error: "Choose a text model from this provider’s available catalog." }, { status: 400 }); }
+  try {
+    const input: unknown = await request.json();
+    const control = input !== null && typeof input === 'object' && Object.hasOwn(input, 'enabled');
+    return NextResponse.json({ providers: await (control ? setProviderEnabled(input) : selectActiveModel(input)) });
+  } catch { return NextResponse.json({ error: "Choose a valid provider toggle or models from this provider’s available text catalog." }, { status: 400 }); }
 }

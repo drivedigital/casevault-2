@@ -7,9 +7,9 @@ import { withProcessingDb } from './processing-db';
 import { readAgents, instructionSchema } from './agent-workspace';
 import { readProviders } from './providers';
 import { freeInference, freeModelCheck } from './free-inference';
-import { analysisSchema, citedFacts, extractionSchema, extractionVersion, liveLease, parseAnalysis,validateOriginalSize, type Extraction } from './processing-types';
+import { analysisSchema, citedFacts, extractionSchema, extractionVersion, extractionVersions, liveLease, parseAnalysis,validateOriginalSize, type Extraction } from './processing-types';
 const workspace = () => getCloudflareContext().env.WORKSPACE_ID;
-const snapshotSchema = z.object({ agent: z.object({ id: z.string(), name: z.string(), instructions: z.string(), provider: z.string(), modelId: z.string().nullable() }), prompt: z.string(), originalHash: z.string(), objectKey: z.string(), extractionVersion: z.literal(extractionVersion) });
+const snapshotSchema = z.object({ agent: z.object({ id: z.string(), name: z.string(), instructions: z.string(), provider: z.string(), modelId: z.string().nullable() }), prompt: z.string(), originalHash: z.string(), objectKey: z.string(), extractionVersion: z.enum(extractionVersions) });
 export async function migrateProcessingRequests() {
     const bucket = getCloudflareContext().env.EVIDENCE;
     let cursor: string | undefined, count = 0;
@@ -82,6 +82,8 @@ export async function approveRequest(requestId: string) {
         const agent = agents.find(a => a.id === request.agentId && a.active);
         if (!agent)
             throw new Error('Agent is inactive or unavailable');
+        if (!providers.find(p => p.id === agent.provider)?.enabled)
+            throw new Error('This inference provider is off. Turn it on in Settings before approval.');
         if (agent.modelId && !providers.find(p => p.id === agent.provider)?.activeModels.includes(agent.modelId))
             throw new Error('Choose an active model before approval');
         const snapshot = { agent: { id: agent.id, name: agent.name, provider: agent.provider, instructions: agent.instructions, modelId: agent.modelId ?? null }, prompt: request.prompt, originalHash: doc.sha256!, objectKey: doc.objectKey!, extractionVersion };
@@ -126,6 +128,8 @@ export async function processTick() {
     let extraction: Extraction | null = null;
     try {
         const snapshot = snapshotSchema.parse(run.snapshot);
+        if (snapshot.extractionVersion !== extractionVersion)
+            throw new Error('This run uses the old readability policy. Submit a new processing request to approve body-text validation; the historical snapshot is retained.');
         const env = getCloudflareContext().env;
         const cacheKey = `casevault-2/derivatives/${snapshot.originalHash}/${extractionVersion}/complete.json`;
         await checkpoint(run.id, job.id, token, { extractionState: 'running', error: null });
@@ -139,7 +143,7 @@ export async function processTick() {
             if (currentHash !== snapshot.originalHash)
                 throw new Error('Original hash mismatch');
             extraction = extractionSchema.parse(await cached.json());
-            if (extraction.originalHash !== snapshot.originalHash || extraction.status !== 'complete')
+            if (extraction.originalHash !== snapshot.originalHash || extraction.version !== extractionVersion || extraction.status !== 'complete')
                 throw new Error('Cached extraction receipt is invalid');
         }
         else {
@@ -151,7 +155,7 @@ export async function processTick() {
                 throw new Error(result.error ?? 'Extraction failed');
             }
             extraction = extractionSchema.parse(await response.json());
-            if (extraction.originalHash !== snapshot.originalHash)
+            if (extraction.originalHash !== snapshot.originalHash || extraction.version !== extractionVersion)
                 throw new Error('Extraction hash mismatch');
         }
         const encoded = JSON.stringify(extraction);

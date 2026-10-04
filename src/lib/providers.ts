@@ -2,6 +2,7 @@ import "server-only";
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { z } from "zod";
 import { catalogSchema, modelSchema, providerIds, type ProviderId, type ProviderCheck, type ProviderView, type Model, modelSelectionSchema, validActiveModel } from "./provider-types";
+import { readProviderEnabled, requireProviderEnabled, writeProviderControl } from './provider-controls';
 
 const catalogKey = "casevault-2/settings/provider-catalog-v1.json";
 const openAIModels = z.object({ data: z.array(z.object({ id: z.string(), name: z.string().optional(), context_length: z.number().optional(), architecture: z.object({ input_modalities: z.array(z.string()).optional(), output_modalities: z.array(z.string()).optional() }).optional() })) });
@@ -83,15 +84,16 @@ export async function discoverProvider(id: ProviderId): Promise<ProviderCheck> {
 export async function readProviders(): Promise<ProviderView[]> {
   const object = await getCloudflareContext().env.EVIDENCE.get(catalogKey);
   const parsed = catalogSchema.safeParse(object ? await object.json() : null);
-  const selections = await readModelSelections();
+  const [selections, controls] = await Promise.all([readModelSelections(), Promise.all(providerIds.map(async id => ({ id, enabled: await readProviderEnabled(getCloudflareContext().env.EVIDENCE, id) }))) ]);
   return providerIds.map(id => {
     const configured = Boolean(credential(id));
     const previous = parsed.success ? parsed.data.providers.find(p => p.id === id) : undefined;
-    return { activeModels: selections[id] ?? [], activeModel: selections[id]?.[0] ?? null, ...(previous ?? { id, checkedAt: "", status: "missing", message: configured ? "Credential installed. Refresh connections to discover models." : "Credential has not been installed.", models: [] }), configured, ...(!configured ? { status: "missing" as const, message: "Credential has not been installed.", models: [] } : {}) };
+    return { enabled: controls.find(control => control.id === id)!.enabled, activeModels: selections[id] ?? [], activeModel: selections[id]?.[0] ?? null, ...(previous ?? { id, checkedAt: "", status: "missing", message: configured ? "Credential installed. Refresh connections to discover models." : "Credential has not been installed.", models: [] }), configured, ...(!configured ? { status: "missing" as const, message: "Credential has not been installed.", models: [] } : {}) };
   });
 }
 export async function refreshProviders(): Promise<ProviderView[]> {
-  const providers = await Promise.all(providerIds.map(discoverProvider));
+  const current = await readProviders();
+  const providers = await Promise.all(current.map(provider => provider.enabled ? discoverProvider(provider.id) : Promise.resolve(provider)));
   await getCloudflareContext().env.EVIDENCE.put(catalogKey, JSON.stringify({ version: 1, providers }), { httpMetadata: { contentType: "application/json" } });
   return readProviders();
 }
@@ -99,10 +101,11 @@ export async function refreshProviders(): Promise<ProviderView[]> {
 // Ready for the future leased processor. Callers must explicitly choose provider/model;
 // discovery alone never starts processing or sends legal documents externally.
 export async function generateText(provider: Exclude<ProviderId, "ocr">, model: string, prompt: string): Promise<string> {
+  await requireProviderEnabled(getCloudflareContext().env.EVIDENCE, provider);
   const key = credential(provider);
   if (!key) throw new ProviderFailure();
   const current = (await readProviders()).find(p => p.id === provider);
-  if (!current?.models.some(m => m.id === model)) throw new Error("Model is absent from the current provider catalog");
+  if (!current?.activeModels.includes(model) || !validActiveModel(current, model)) throw new Error("Choose an active model from the current provider catalog");
   let data: unknown;
   if (provider === "gemini") {
     data = await request(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`, { method: "POST", headers: { "X-goog-api-key": key, "Content-Type": "application/json" }, body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { maxOutputTokens: 256 } }) });
@@ -137,8 +140,13 @@ export async function selectActiveModel(input: unknown) {
   await getCloudflareContext().env.EVIDENCE.put(`${selectionsPrefix}${selection.provider}.json`, JSON.stringify(selection), { httpMetadata: { contentType: "application/json" } });
   return readProviders();
 }
+export async function setProviderEnabled(input: unknown) {
+  await writeProviderControl(getCloudflareContext().env.EVIDENCE, input);
+  return readProviders();
+}
 export async function generateWithActiveModel(provider: "openrouter" | "nvidia" | "gemini", prompt: string, model?: string): Promise<string> {
   const connection = (await readProviders()).find(p => p.id === provider);
+  if (!connection?.enabled) throw new Error('This provider is off. Turn it on in Settings first.');
   const selected = model ?? connection?.activeModels[0];
   if (!connection || !selected || !connection.activeModels.includes(selected) || !validActiveModel(connection,selected)) throw new Error("Choose an available active model in Settings first.");
   return generateText(provider, selected, prompt);

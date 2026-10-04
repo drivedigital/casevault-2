@@ -1,7 +1,8 @@
 import { z } from 'zod';
-export const extractionVersion = 'text-first-ocrspace-v1';
+export const extractionVersions = ['text-first-ocrspace-v1', 'text-first-ocrspace-body-v2'] as const;
+export const extractionVersion = extractionVersions[1];
 export const pageSchema = z.object({ page: z.number().int().positive(), text: z.string().max(250000), method: z.enum(['embedded', 'ocrspace', 'unavailable']), warnings: z.array(z.string()) });
-export const extractionSchema = z.object({ version: z.literal(extractionVersion), originalHash: z.string().regex(/^[a-f0-9]{64}$/), pageCount: z.number().int().positive().max(200), pages: z.array(pageSchema).max(200), status: z.enum(['complete', 'partial']), engines: z.record(z.string(), z.string()) }).superRefine((value, ctx) => { if (value.pages.length !== value.pageCount || value.pages.some((p, i) => p.page !== i + 1))
+export const extractionSchema = z.object({ version: z.enum(extractionVersions), originalHash: z.string().regex(/^[a-f0-9]{64}$/), pageCount: z.number().int().positive().max(200), pages: z.array(pageSchema).max(200), status: z.enum(['complete', 'partial']), engines: z.record(z.string(), z.string()) }).superRefine((value, ctx) => { if (value.pages.length !== value.pageCount || value.pages.some((p, i) => p.page !== i + 1))
     ctx.addIssue({ code: 'custom', message: 'Incomplete or unordered page receipt' }); if (value.status === 'complete' && value.pages.some(p => p.method === 'unavailable'))
     ctx.addIssue({ code: 'custom', message: 'Unavailable pages cannot be complete' }); });
 export type Extraction = z.infer<typeof extractionSchema>;

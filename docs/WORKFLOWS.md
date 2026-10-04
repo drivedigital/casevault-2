@@ -67,3 +67,5 @@ Docket overview cards and detail pages link to the recorded live NYSCEF source U
 # Standalone Cloudflare OCR evaluation
 
 Use the Cloudflare integration for account actions and direct model tests. The protected implementation is in `ocr-worker/`, with an explicit model choice and a required `OCR_SECRET_KEY` secret binding. It accepts page images and returns unverified transcription, with no searchable PDF or automatic legal-record updates. Deployment remains blocked by connector upload access. See [Cloudflare OCR evaluation](CLOUDFLARE_OCR_BENCHMARK.md) for dependencies, test results, Gemini pause limitations, and deployment requirements.
+
+Provider switches, the new body-readability check, searchable-PDF/versioning design, recognition hints and docket-context summarization are documented in [Document processing strategy](DOCUMENT_PROCESSING_STRATEGY.md). The switches/readability fix are locally implemented; searchable derivatives and context-aware retrieval remain future work. Cloudflare integration write access currently blocks applying the code to production.

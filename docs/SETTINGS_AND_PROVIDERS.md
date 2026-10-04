@@ -1,6 +1,6 @@
 # Settings and provider connections
 
-The private `/settings` page shows the court review policy, Knowledge Graph placeholder, credential installation state, latest connection check, and searchable live model catalogs. Only the authorized Google user or trusted machine credential can access the page/API. Credentials never appear in client props, model receipts, or browser responses.
+The `/settings` page shows the court review policy, Knowledge Graph placeholder, credential installation state, latest connection check, and searchable model catalogs. Temporary public review permits read-only viewing; only the authorized Google user or trusted machine credential can change settings. Credentials never appear in client props, model receipts, or browser responses.
 
 ## Credentials and endpoints
 
@@ -13,9 +13,9 @@ The private `/settings` page shows the court review policy, Knowledge Graph plac
 
 `NVIDIA_ENDPOINT` is a deployment variable set to `https://integrate.api.nvidia.com/v1/`. The server restricts it to that exact endpoint. The four credentials are installed as Cloudflare Worker secrets. Local copies are in ignored, permission-restricted files; source control contains names only. Google workspace OAuth remains separate from these inference credentials.
 
-Use `wrangler secret put <NAME>` to replace an individual credential, or a private JSON file with `wrangler secret bulk <file>`. Refresh Settings after replacement. Refresh never processes lawsuit evidence. OCR checks use a generated image; AI smoke tests use a trivial synthetic prompt. Catalog discovery does not establish that every listed model supports chat or that an account has inference credits.
+Use the Cloudflare integration's Worker secrets API to replace an individual credential. Refresh Settings after replacement, with that provider on. Refresh never processes lawsuit evidence. OCR checks use a generated image; AI smoke tests use a trivial synthetic prompt. Catalog discovery does not establish that every listed model supports chat or that an account has inference credits.
 
-`GET /api/settings/providers` returns sanitized cached connection receipts. `POST` refreshes the providers concurrently and persists a credential-free receipt at `casevault-2/settings/provider-catalog-v1.json` in private R2. The existing evidence objects and legacy KV inventory are untouched. Cookie mutations require the same app origin. Failed provider requests are reported without returning provider response bodies or credentials.
+`GET /api/settings/providers` returns sanitized cached connection receipts and current controls. `POST` refreshes only enabled providers concurrently and persists a credential-free receipt at `casevault-2/settings/provider-catalog-v1.json` in private R2. The existing evidence objects and legacy KV inventory are untouched. Cookie mutations require the same app origin. Failed provider requests are reported without returning provider response bodies or credentials.
 
 ## Review policy
 
@@ -25,7 +25,7 @@ Review bypass does not mark a document OCR-complete, indexed, verified, or legal
 
 ## Processing scope
 
-The server provider module supplies model discovery and a text inference adapter for OpenRouter, NVIDIA, and Gemini. Callers must explicitly choose an installed provider and a model from its latest catalog. No automatic fallback sends evidence to another provider. OCR credentials and connection checks are available; the leased OCR/extraction runner remains future work. The document action is labeled **Queue extraction**, and reports queued work accurately.
+The server provider module supplies model discovery and a text inference adapter for OpenRouter, NVIDIA, and Gemini. Callers must choose an enabled installed provider and a selected model from its catalog. No automatic fallback sends evidence to another provider. The leased pilot runner is implemented separately, while the general backlog remains queued; see [pilot scope](PROCESSING_PILOT.md). The document action is labeled **Queue extraction**, and reports queued work accurately.
 
 Knowledge Graph renders a static placeholder and does not call the graph API.
 
@@ -44,3 +44,11 @@ Settings now includes persistent active-model pills for each cloud inference pro
 Model filters appear inside each inference provider card. Filters independently match model names and IDs, ignore case and surrounding whitespace, show matching counts, and can be cleared. Filtering does not change the saved active model.
 
 Multiple active models: each provider stores a `models` array. Model pills toggle independently; Clear all deselects every model. Existing single-model settings load as a one-element array without changing saved choices. Filters do not affect selections. API PATCH accepts `{provider, models}`; legacy `{provider, model}` requests remain compatible. All selected IDs must belong to the provider's available text catalog and duplicates are rejected. Inference can explicitly choose any selected model; calls without an explicit model use the first selected model. Enabling multiple models does not automatically send duplicate inference requests.
+
+## Provider on/off controls — 2026-10-04
+
+Each provider card now has an accessible on/off switch independent of its multi-select model pills. PATCH `{provider, enabled}` writes only `casevault-2/settings/provider-controls/{provider}.json`; it does not alter installed secrets, catalogs, selected models or agent bindings. Gemini defaults off on the new implementation; existing other providers default on. Invalid control records fail closed. Turning a provider back on restores eligibility for its saved model choices, subject to credentials, availability and the existing execution policy.
+
+Refresh skips off providers. New direct inference, pilot approvals and actual new inference calls enforce provider state server-side; the service-bound OCR.space adapter uses the same R2 control. Existing extracted text can still be read/reused. A switch cannot cancel an already submitted external request. Model choices remain editable while off and apply when enabled. Settings mutations retain existing owner/trusted authentication; public viewers cannot change controls.
+
+Local tests and production build pass, but Cloudflare integration write access rejected deployment/setup and the Gemini control write. The hosted app is not yet updated. See [document strategy and context design](DOCUMENT_PROCESSING_STRATEGY.md).

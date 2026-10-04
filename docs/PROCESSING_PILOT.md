@@ -54,3 +54,7 @@ The first successful NVIDIA smoke draft contained unsupported narrative addition
 ## Pilot outcome
 
 All ten originals passed SHA-256 readback and have complete extraction receipts: 29 pages, of which 28 supplied usable embedded text and one required OCR. Nine documents have saved draft summaries and cited facts. Document 174 has complete OCR but malformed AI JSON and an unsupported `entity` kind; its response receipt is preserved and the run remains `needs_human`. A new schema-focused approved request or another verified-free model is the next action. No run is human-accepted, and 507 general extraction jobs remain queued. The initial OpenRouter failures remain separately visible rather than being rewritten as successes.
+
+## Readability and provider controls follow-up
+
+The separate mixed-scan benchmark demonstrated that v1 can accept filing headers even when the page body is scanned. New source code uses `text-first-ocrspace-body-v2` and retains v1 receipts for historical display; changing the extraction policy requires a new approval, rather than rewriting existing pilot snapshots or cache results. Provider on/off controls pause new calls while preserving credentials and model selections. These changes passed local verification/build but are not deployed because the Cloudflare integration rejected write operations. See [current implementation and planned workflow](DOCUMENT_PROCESSING_STRATEGY.md) before interpreting historical “complete” extraction as full visual coverage.
