@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   ArrowDown,
   ArrowUp,
@@ -9,6 +9,7 @@ import {
   FileSearch,
   Bot,
   Plus,
+  RefreshCw,
   RotateCcw,
   Sparkles,
   Trash2,
@@ -65,6 +66,8 @@ export function UseCaseModelRanking({
   defaults: UseCaseRanks;
 }) {
   const [ranks, setRanks] = useState<UseCaseRanks>(initialRanks);
+  const [available, setAvailable] = useState<ActiveModelOption[]>(availableModels);
+  const [syncing, setSyncing] = useState(false);
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -73,6 +76,30 @@ export function UseCaseModelRanking({
     document_processing: "",
     agentic_work: "",
   });
+
+  async function syncModels() {
+    setSyncing(true);
+    try {
+      const res = await fetch("/api/settings/use-cases");
+      if (res.ok) {
+        const data = (await res.json()) as { availableModels?: ActiveModelOption[] };
+        if (Array.isArray(data.availableModels)) {
+          setAvailable(data.availableModels);
+        }
+      }
+    } catch {}
+    finally {
+      setSyncing(false);
+    }
+  }
+
+  useEffect(() => {
+    function handleEvent() {
+      void syncModels();
+    }
+    window.addEventListener("casevault:providers-refreshed", handleEvent);
+    return () => window.removeEventListener("casevault:providers-refreshed", handleEvent);
+  }, []);
 
   async function persistRanks(newRanks: UseCaseRanks) {
     setSaving(true);
@@ -132,7 +159,7 @@ export function UseCaseModelRanking({
       return;
     }
 
-    const modelOption = availableModels.find(m => m.providerId === providerId && m.modelId === modelId);
+    const modelOption = available.find(m => m.providerId === providerId && m.modelId === modelId);
     const newChoice: RankedModelChoice = {
       providerId,
       modelId,
@@ -152,7 +179,7 @@ export function UseCaseModelRanking({
     persistRanks(defaults);
   }
 
-  const totalActive = availableModels.length;
+  const totalActive = available.length;
 
   return (
     <div className="space-y-4">
@@ -170,6 +197,16 @@ export function UseCaseModelRanking({
           </p>
         </div>
         <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={syncModels}
+            disabled={syncing}
+            className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 shadow-sm transition hover:bg-slate-50 disabled:opacity-50"
+            title="Sync active models from enabled providers"
+          >
+            <RefreshCw size={13} className={syncing ? "animate-spin text-indigo-600" : ""} />
+            {syncing ? "Syncing…" : "Sync active"}
+          </button>
           <button
             type="button"
             onClick={handleResetDefaults}
@@ -209,7 +246,7 @@ export function UseCaseModelRanking({
           {USE_CASE_CONFIGS.map(config => {
             const Icon = config.icon;
             const cascade = ranks[config.id] || [];
-            const candidateModels = availableModels.filter(
+            const candidateModels = available.filter(
               opt => !cascade.some(c => c.providerId === opt.providerId && c.modelId === opt.modelId)
             );
 
@@ -249,7 +286,7 @@ export function UseCaseModelRanking({
                       cascade.map((item, index) => {
                         const isPrimary = index === 0;
                         const isLast = index === cascade.length - 1;
-                        const modelOpt = availableModels.find(
+                        const modelOpt = available.find(
                           m => m.providerId === item.providerId && m.modelId === item.modelId
                         );
 

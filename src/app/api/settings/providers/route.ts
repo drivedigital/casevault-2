@@ -4,8 +4,21 @@ import { readProviders, refreshProviders, selectActiveModel, setProviderEnabled,
 export async function GET() {
   return NextResponse.json({ providers: await readProviders() }, { headers: { "Cache-Control": "private, no-store" } });
 }
-export async function POST() {
-  return NextResponse.json({ providers: await refreshProviders() }, { headers: { "Cache-Control": "private, no-store" } });
+export async function POST(request: Request) {
+  let targetProvider: string | undefined;
+  try {
+    const text = await request.text();
+    if (text) {
+      const body = JSON.parse(text);
+      if (typeof body?.provider === "string" && body.provider.trim()) {
+        targetProvider = body.provider.trim();
+      }
+    }
+  } catch {}
+  return NextResponse.json(
+    { providers: await refreshProviders(targetProvider) },
+    { headers: { "Cache-Control": "private, no-store" } }
+  );
 }
 
 export async function PATCH(request: Request) {

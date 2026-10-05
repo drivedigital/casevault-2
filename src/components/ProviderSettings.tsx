@@ -41,15 +41,33 @@ export function ProviderSettings({ initialProviders }: { initialProviders: Provi
     finally { setSaving(null); }
   }
 
-  async function refresh() {
-    setRefreshing(true); setError("");
+  const [refreshingProvider, setRefreshingProvider] = useState<string | null>(null);
+
+  async function refresh(targetProviderId?: string) {
+    if (targetProviderId) {
+      setRefreshingProvider(targetProviderId);
+    } else {
+      setRefreshing(true);
+    }
+    setError("");
     try {
-      const response = await fetch("/api/settings/providers", { method: "POST" });
+      const response = await fetch("/api/settings/providers", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: targetProviderId ? JSON.stringify({ provider: targetProviderId }) : undefined,
+      });
       if (!response.ok) throw new Error();
       const result = providerResponseSchema.parse(await response.json());
       setProviders(result.providers);
-    } catch { setError("Could not refresh connections. Please try again."); }
-    finally { setRefreshing(false); }
+      if (typeof window !== "undefined") {
+        window.dispatchEvent(new CustomEvent("casevault:providers-refreshed"));
+      }
+    } catch {
+      setError(`Could not refresh ${targetProviderId ? (providerNames[targetProviderId] || targetProviderId) : "connections"}. Please try again.`);
+    } finally {
+      setRefreshing(false);
+      setRefreshingProvider(null);
+    }
   }
 
   async function movePriority(index: number, direction: "up" | "down") {
@@ -222,7 +240,7 @@ export function ProviderSettings({ initialProviders }: { initialProviders: Provi
           <Plus size={15} /> Add API
         </button>
         <button
-          onClick={refresh}
+          onClick={() => refresh()}
           disabled={refreshing || saving !== null}
           className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-slate-800 disabled:opacity-50"
         >
@@ -338,6 +356,17 @@ export function ProviderSettings({ initialProviders }: { initialProviders: Provi
                   {provider.endpoint}
                 </span>
               ) : null}
+              <button
+                type="button"
+                onClick={() => refresh(provider.id)}
+                disabled={refreshing || refreshingProvider !== null || saving !== null || !provider.configured || !provider.enabled}
+                title={`Poll ${displayName} connection and catalog`}
+                aria-label={`Poll ${displayName}`}
+                className="inline-flex items-center gap-1 rounded border border-slate-200 bg-white px-2 py-0.5 text-xs font-medium text-slate-600 hover:border-indigo-300 hover:bg-indigo-50 hover:text-indigo-600 disabled:opacity-40"
+              >
+                <RefreshCw size={11} className={refreshingProvider === provider.id ? "animate-spin text-indigo-600" : ""} />
+                {refreshingProvider === provider.id ? "Polling…" : "Poll API"}
+              </button>
             </div>
 
             <p className="mt-2 text-sm text-slate-600">
@@ -349,9 +378,27 @@ export function ProviderSettings({ initialProviders }: { initialProviders: Provi
           </div>
 
           {provider.id !== "ocr" ? <div className="border-t border-slate-100 p-5">
-            <p className="mb-3 text-sm font-medium text-slate-700">
-              {provider.enabled ? 'Active models' : 'Saved model selections'}: <span className="font-normal break-all">{provider.activeModels.length ? provider.activeModels.join(", ") : "None selected"}</span>
-            </p>
+            <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <p className="text-sm font-medium text-slate-700">
+                  {provider.enabled ? 'Active models' : 'Saved model selections'}: <span className="font-normal break-all">{provider.activeModels.length ? provider.activeModels.join(", ") : "None selected"}</span>
+                </p>
+                <p className="text-xs text-slate-400">
+                  {provider.models.length} model{provider.models.length === 1 ? "" : "s"} discovered
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => refresh(provider.id)}
+                disabled={refreshing || refreshingProvider !== null || saving !== null || !provider.configured || !provider.enabled}
+                title={`Poll and refresh model catalog from ${displayName}`}
+                aria-label={`Refresh models for ${displayName}`}
+                className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs font-medium text-slate-700 shadow-2xs transition hover:border-indigo-300 hover:bg-indigo-50 hover:text-indigo-600 disabled:opacity-40"
+              >
+                <RefreshCw size={12} className={refreshingProvider === provider.id ? "animate-spin text-indigo-600" : ""} />
+                {refreshingProvider === provider.id ? "Polling models…" : "Refresh models"}
+              </button>
+            </div>
             <label className="mb-3 block text-xs font-medium text-slate-600">
               Filter {displayName} models
               <span className="mt-1 flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2">
@@ -390,7 +437,20 @@ export function ProviderSettings({ initialProviders }: { initialProviders: Provi
             <p className="mt-3 text-xs text-slate-400">
               {saving === provider.id ? "Saving…" : `${models.length} of ${provider.models.length} discovered models. Priority order determines fallback precedence.`}
             </p>
-          </div> : null}
+          </div> : (
+            <div className="border-t border-slate-100 p-5 flex items-center justify-between">
+              <p className="text-xs text-slate-500">OCR Engine 3 handles document scan extractions.</p>
+              <button
+                type="button"
+                disabled={refreshing || refreshingProvider !== null || saving !== null || !provider.enabled}
+                onClick={() => refresh(provider.id)}
+                className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 shadow-2xs hover:bg-slate-50 hover:text-indigo-600 disabled:opacity-40"
+              >
+                <RefreshCw size={13} className={refreshingProvider === provider.id ? "animate-spin text-indigo-600" : ""} />
+                {refreshingProvider === provider.id ? "Testing engine…" : "Refresh status"}
+              </button>
+            </div>
+          )}
         </Card>;
       })}
     </div>

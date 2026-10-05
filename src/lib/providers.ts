@@ -194,10 +194,44 @@ export async function readProviders(): Promise<ProviderView[]> {
   return list;
 }
 
-export async function refreshProviders(): Promise<ProviderView[]> {
+export async function refreshProviders(targetId?: string): Promise<ProviderView[]> {
   const current = await readProviders();
-  const providers = await Promise.all(current.map(provider => provider.enabled ? discoverProvider(provider.id as any) : Promise.resolve(provider)));
-  await getCloudflareContext().env.EVIDENCE.put(catalogKey, JSON.stringify({ version: 1, providers }), { httpMetadata: { contentType: "application/json" } });
+  const store = getCloudflareContext().env.EVIDENCE;
+  const object = await store.get(catalogKey);
+  const parsed = catalogSchema.safeParse(object ? await object.json() : null);
+  const existingMap = new Map<string, ProviderCheck>();
+  if (parsed.success) {
+    for (const p of parsed.data.providers) {
+      existingMap.set(p.id, p);
+    }
+  }
+
+  let providers: ProviderCheck[];
+  if (targetId) {
+    const target = current.find(p => p.id === targetId);
+    if (!target) throw new Error("Provider not found");
+    const freshCheck = await discoverProvider(targetId as any);
+    existingMap.set(targetId, freshCheck);
+    providers = current.map(p => {
+      if (p.id === targetId) return freshCheck;
+      return existingMap.get(p.id) || {
+        id: p.id,
+        checkedAt: p.checkedAt,
+        status: p.status,
+        message: p.message,
+        httpStatus: p.httpStatus,
+        models: p.models,
+      };
+    });
+  } else {
+    providers = await Promise.all(
+      current.map(provider => (provider.enabled ? discoverProvider(provider.id as any) : Promise.resolve(provider)))
+    );
+  }
+
+  await store.put(catalogKey, JSON.stringify({ version: 1, providers }), {
+    httpMetadata: { contentType: "application/json" },
+  });
   return readProviders();
 }
 
