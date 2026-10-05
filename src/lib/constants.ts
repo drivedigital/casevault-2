@@ -6,6 +6,13 @@ export const documentStatusStyles: Record<string, string> = {
   flagged: "bg-rose-50 text-rose-700 ring-rose-200",
 };
 
+export const matterStatusStyles: Record<string, string> = {
+  active: "bg-emerald-50 text-emerald-700 ring-emerald-200",
+  hidden: "bg-amber-50 text-amber-700 ring-amber-200",
+  closed: "bg-slate-100 text-slate-600 ring-slate-200",
+  pending: "bg-sky-50 text-sky-700 ring-sky-200",
+};
+
 export const docketEntryStatusStyles: Record<string, string> = {
   pending_review: "bg-amber-50 text-amber-700 ring-amber-200",
   indexed: "bg-indigo-50 text-indigo-700 ring-indigo-200",

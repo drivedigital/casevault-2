@@ -9,7 +9,8 @@ import {
   deadlineStatusStyles,
   taskStatusStyles,
 } from "@/lib/constants";
-import { ChevronLeft, Scale, Clock, CalendarClock, FileText, Users } from "lucide-react";
+import { ChevronLeft, Scale, Clock, CalendarClock, FileText, Users, EyeOff } from "lucide-react";
+import { MatterDetailActions } from "@/components/actions/MatterActions";
 
 export const dynamic = "force-dynamic";
 
@@ -39,11 +40,20 @@ export default async function MatterDetailPage({
       </Link>
 
       <SectionHeading
-        eyebrow={`${matter.caseNumber} · ${matter.court}`}
+        eyebrow={`${matter.caseNumber || "No case #"} · ${matter.court || "No court specified"}`}
         title={matter.name}
         description={matter.description ?? undefined}
-        action={<Badge className="bg-emerald-50 text-emerald-700 ring-emerald-200">{matter.status}</Badge>}
+        action={<MatterDetailActions matter={matter} />}
       />
+
+      {matter.status === "hidden" ? (
+        <div className="flex items-center justify-between rounded-xl border border-amber-200 bg-amber-50/70 p-4 text-xs text-amber-800">
+          <div className="flex items-center gap-2">
+            <EyeOff size={16} className="text-amber-600 flex-shrink-0" />
+            <span>This matter is currently hidden from the default active matters list.</span>
+          </div>
+        </div>
+      ) : null}
 
       <Card className="p-5">
         <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-800">

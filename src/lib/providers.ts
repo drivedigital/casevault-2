@@ -1,16 +1,50 @@
 import "server-only";
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { z } from "zod";
-import { catalogSchema, modelSchema, providerIds, type ProviderId, type ProviderCheck, type ProviderView, type Model, modelSelectionSchema, validActiveModel } from "./provider-types";
-import { readProviderEnabled, requireProviderEnabled, writeProviderControl } from './provider-controls';
+import { catalogSchema, modelSchema, providerIds, providerNames, type ProviderId, type ProviderCheck, type ProviderView, type Model, modelSelectionSchema, validActiveModel, priorityUpdateSchema, customProviderInputSchema } from "./provider-types";
+import { readProviderEnabled, requireProviderEnabled, writeProviderControl, readProviderPriority, writeProviderPriority, readCustomProviders, writeCustomProviders, type CustomProviderRecord } from './provider-controls';
 
 const catalogKey = "casevault-2/settings/provider-catalog-v1.json";
 const openAIModels = z.object({ data: z.array(z.object({ id: z.string(), name: z.string().optional(), context_length: z.number().optional(), architecture: z.object({ input_modalities: z.array(z.string()).optional(), output_modalities: z.array(z.string()).optional() }).optional() })) });
 const googleModels = z.object({ models: z.array(z.object({ name: z.string(), displayName: z.string().optional(), inputTokenLimit: z.number().optional(), supportedGenerationMethods: z.array(z.string()).optional() })), nextPageToken: z.string().optional() });
 
+export const defaultOllamaModels: Model[] = [
+  { id: "gemma4:31b", name: "Gemma 4 31B", output: ["text"] },
+  { id: "gpt-oss:120b", name: "GPT-OSS 120B", output: ["text"] },
+  { id: "gpt-oss:20b", name: "GPT-OSS 20B", output: ["text"] },
+  { id: "nemotron-3-nano:30b", name: "Nemotron 3 Nano 30B", output: ["text"] },
+  { id: "nemotron-3-super", name: "Nemotron 3 Super", output: ["text"] },
+  { id: "nemotron-3-ultra", name: "Nemotron 3 Ultra", output: ["text"] },
+];
+
+export const defaultOpencodeModels: Model[] = [
+  { id: "Big Pickle Free", name: "Big Pickle Free", output: ["text"] },
+  { id: "MiMo-V2.5 Free", name: "MiMo-V2.5 Free", output: ["text"] },
+  { id: "Ling 3.0 Flash Fin Free", name: "Ling 3.0 Flash Fin Free", output: ["text"] },
+  { id: "Nemotron 3 Ultra Free", name: "Nemotron 3 Ultra Free", output: ["text"] },
+  { id: "Nemotron 3.5 Lightning Free", name: "Nemotron 3.5 Lightning Free", output: ["text"] },
+  { id: "Opencode Zen", name: "Opencode Zen", output: ["text"] },
+];
+
+export const defaultE2bModels: Model[] = [
+  { id: "e2b-sandbox-python", name: "E2B Code Sandbox (Python / OCR Runtime)", output: ["text"] },
+  { id: "docling-ocr", name: "Docling Open-Source OCR", output: ["text"] },
+  { id: "surya-ocr", name: "Surya Document Layout & OCR", output: ["text"] },
+  { id: "tesseract-searchable-pdf", name: "Tesseract / OCRmyPDF Searchable PDF", output: ["text"] },
+];
+
 function credential(id: ProviderId): string | undefined {
-  const env = getCloudflareContext().env;
-  return ({ openrouter: env.OPEN_ROUTER_KEY, nvidia: env.NVIDIA_KEY, gemini: env.GEMINI_API_KEY, ocr: env.OCR_SPACE_API_KEY })[id];
+  const env = getCloudflareContext().env as any;
+  const standardKeys: Record<string, string | undefined> = {
+    openrouter: env.OPEN_ROUTER_KEY,
+    nvidia: env.NVIDIA_KEY,
+    gemini: env.GEMINI_API_KEY,
+    ocr: env.OCR_SPACE_API_KEY,
+    ollama: env.OLLAMA_API_KEY,
+    opencode: env.OPENCODE_API_KEY,
+    e2b: env.E2B_API_KEY,
+  };
+  return standardKeys[id];
 }
 function nvidiaEndpoint(): string {
   // The only permitted host is the provider endpoint, even if a deployment var is edited.
@@ -88,7 +122,7 @@ export async function readProviders(): Promise<ProviderView[]> {
   return providerIds.map(id => {
     const configured = Boolean(credential(id));
     const previous = parsed.success ? parsed.data.providers.find(p => p.id === id) : undefined;
-    return { enabled: controls.find(control => control.id === id)!.enabled, activeModels: selections[id] ?? [], activeModel: selections[id]?.[0] ?? null, ...(previous ?? { id, checkedAt: "", status: "missing", message: configured ? "Credential installed. Refresh connections to discover models." : "Credential has not been installed.", models: [] }), configured, ...(!configured ? { status: "missing" as const, message: "Credential has not been installed.", models: [] } : {}) };
+    return { priority: 1, isCustom: false, enabled: controls.find(control => control.id === id)!.enabled, activeModels: selections[id] ?? [], activeModel: selections[id]?.[0] ?? null, ...(previous ?? { id, checkedAt: "", status: "missing", message: configured ? "Credential installed. Refresh connections to discover models." : "Credential has not been installed.", models: [] }), configured, ...(!configured ? { status: "missing" as const, message: "Credential has not been installed.", models: [] } : {}) };
   });
 }
 export async function refreshProviders(): Promise<ProviderView[]> {

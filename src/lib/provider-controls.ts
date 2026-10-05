@@ -3,9 +3,59 @@ import { providerIds, providerNames, type ProviderId } from './provider-types';
 
 export const providerControlSchema = z.object({ provider: z.enum(providerIds), enabled: z.boolean() }).strict();
 export const providerControlKey = (provider: ProviderId) => `casevault-2/settings/provider-controls/${provider}.json`;
+export const providerPriorityKey = 'casevault-2/settings/provider-priority.json';
+export const customProvidersKey = 'casevault-2/settings/custom-providers.json';
+
+export const defaultProviderPriority: string[] = ['nvidia', 'openrouter', 'gemini', 'ollama', 'opencode', 'e2b', 'ocr'];
+
 export interface ProviderControlStore {
   get(key: string): Promise<{ json(): Promise<unknown> } | null>;
   put(key: string, value: string, options: { httpMetadata: { contentType: string } }): Promise<unknown>;
+}
+
+export async function readProviderPriority(store: Pick<ProviderControlStore, 'get'>): Promise<string[]> {
+  const object = await store.get(providerPriorityKey);
+  if (!object) return [...defaultProviderPriority];
+  try {
+    const data = await object.json();
+    if (Array.isArray(data) && data.length > 0 && data.every(id => typeof id === 'string')) {
+      return data;
+    }
+    return [...defaultProviderPriority];
+  } catch {
+    return [...defaultProviderPriority];
+  }
+}
+
+export async function writeProviderPriority(store: ProviderControlStore, priority: string[]): Promise<string[]> {
+  await store.put(providerPriorityKey, JSON.stringify(priority), { httpMetadata: { contentType: 'application/json' } });
+  return priority;
+}
+
+export interface CustomProviderRecord {
+  id: string;
+  name: string;
+  endpoint: string;
+  apiKey?: string;
+  models: { id: string; name: string; contextWindow?: number; output?: string[] }[];
+  type?: string;
+  enabled?: boolean;
+}
+
+export async function readCustomProviders(store: Pick<ProviderControlStore, 'get'>): Promise<CustomProviderRecord[]> {
+  const object = await store.get(customProvidersKey);
+  if (!object) return [];
+  try {
+    const data = await object.json();
+    return Array.isArray(data) ? data : [];
+  } catch {
+    return [];
+  }
+}
+
+export async function writeCustomProviders(store: ProviderControlStore, records: CustomProviderRecord[]): Promise<CustomProviderRecord[]> {
+  await store.put(customProvidersKey, JSON.stringify(records), { httpMetadata: { contentType: 'application/json' } });
+  return records;
 }
 
 // Existing providers retain their behavior; Gemini starts paused by owner request.
@@ -24,5 +74,5 @@ export async function writeProviderControl(store: ProviderControlStore, input: u
   return value;
 }
 export async function requireProviderEnabled(store: Pick<ProviderControlStore, 'get'>, provider: ProviderId) {
-  if (!await readProviderEnabled(store, provider)) throw new Error(`${providerNames[provider]} is off. Turn it on in Settings before starting new calls.`);
+  if (!await readProviderEnabled(store, provider)) throw new Error(`${providerNames[provider] || provider} is off. Turn it on in Settings before starting new calls.`);
 }
