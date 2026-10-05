@@ -1,6 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { providerControlKey, readProviderEnabled, requireProviderEnabled, writeProviderControl } from '../src/lib/provider-controls';
+import {
+  defaultProviderPriority,
+  providerControlKey,
+  readCustomProviders,
+  readProviderEnabled,
+  readProviderPriority,
+  requireProviderEnabled,
+  writeCustomProviders,
+  writeProviderControl,
+  writeProviderPriority,
+} from '../src/lib/provider-controls';
 
 function store() {
   const objects = new Map<string, string>();
@@ -41,3 +51,37 @@ test('control updates reject combined selection mutations and unknown providers'
   await assert.rejects(writeProviderControl(bucket, { provider: 'nvidia', enabled: 'false' }));
   assert.equal(bucket.objects.size, 0);
 });
+test('provider priority defaults to NVIDIA ahead of OpenRouter and round-trips updates', async () => {
+  const bucket = store();
+  const initial = await readProviderPriority(bucket);
+  assert.deepEqual(initial, defaultProviderPriority);
+  assert.ok(initial.indexOf('nvidia') < initial.indexOf('openrouter'), 'NVIDIA must precede OpenRouter by default');
+
+  const reordered = ['openrouter', 'nvidia', 'gemini', 'ollama', 'opencode', 'e2b', 'ocr'];
+  await writeProviderPriority(bucket as any, reordered);
+  const updated = await readProviderPriority(bucket);
+  assert.deepEqual(updated, reordered);
+
+  // Corrupted priority payload falls back cleanly to default
+  bucket.objects.set('casevault-2/settings/provider-priority.json', 'not-json');
+  assert.deepEqual(await readProviderPriority(bucket), defaultProviderPriority);
+});
+test('custom provider records round-trip and support persistence', async () => {
+  const bucket = store();
+  assert.deepEqual(await readCustomProviders(bucket), []);
+
+  const customList = [
+    {
+      id: 'ollama',
+      name: 'Ollama Cloud',
+      endpoint: 'https://ollama.com/api',
+      models: [{ id: 'nemotron-3-nano:30b', name: 'nemotron-3-nano:30b' }],
+      type: 'ollama',
+      enabled: true,
+    },
+  ];
+  await writeCustomProviders(bucket as any, customList);
+  const saved = await readCustomProviders(bucket);
+  assert.deepEqual(saved, customList);
+});
+
