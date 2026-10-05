@@ -1,0 +1,99 @@
+{
+  "comparisonId": "bba21ba9-d383-4cde-bb67-c60d06db77b9",
+  "at": "2026-10-05T02:12:34.488Z",
+  "artifacts": 0,
+  "analyses": 0,
+  "results": [
+    {
+      "id": "kimi",
+      "model": "moonshotai/kimi-k3",
+      "usable": 5,
+      "failed": 5,
+      "partial": 0,
+      "missing": 3,
+      "medianSuccessfulPageSeconds": 28.1
+    },
+    {
+      "id": "qwen",
+      "model": "qwen/qwen3.8-27b:free",
+      "usable": 2,
+      "failed": 11,
+      "partial": 0,
+      "missing": 0,
+      "medianSuccessfulPageSeconds": 17.7
+    },
+    {
+      "id": "nano",
+      "model": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+      "usable": 2,
+      "failed": 2,
+      "partial": 0,
+      "missing": 9,
+      "medianSuccessfulPageSeconds": 38.4
+    },
+    {
+      "id": "gemma",
+      "model": "google/gemma-4-31b-it",
+      "usable": 10,
+      "failed": 1,
+      "partial": 0,
+      "missing": 2,
+      "medianSuccessfulPageSeconds": 76
+    },
+    {
+      "id": "dots",
+      "model": "MohamedRashad/Dots-OCR",
+      "usable": 3,
+      "failed": 10,
+      "partial": 0,
+      "missing": 0,
+      "medianSuccessfulPageSeconds": 24.7
+    },
+    {
+      "id": "deepseekocr",
+      "model": "prithivMLmods/DeepSeek-OCR-2-Unlimited-OCR",
+      "usable": 10,
+      "failed": 2,
+      "partial": 0,
+      "missing": 1,
+      "medianSuccessfulPageSeconds": 24.2
+    },
+    {
+      "id": "nemotronocr",
+      "model": "nvidia/nemotron-ocr-v2",
+      "usable": 0,
+      "failed": 13,
+      "partial": 0,
+      "missing": 0,
+      "medianSuccessfulPageSeconds": null
+    },
+    {
+      "id": "moondream",
+      "model": "@cf/moondream/moondream3.1-9B-A2B",
+      "usable": 0,
+      "failed": 12,
+      "partial": 0,
+      "missing": 1,
+      "medianSuccessfulPageSeconds": null
+    },
+    {
+      "id": "llama90",
+      "model": "meta/llama-3.2-90b-vision-instruct",
+      "usable": 8,
+      "failed": 5,
+      "partial": 0,
+      "missing": 0,
+      "medianSuccessfulPageSeconds": 102.4
+    },
+    {
+      "id": "deepseekflash",
+      "model": "deepseek-ai/deepseek-v4.1-flash",
+      "usable": 0,
+      "failed": 13,
+      "partial": 0,
+      "missing": 0,
+      "medianSuccessfulPageSeconds": null
+    }
+  ],
+  "measurementDefinition": "usable counts completed non-error transcripts, not human-verified OCR accuracy; timing is median elapsed milliseconds converted to seconds on successful pages, including queue/network time"
+}
