@@ -1,5 +1,3 @@
-import { DriveFileSelector } from "@/components/DriveFileSelector";
-import { Card } from "@/components/ui";
 import { SectionHeading } from "@/components/ui";
 import { ProviderSettings } from "@/components/ProviderSettings";
 import { UseCaseModelRanking } from "@/components/UseCaseModelRanking";
@@ -25,7 +23,7 @@ export default async function SettingsPage() {
       <SectionHeading
         eyebrow="Workspace"
         title="Settings"
-        description="Manage model routing cascades, cloud AI providers, and document ingestion."
+        description="Manage model routing cascades, cloud AI providers, and workspace configurations."
       />
       <UseCaseModelRanking
         initialRanks={ranks}
@@ -33,13 +31,6 @@ export default async function SettingsPage() {
         defaults={defaults}
       />
       <ProviderSettings initialProviders={providers} />
-      <Card className="p-5">
-        <h2 className="text-base font-semibold">Google Drive</h2>
-        <p className="my-3 text-sm text-slate-500">
-          Browse folders, search files, and choose what to import. Drive access is separate from workspace sign-in.
-        </p>
-        <DriveFileSelector />
-      </Card>
     </div>
   );
 }

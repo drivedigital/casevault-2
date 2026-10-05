@@ -58,6 +58,11 @@ export function DriveFileSelector() {
     } catch { setError("Could not import the selected files. Reconnect Drive and try again."); }
     finally { setLoading(false); }
   }
+
+  // Temporarily hidden per workspace settings
+  const hidden = true;
+  if (hidden) return null;
+
   return <>
     <button onClick={show} className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"><HardDriveUpload size={15} />Choose Drive files</button>
     {open ? <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/50 p-4"><section role="dialog" aria-modal="true" aria-labelledby="drive-picker-title" className="flex max-h-[85vh] w-full max-w-3xl flex-col rounded-2xl bg-white shadow-2xl">
