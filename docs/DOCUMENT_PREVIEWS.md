@@ -1,11 +1,12 @@
-# Document previews
+# Documentation relocated
 
-The original viewer embedded the private file endpoint in an iframe and relied on the browser's native PDF plugin. The in-app browser displayed a blank panel even though the authenticated endpoint returned the correct original bytes.
+This document has been consolidated into the [CaseVault technical wiki](README.md).
 
-PDFs now render inside CaseVault with pinned PDF.js 6.4.299. The renderer fetches the original through the existing authenticated endpoint, draws one page at a time, and provides previous/next page controls, zoom, loading/error states and an original download link. It does not require completed OCR. PDF page counts come from the actual loaded file.
+- [ux and roadmap](product/ux-and-roadmap.md#existing-screens)
+- [features and use cases](product/features-and-use-cases.md)
 
-The PDF worker, character maps, standard fonts and decoder assets are served from the application's own origin, prepared from the locked dependency during development/build. No evidence is sent to an external preview service. The original-file endpoint retains authentication and sandbox response headers. The download query requests an attachment disposition.
+The [original dated document](history/archive/2026-10-04/DOCUMENT_PREVIEWS.md) is preserved byte-for-byte. It records historical observations and instructions, not current execution authorization. See the [source map](history/source-map.md) for provenance and relative-link resolution.
 
-PNG, JPEG, GIF, WebP and AVIF originals with those content types render as local images. Small plain-text, CSV and JSON files render as escaped text. Other formats show a download option instead of a blank iframe; Office conversion is not implemented by this change. SVG and HTML are not executed inline.
+## Previous section links
 
-This is a visual original-file preview. Extracted text search, selectable PDF text, annotation and evidence highlights remain separate work.
+- <a id="document-previews"></a>Document previews: [Current topic](product/ux-and-roadmap.md#existing-screens)

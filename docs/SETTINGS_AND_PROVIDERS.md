@@ -1,54 +1,18 @@
-# Settings and provider connections
+# Documentation relocated
 
-The `/settings` page shows the court review policy, Knowledge Graph placeholder, credential installation state, latest connection check, and searchable model catalogs. Temporary public review permits read-only viewing; only the authorized Google user or trusted machine credential can change settings. Credentials never appear in client props, model receipts, or browser responses.
+This document has been consolidated into the [CaseVault technical wiki](README.md).
 
-## Credentials and endpoints
+- [providers and endpoints](ocr/providers-and-endpoints.md)
+- [features and use cases](product/features-and-use-cases.md)
 
-| Connection | Worker secret | Endpoint / discovery |
-| --- | --- | --- |
-| OCR.space | `OCR_SPACE_API_KEY` | `https://api.ocr.space/parse/image`; Engine 3 synthetic image probe |
-| OpenRouter | `OPEN_ROUTER_KEY` | `https://openrouter.ai/api/v1/key` authenticates; `/models/user` discovers account-filtered text models |
-| NVIDIA | `NVIDIA_KEY` | `https://integrate.api.nvidia.com/v1/models`; OpenAI-compatible chat endpoint verifies the credential with a short synthetic probe |
-| Google Gemini | `GEMINI_API_KEY` | `https://generativelanguage.googleapis.com/v1beta/models`; paginated, filtered to `generateContent` models |
+The [original dated document](history/archive/2026-10-04/SETTINGS_AND_PROVIDERS.md) is preserved byte-for-byte. It records historical observations and instructions, not current execution authorization. See the [source map](history/source-map.md) for provenance and relative-link resolution.
 
-`NVIDIA_ENDPOINT` is a deployment variable set to `https://integrate.api.nvidia.com/v1/`. The server restricts it to that exact endpoint. The four credentials are installed as Cloudflare Worker secrets. Local copies are in ignored, permission-restricted files; source control contains names only. Google workspace OAuth remains separate from these inference credentials.
+## Previous section links
 
-Use the Cloudflare integration's Worker secrets API to replace an individual credential. Refresh Settings after replacement, with that provider on. Refresh never processes lawsuit evidence. OCR checks use a generated image; AI smoke tests use a trivial synthetic prompt. Catalog discovery does not establish that every listed model supports chat or that an account has inference credits.
-
-`GET /api/settings/providers` returns sanitized cached connection receipts and current controls. `POST` refreshes only enabled providers concurrently and persists a credential-free receipt at `casevault-2/settings/provider-catalog-v1.json` in private R2. The existing evidence objects and legacy KV inventory are untouched. Cookie mutations require the same app origin. Failed provider requests are reported without returning provider response bodies or credentials.
-
-## Review policy
-
-Court documents (`sourceType=docket_filing`) bypass routine human document review. Explicit `isFlagged` or `status=flagged` overrides the bypass and brings a filing back into the review queue. Drive, upload, and email documents retain the normal review policy. This source-based policy applies to existing and future court imports and is shared by the queue, dashboard count, and document detail. Docket Viewer and direct document URLs keep all originals accessible.
-
-Review bypass does not mark a document OCR-complete, indexed, verified, or legally approved. Stored processing states and the extraction jobs remain intact. There are 102 court documents and 404 other document associations in the initial corpus.
-
-## Processing scope
-
-The server provider module supplies model discovery and a text inference adapter for OpenRouter, NVIDIA, and Gemini. Callers must choose an enabled installed provider and a selected model from its catalog. No automatic fallback sends evidence to another provider. The leased pilot runner is implemented separately, while the general backlog remains queued; see [pilot scope](PROCESSING_PILOT.md). The document action is labeled **Queue extraction**, and reports queued work accurately.
-
-Knowledge Graph renders a static placeholder and does not call the graph API.
-
-## Primary references
-
-- [OpenRouter account-filtered model discovery](https://openrouter.ai/docs/api/api-reference/models/list-models-filtered-by-user-provider-preferences-privacy-settings-and-guardrails)
-- [OpenRouter current-key authentication](https://openrouter.ai/docs/api/api-reference/api-keys/get-current-api-key)
-- [NVIDIA LLM API reference](https://docs.api.nvidia.com/nim/reference/llm-apis)
-- [Gemini model discovery](https://ai.google.dev/api/models)
-- [Gemini content generation](https://ai.google.dev/api/generate-content)
-
-## Model selection and source controls
-
-Settings now includes persistent active-model pills for each cloud inference provider and a real Google Drive file selector. The source bridge controls are under **Court & NotebookLM**. See `QUEUES_AND_BRIDGES.md` for authorization, queue semantics, adapter execution and limits.
-
-Model filters appear inside each inference provider card. Filters independently match model names and IDs, ignore case and surrounding whitespace, show matching counts, and can be cleared. Filtering does not change the saved active model.
-
-Multiple active models: each provider stores a `models` array. Model pills toggle independently; Clear all deselects every model. Existing single-model settings load as a one-element array without changing saved choices. Filters do not affect selections. API PATCH accepts `{provider, models}`; legacy `{provider, model}` requests remain compatible. All selected IDs must belong to the provider's available text catalog and duplicates are rejected. Inference can explicitly choose any selected model; calls without an explicit model use the first selected model. Enabling multiple models does not automatically send duplicate inference requests.
-
-## Provider on/off controls — 2026-10-04
-
-Each provider card now has an accessible on/off switch independent of its multi-select model pills. PATCH `{provider, enabled}` writes only `casevault-2/settings/provider-controls/{provider}.json`; it does not alter installed secrets, catalogs, selected models or agent bindings. Gemini defaults off on the new implementation; existing other providers default on. Invalid control records fail closed. Turning a provider back on restores eligibility for its saved model choices, subject to credentials, availability and the existing execution policy.
-
-Refresh skips off providers. New direct inference, pilot approvals and actual new inference calls enforce provider state server-side; the service-bound OCR.space adapter uses the same R2 control. Existing extracted text can still be read/reused. A switch cannot cancel an already submitted external request. Model choices remain editable while off and apply when enabled. Settings mutations retain existing owner/trusted authentication; public viewers cannot change controls.
-
-Local tests and production build pass, but Cloudflare integration write access rejected deployment/setup and the Gemini control write. The hosted app is not yet updated. See [document strategy and context design](DOCUMENT_PROCESSING_STRATEGY.md).
+- <a id="settings-and-provider-connections"></a>Settings and provider connections: [Current topic](ocr/providers-and-endpoints.md)
+- <a id="credentials-and-endpoints"></a>Credentials and endpoints: [Current topic](ocr/providers-and-endpoints.md)
+- <a id="review-policy"></a>Review policy: [Current topic](product/features-and-use-cases.md#queues-and-meaning-of-success)
+- <a id="processing-scope"></a>Processing scope: [Current topic](processing/intake-and-processing.md)
+- <a id="primary-references"></a>Primary references: [Current topic](ocr/providers-and-endpoints.md)
+- <a id="model-selection-and-source-controls"></a>Model selection and source controls: [Current topic](ocr/providers-and-endpoints.md#settings-and-execution-controls)
+- <a id="provider-onoff-controls--2026-10-04"></a>Provider on/off controls — 2026-10-04: [Current topic](ocr/providers-and-endpoints.md#settings-and-execution-controls)

@@ -1,29 +1,14 @@
-# Cloudflare OCR, search, and docket browser research
+# Documentation relocated
 
-Reviewed October 4, 2026. These are planning findings; no AI Search index or Browser Run acquisition was created.
+This document has been consolidated into the [CaseVault technical wiki](README.md).
 
-## AI Search
+- [providers and endpoints](ocr/providers-and-endpoints.md#licensing-and-research)
+- [ux and roadmap](product/ux-and-roadmap.md#deferred-research)
 
-AI Search can index R2 PDFs and use OCR for scanned PDFs when `indexing_options.use_ocr=true`. OCR is off by default; changing that option initiates reindexing. PDF limits are 10 MiB with OCR and 4 MiB without OCR. The current CaseVault pilot permits originals up to 50 MB, so this cannot replace the whole extraction path.
+The [original dated document](history/archive/2026-10-04/CLOUDFLARE_EVALUATION.md) is preserved byte-for-byte. It records historical observations and instructions, not current execution authorization. See the [source map](history/source-map.md) for provenance and relative-link resolution.
 
-AI Search is suitable for a later search layer. The reviewed Items API does not establish a supported export of complete, page-numbered extraction receipts with engine and quality metadata. Search citations/chunks do not by themselves meet the pilot's authoritative page receipt requirement. Extract embedded text first and call cloud OCR only for pages needing it.
+## Previous section links
 
-Account verification on October 4 returned HTTP 200 and an empty AI Search instance list. AI Search OCR is **not enabled** in CaseVault. The current Items API does expose indexed chunk text through `items.get().chunks()`, including byte offsets; the text is not locked inside the index. These offsets are not established as original PDF page coordinates. The download operation returns the original source file, not a newly generated searchable PDF. A page-level transcript and a searchable-PDF derivative therefore remain separate processing outputs. See [chunk access](https://developers.cloudflare.com/ai-search/api/items/workers-binding/) and the [OCR model benchmark](OCR_MODEL_BENCHMARK.md).
-
-Billing begins November 1, 2026. The documented account allowance includes 5 million ingestion tokens monthly, shared by text and image processing. Text ingestion above that allowance costs $0.75/million tokens; image processing adds $0.50/million. Query rewriting and answer generation have separate Workers AI usage. Account entitlement and remaining usage must be checked before adoption; availability during the current free period is not a permanent free guarantee.
-
-Use an isolated derivative prefix or bucket with correct Content-Type metadata. Do not index the existing whole evidence bucket: it also contains private configuration and connector credentials. Originals currently use hash-only object keys.
-
-Sources: [Data source and OCR](https://developers.cloudflare.com/ai-search/configuration/data-source/), [R2 source configuration](https://developers.cloudflare.com/ai-search/configuration/data-source/r2/), [Limits and pricing](https://developers.cloudflare.com/ai-search/platform/limits-pricing/), [Items API](https://developers.cloudflare.com/ai-search/api/items/rest-api/).
-
-## Browser Run for NYSCEF
-
-Browser Run is a candidate for a bounded hosted docket acquisition experiment. It supports remote Playwright/Puppeteer sessions and Live View, where the operator can complete a login or challenge before automation resumes. Live View human interaction is beta. Browser Run identifies its traffic as automated; it offers no IP rotation. NYSCEF acceptance therefore remains unverified. A challenge must pause the job rather than produce an empty successful docket.
-
-The first experiment should use one known, previously captured docket: navigate its observed live URL, hand over on a court gate, capture all observed pagination, and retrieve the original filing PDF responses. The `/pdf` endpoint renders a web page; that output is not the filed original and must not substitute for it. Preserve original hashes, filing identities, capture timestamps, and unresolved access restrictions.
-
-The free allowance is 10 browser minutes/day. Paid accounts include 10 browser hours/month before $0.09/browser hour, with separate concurrency considerations. Default session idle timeout is 60 seconds and can be extended to 10 minutes. Live View links default to five minutes, up to one hour. Browser sessions are not a durable job ledger; persist progress in CaseVault and pause safely when a session expires. Verify this account's actual allowance before an experiment.
-
-This remains a future scraper experiment. The existing supervised capture and local source bridge remain the documented recovery paths. It does not change this document-processing pilot or deliver anything to NotebookLM.
-
-Sources: [Human in the loop](https://developers.cloudflare.com/browser-run/features/human-in-the-loop/), [FAQ](https://developers.cloudflare.com/browser-run/faq/), [Limits](https://developers.cloudflare.com/browser-run/limits/), [Pricing](https://developers.cloudflare.com/browser-run/pricing/).
+- <a id="cloudflare-ocr-search-and-docket-browser-research"></a>Cloudflare OCR, search, and docket browser research: [Current topic](ocr/providers-and-endpoints.md#licensing-and-research)
+- <a id="ai-search"></a>AI Search: [Current topic](ocr/providers-and-endpoints.md#licensing-and-research)
+- <a id="browser-run-for-nyscef"></a>Browser Run for NYSCEF: [Current topic](ocr/providers-and-endpoints.md#licensing-and-research)

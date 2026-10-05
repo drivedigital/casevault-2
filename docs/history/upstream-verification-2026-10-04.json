@@ -1,0 +1,365 @@
+{
+  "root": "/Users/dangeorge/Documents/Codex/2026-10-02/check-the-build-plan-for-this/outputs",
+  "date": "2026-10-04",
+  "files": [
+    {
+      "path": "WORKING_BRIEF.md",
+      "recordedSha256": "62f2cb5020d66054c27a9cc07a8e8fbf01c3fb87fc67f1e08a0dcec11eb07c39",
+      "observedSha256": "62f2cb5020d66054c27a9cc07a8e8fbf01c3fb87fc67f1e08a0dcec11eb07c39",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "Arena-build-request-safe.md",
+      "recordedSha256": "d32d09315cd0f790cd17c9d797bbf5e2ff289494ae9a5fb3e5efad2b6f20d587",
+      "observedSha256": "d32d09315cd0f790cd17c9d797bbf5e2ff289494ae9a5fb3e5efad2b6f20d587",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "WORKFLOW_EXPERIMENT.md",
+      "recordedSha256": "1d0631939fb5f8de9a0e9d581d21d6113f114180edbe3da8c4f3d69f602005c4",
+      "observedSha256": "1d0631939fb5f8de9a0e9d581d21d6113f114180edbe3da8c4f3d69f602005c4",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "EXPERIMENT_RESULTS.md",
+      "recordedSha256": "66b9e1caa491888895712a8f64a02bff80b223a5276a5c343386ed60df7b771e",
+      "observedSha256": "66b9e1caa491888895712a8f64a02bff80b223a5276a5c343386ed60df7b771e",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "KNOWLEDGE_GRAPH_PLAN.md",
+      "recordedSha256": "3c22879fbe37a4ab9347784f410841123eab76d52366cbb8df8a25c0179fd635",
+      "observedSha256": "3c22879fbe37a4ab9347784f410841123eab76d52366cbb8df8a25c0179fd635",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "PLAN_REVIEW.md",
+      "recordedSha256": "03893a094eed8df6d0643708c93259689fbe459404f561c6f66f6b3b9e73ff2a",
+      "observedSha256": "03893a094eed8df6d0643708c93259689fbe459404f561c6f66f6b3b9e73ff2a",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "CASEVAULT_INTEGRATION_PLAN.md",
+      "recordedSha256": "f92782ff935423135a89519a16d8df7f06e51c5873a06aae6ae03d37c56f949c",
+      "observedSha256": "f92782ff935423135a89519a16d8df7f06e51c5873a06aae6ae03d37c56f949c",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "CONTACTS_SHARED_COMPONENT_REVIEW.md",
+      "recordedSha256": "6b6e68763a7eed63c383755e5304768443553b20b702d9b6bb42fcb22aee35fb",
+      "observedSha256": "6b6e68763a7eed63c383755e5304768443553b20b702d9b6bb42fcb22aee35fb",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "CASEVAULT_OCR_REUSE_REVIEW.md",
+      "recordedSha256": "b0534d03ba7b60b05688aaebc9bb7fb5b090f884f72c9089d56606b14991c404",
+      "observedSha256": "b0534d03ba7b60b05688aaebc9bb7fb5b090f884f72c9089d56606b14991c404",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "BUILD_SPEC.md",
+      "recordedSha256": "b17284c6a29f9a2cbebec813fb8d034e81cbaee8e03c8fc51c21776d96925538",
+      "observedSha256": "b17284c6a29f9a2cbebec813fb8d034e81cbaee8e03c8fc51c21776d96925538",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "OCR_EXPERIMENT/REPORT.md",
+      "recordedSha256": "dddc1d3cd72d03f1a8c07e329d5184431c1773693a886bd8bf47b98816379a0e",
+      "observedSha256": "dddc1d3cd72d03f1a8c07e329d5184431c1773693a886bd8bf47b98816379a0e",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "OCR_EXPERIMENT/VISUAL_REFERENCE.md",
+      "recordedSha256": "13eb2fa105c6c992fdb33579dfe8e241dccb1ef5a68affa15ed5985375c28008",
+      "observedSha256": "13eb2fa105c6c992fdb33579dfe8e241dccb1ef5a68affa15ed5985375c28008",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "OCR_EXPERIMENT/PIPELINE_SPEC.md",
+      "recordedSha256": "8de0345004978c2b58c73c652bbd04663e51b2ce5778a21f111bf7f1efedf5fb",
+      "observedSha256": "8de0345004978c2b58c73c652bbd04663e51b2ce5778a21f111bf7f1efedf5fb",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "OCR_EXPERIMENT/derived/LT-22-page-labeled-companion.md",
+      "recordedSha256": "72334e79d61b62f23cd55f2b45d6d34f7d0edb36942c7849e3234958c9a98b47",
+      "observedSha256": "72334e79d61b62f23cd55f2b45d6d34f7d0edb36942c7849e3234958c9a98b47",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "OCR_EXPERIMENT/derived/lt4-p05-structured-companion.md",
+      "recordedSha256": "e9f1bae40ed51c73fcbeeacf4f5d304e1194584e836013eb4bc4f292e5290d90",
+      "observedSha256": "e9f1bae40ed51c73fcbeeacf4f5d304e1194584e836013eb4bc4f292e5290d90",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "OCR_EXPERIMENT/derived/LT-22-reviewed-companion.md",
+      "recordedSha256": "4c5351f1c876e4cc1ec4ef6de081ca1a3171c2be954692ef47c79c6dad33175a",
+      "observedSha256": "4c5351f1c876e4cc1ec4ef6de081ca1a3171c2be954692ef47c79c6dad33175a",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "OCR_EXPERIMENT/derived/lt1-p02-structured-companion.md",
+      "recordedSha256": "854ed9e743901908694e807e2685569d63102d062cd932112d6db6546e3da2eb",
+      "observedSha256": "854ed9e743901908694e807e2685569d63102d062cd932112d6db6546e3da2eb",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "OCR_EXPERIMENT/NVIDIA/parse-lt22-p04-3072.md",
+      "recordedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "OCR_EXPERIMENT/NVIDIA/parse-lt22-p02-hosted-prompt.md",
+      "recordedSha256": "159a1af294b346f9243a517e31640c352207c14409d490e3498aa6c82752b769",
+      "observedSha256": "159a1af294b346f9243a517e31640c352207c14409d490e3498aa6c82752b769",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "OCR_EXPERIMENT/NVIDIA/parse-lt22-p06-hosted-prompt.md",
+      "recordedSha256": "df44295aaa016734bddb0b78c8398fa537bd9c8ffa746d03f0401c653b6cd977",
+      "observedSha256": "df44295aaa016734bddb0b78c8398fa537bd9c8ffa746d03f0401c653b6cd977",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "OCR_EXPERIMENT/NVIDIA/parse-lt22-p03-hosted-prompt.md",
+      "recordedSha256": "0e03f4898ca5ef56b849c63ff6c9bdeac907c22b20782910d5e7327e9208079e",
+      "observedSha256": "0e03f4898ca5ef56b849c63ff6c9bdeac907c22b20782910d5e7327e9208079e",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "OCR_EXPERIMENT/NVIDIA/REPORT.md",
+      "recordedSha256": "f3ce2d7db5e26273dd2e6deadf0929213c218c74af2b4ba6cc68e11dc90d43f2",
+      "observedSha256": "f3ce2d7db5e26273dd2e6deadf0929213c218c74af2b4ba6cc68e11dc90d43f2",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "OCR_EXPERIMENT/NVIDIA/parse-synthetic-chart-hosted-prompt.md",
+      "recordedSha256": "f8d4447ca1c78f8f71cba4bb615e45a7cb68c611a47920ce24f583afd5b18cf1",
+      "observedSha256": "f8d4447ca1c78f8f71cba4bb615e45a7cb68c611a47920ce24f583afd5b18cf1",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "OCR_EXPERIMENT/NVIDIA/kimi-synthetic-chart.md",
+      "recordedSha256": "e5f45ab770a46abe6d2b21561fa10923e4f909cb988d8009b34863ea9c0a28aa",
+      "observedSha256": "e5f45ab770a46abe6d2b21561fa10923e4f909cb988d8009b34863ea9c0a28aa",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "OCR_EXPERIMENT/NVIDIA/parse-lt4-p05-hosted-prompt.md",
+      "recordedSha256": "e908d2e7dcd04aba23a60d5857ba41cf96413debfa00e85c52d9302f9d42d878",
+      "observedSha256": "e908d2e7dcd04aba23a60d5857ba41cf96413debfa00e85c52d9302f9d42d878",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "OCR_EXPERIMENT/NVIDIA/parse-lt1-p02-3072.md",
+      "recordedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "OCR_EXPERIMENT/NVIDIA/kimi-lt22-p04.md",
+      "recordedSha256": "ae749e901388edcb7d78c98964618a28ecf1ec7732d7b1eb2f9ba215086fdd32",
+      "observedSha256": "ae749e901388edcb7d78c98964618a28ecf1ec7732d7b1eb2f9ba215086fdd32",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "OCR_EXPERIMENT/NVIDIA/kimi-lt22-p06-retry.md",
+      "recordedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "OCR_EXPERIMENT/NVIDIA/kimi-lt22-p03.md",
+      "recordedSha256": "23e27573cbd6d81439a9282643a6d87185d5abe9d03a0a2631d4cd2dc3009f12",
+      "observedSha256": "23e27573cbd6d81439a9282643a6d87185d5abe9d03a0a2631d4cd2dc3009f12",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "OCR_EXPERIMENT/NVIDIA/parse-synthetic-chart-3072.md",
+      "recordedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "OCR_EXPERIMENT/NVIDIA/parse-lt1-p02-hosted-prompt.md",
+      "recordedSha256": "c76a7da324843d523cde15bb5e59bdbf3e964c766d21bbbfc63a68d1aba90803",
+      "observedSha256": "c76a7da324843d523cde15bb5e59bdbf3e964c766d21bbbfc63a68d1aba90803",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "OCR_EXPERIMENT/NVIDIA/parse-lt22-p04-hosted-prompt.md",
+      "recordedSha256": "03e90e9e9f10d335528b0662f7d8e4dd401a7ae64bc049622e529b1c81cf27e4",
+      "observedSha256": "03e90e9e9f10d335528b0662f7d8e4dd401a7ae64bc049622e529b1c81cf27e4",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "OCR_EXPERIMENT/NVIDIA/kimi-lt22-p06.md",
+      "recordedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "OCR_EXPERIMENT/NVIDIA/kimi-lt22-p02.md",
+      "recordedSha256": "6b3e43cf10355fb74acfbf61c1023fe18012ae290226acdf57c735c5cb3fc640",
+      "observedSha256": "6b3e43cf10355fb74acfbf61c1023fe18012ae290226acdf57c735c5cb3fc640",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "OCR_EXPERIMENT/NVIDIA/parse-lt4-p05-3072.md",
+      "recordedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "observedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "OCR_EXPERIMENT/NVIDIA/kimi-lt1-p02.md",
+      "recordedSha256": "39f03a3d3188a5781bf2575bcbd857b4393f23eb6472cbe7b3c3129e2fa6d935",
+      "observedSha256": "39f03a3d3188a5781bf2575bcbd857b4393f23eb6472cbe7b3c3129e2fa6d935",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "OCR_EXPERIMENT/NVIDIA/kimi-lt4-p05.md",
+      "recordedSha256": "63528fbef6c756b76c3a2c68cbefc76c8683b89cbe1eebd4c7c53f60fcfa9ab9",
+      "observedSha256": "63528fbef6c756b76c3a2c68cbefc76c8683b89cbe1eebd4c7c53f60fcfa9ab9",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "LT-316530-24-NY/RETRIEVAL_REPORT.md",
+      "recordedSha256": "1da8d245ff4123008e4204438fb7a36931466a64df6a3caae817f8b67072acbf",
+      "observedSha256": "1da8d245ff4123008e4204438fb7a36931466a64df6a3caae817f8b67072acbf",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "LT-316530-24-NY/NOTEBOOK_SYNC_REPORT.md",
+      "recordedSha256": "cc5e3470621f7d428740ea34870864de633f15ffe2ec8b4a4e91c006e3cdb52c",
+      "observedSha256": "cc5e3470621f7d428740ea34870864de633f15ffe2ec8b4a4e91c006e3cdb52c",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "download-benchmark/RESULTS.md",
+      "recordedSha256": "f3790bd9bc08b633cc288a568756404e7be1d9ec8a8df32bc98689189ca678b7",
+      "observedSha256": "f3790bd9bc08b633cc288a568756404e7be1d9ec8a8df32bc98689189ca678b7",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "AGENT_HANDOFF_2026-10-03/02-Knowledge-Graph-Plan.md",
+      "recordedSha256": "1dfad0a8a168a3f4c4270f701ff52b8f8ea9bf28435b87e2a23fa2c1d61c828f",
+      "observedSha256": "1dfad0a8a168a3f4c4270f701ff52b8f8ea9bf28435b87e2a23fa2c1d61c828f",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "AGENT_HANDOFF_2026-10-03/06-Shared-Services-and-Schema.md",
+      "recordedSha256": "8693ab1739467ef28065bba783fed1db6df1e7d68a60c7c7de06b05cd3ebf6a7",
+      "observedSha256": "8693ab1739467ef28065bba783fed1db6df1e7d68a60c7c7de06b05cd3ebf6a7",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "AGENT_HANDOFF_2026-10-03/05-Converge-Integration-Plan.md",
+      "recordedSha256": "f80b118514425a40dc22717bb2ec93b2660bcaf554ba0614ffe79511a1b074c1",
+      "observedSha256": "f80b118514425a40dc22717bb2ec93b2660bcaf554ba0614ffe79511a1b074c1",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "AGENT_HANDOFF_2026-10-03/04-Docket-Key-Integration-Plan.md",
+      "recordedSha256": "378995e976c0f0bd542dbbe3f20875ed0336aa016d5c20306b3d8da629689745",
+      "observedSha256": "378995e976c0f0bd542dbbe3f20875ed0336aa016d5c20306b3d8da629689745",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "AGENT_HANDOFF_2026-10-03/01-Document-Processing-Plan.md",
+      "recordedSha256": "2fd6de6f952ce95df85ca696c903b96ef094603a80a60209c0eed7a60da1b2ee",
+      "observedSha256": "2fd6de6f952ce95df85ca696c903b96ef094603a80a60209c0eed7a60da1b2ee",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "AGENT_HANDOFF_2026-10-03/03-CaseVault-Integration-Plan.md",
+      "recordedSha256": "fd58e597c2edfe91d7299eb50fd332772c55e3e335bf8c5465b92d4d9501c2dd",
+      "observedSha256": "fd58e597c2edfe91d7299eb50fd332772c55e3e335bf8c5465b92d4d9501c2dd",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "AGENT_HANDOFF_2026-10-03/07-Technologies-and-Platforms-Recommendation.md",
+      "recordedSha256": "85b0dc9b403dd14774947f747dd48da778d2c325926bc93bde4db75d2524d46d",
+      "observedSha256": "85b0dc9b403dd14774947f747dd48da778d2c325926bc93bde4db75d2524d46d",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "NASCA_RECONCILIATION/REPORT.md",
+      "recordedSha256": "16cd57243d847890b691b27245afb3eb91f911e23f6cc76b577e865792ae96bb",
+      "observedSha256": "16cd57243d847890b691b27245afb3eb91f911e23f6cc76b577e865792ae96bb",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "NASCA_RECONCILIATION/NOTEBOOK_SYNC_REPORT.md",
+      "recordedSha256": "dc93d43c87fb87db858dbc682a12a2cd793b03e9b96bd47d636c6046a160f2ca",
+      "observedSha256": "dc93d43c87fb87db858dbc682a12a2cd793b03e9b96bd47d636c6046a160f2ca",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "casevault-claude-sonnet-5-high.zip",
+      "role": "prototype",
+      "recordedSha256": "fcbe35334282f5090a1202a1102bf0c0110237e5ab30ad89b3ca663e58dd21df",
+      "observedSha256": "fcbe35334282f5090a1202a1102bf0c0110237e5ab30ad89b3ca663e58dd21df",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    },
+    {
+      "path": "Causes of Action Workflow.md",
+      "role": "requirementsReference",
+      "recordedSha256": "53bc9340390fa067661a4be3a26180e97fe3cf1c1869fd9d7b61a67f0c6bd3e7",
+      "observedSha256": "53bc9340390fa067661a4be3a26180e97fe3cf1c1869fd9d7b61a67f0c6bd3e7",
+      "availability": "Present; hash matches",
+      "contentReview": "Not substantively reviewed in this overhaul"
+    }
+  ]
+}

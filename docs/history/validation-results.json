@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-04",
+  "baselineCommit": "dbed6304a7d5235feb8e55dc7d94096d34f4ac06",
+  "status": "passed",
+  "checks": {
+    "archived_markdown": 24,
+    "preserved_artifacts": 21,
+    "removed_clutter": 1,
+    "protected_non_documentation_files": 145,
+    "active_markdown_files": 45,
+    "local_links": 1084,
+    "mapped_sections": 136
+  },
+  "errors": [],
+  "scope": "Local documentation integrity only; no application tests, builds or live checks.",
+  "diffWhitespace": "passed",
+  "changeScope": "Only docs/ and README.md added or modified by this task; pre-existing application changes preserved.",
+  "upstreamReferences": {
+    "catalog": 49,
+    "startingArtifacts": 2,
+    "matchingHashes": 51,
+    "substantiveContentReview": false
+  }
+}
