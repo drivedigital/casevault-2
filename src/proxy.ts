@@ -2,10 +2,17 @@ import {NextRequest,NextResponse} from 'next/server';
 import {getCloudflareContext} from '@opennextjs/cloudflare';
 import {equalSecret,authorizedGoogleUser} from '@/lib/auth';
 import {createAuthClient,copyAuthCookies} from '@/lib/supabase-auth';
+
 export async function proxy(req:NextRequest){
  const path=req.nextUrl.pathname;
  if(['/login','/api/health','/api/session','/auth/google','/auth/callback'].includes(path))return NextResponse.next();
- const env=getCloudflareContext().env;
+
+ let env: any = process.env;
+ try {
+  const ctx = getCloudflareContext();
+  if (ctx?.env) env = { ...process.env, ...ctx.env };
+ } catch {}
+
  const tokenAuth=await equalSecret(req.headers.get('authorization')?.replace(/^Bearer /,'')??'',env.CASEVAULT_API_TOKEN);
  let response=NextResponse.next({request:req});
  if(tokenAuth){
@@ -13,17 +20,20 @@ export async function proxy(req:NextRequest){
   response.headers.set('X-Content-Type-Options','nosniff');
   return response;
  }
- // Temporary public review: authenticated access remains required for privileged operations.
- const publicReview = env.PUBLIC_REVIEW === 'true' && (
-   (['GET','HEAD','OPTIONS'].includes(req.method) && !path.startsWith('/api/drive/') && !path.startsWith('/api/bridges/')) ||
-   ((path === '/api/settings/providers' || path === '/api/agents' || path === '/api/processing-instructions') && ['POST','PATCH'].includes(req.method))
- );
- if(publicReview){
-  if(!['GET','HEAD','OPTIONS'].includes(req.method)&&req.headers.get('origin')!==req.nextUrl.origin)return NextResponse.json({error:'Invalid request origin'},{status:403});
+
+ // Google identity is disabled for now by owner request.
+ const googleAuthDisabled = env.DISABLE_GOOGLE_AUTH !== 'false';
+ if(googleAuthDisabled){
+  const origin = req.headers.get('origin');
+  if(origin && origin !== req.nextUrl.origin){
+   return NextResponse.json({error:'Invalid request origin'},{status:403});
+  }
   response.headers.set('Cache-Control','private, no-store');
   response.headers.set('X-Content-Type-Options','nosniff');
   return response;
  }
+
+ // When Google identity is enabled:
  const auth=createAuthClient(req,response,true);
  const {data:{user},error}=await auth.client.auth.getUser();
  response=auth.response();

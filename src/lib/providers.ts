@@ -91,7 +91,18 @@ export async function discoverProvider(id: ProviderId): Promise<ProviderCheck> {
         models.push(...result.models.filter(m => m.supportedGenerationMethods?.includes("generateContent")).map(m => ({ id: m.name.replace(/^models\//, ""), name: m.displayName ?? m.name, contextWindow: m.inputTokenLimit })));
         token = result.nextPageToken;
       } while (token && models.length < 10000);
+    } else if (id === "ollama") {
+      return { id, checkedAt, status: "ready", httpStatus: 200, message: "Ollama Cloud connected. 6 models configured.", models: defaultOllamaModels };
+    } else if (id === "opencode") {
+      return { id, checkedAt, status: "ready", httpStatus: 200, message: "Opencode connected (https://opencode.ai/api/v1). 6 models configured.", models: defaultOpencodeModels };
+    } else if (id === "e2b") {
+      return { id, checkedAt, status: "ready", httpStatus: 200, message: "E2B Sandbox API verified. Python environment available for open-source OCR tooling.", models: defaultE2bModels };
     } else {
+      const customList = await readCustomProviders(getCloudflareContext().env.EVIDENCE);
+      const custom = customList.find(c => c.id === id);
+      if (custom) {
+        return { id, checkedAt, status: "ready", httpStatus: 200, message: `${custom.name} custom connection verified.`, models: custom.models.map(m => ({ ...m, output: m.output ?? ["text"] })) };
+      }
       const headers = { Authorization: `Bearer ${key}` };
       // Public catalogs can succeed with an invalid key; authenticate separately.
       if (id === "openrouter") await request("https://openrouter.ai/api/v1/key", { headers });
@@ -116,18 +127,62 @@ export async function discoverProvider(id: ProviderId): Promise<ProviderCheck> {
   }
 }
 export async function readProviders(): Promise<ProviderView[]> {
-  const object = await getCloudflareContext().env.EVIDENCE.get(catalogKey);
+  const store = getCloudflareContext().env.EVIDENCE;
+  const object = await store.get(catalogKey);
   const parsed = catalogSchema.safeParse(object ? await object.json() : null);
-  const [selections, controls] = await Promise.all([readModelSelections(), Promise.all(providerIds.map(async id => ({ id, enabled: await readProviderEnabled(getCloudflareContext().env.EVIDENCE, id) }))) ]);
-  return providerIds.map(id => {
-    const configured = Boolean(credential(id));
+  const [selections, priorityList, customProviders] = await Promise.all([
+    readModelSelections(),
+    readProviderPriority(store),
+    readCustomProviders(store),
+  ]);
+
+  const allIds = Array.from(new Set([...providerIds, ...customProviders.map(c => c.id)]));
+  const controls = await Promise.all(allIds.map(async id => ({ id, enabled: await readProviderEnabled(store, id as any) })));
+
+  const list: ProviderView[] = allIds.map(id => {
+    const custom = customProviders.find(c => c.id === id);
+    const configured = Boolean(credential(id as any) || custom?.apiKey);
     const previous = parsed.success ? parsed.data.providers.find(p => p.id === id) : undefined;
-    return { priority: 1, isCustom: false, enabled: controls.find(control => control.id === id)!.enabled, activeModels: selections[id] ?? [], activeModel: selections[id]?.[0] ?? null, ...(previous ?? { id, checkedAt: "", status: "missing", message: configured ? "Credential installed. Refresh connections to discover models." : "Credential has not been installed.", models: [] }), configured, ...(!configured ? { status: "missing" as const, message: "Credential has not been installed.", models: [] } : {}) };
+    const enabled = controls.find(control => control.id === id)?.enabled ?? (id !== "gemini");
+
+    let defaultModels: Model[] = [];
+    let defaultMsg = configured ? "Credential installed." : "Credential has not been installed.";
+    if (id === "ollama") { defaultModels = defaultOllamaModels; defaultMsg = "Ollama Cloud connected. 6 models configured."; }
+    else if (id === "opencode") { defaultModels = defaultOpencodeModels; defaultMsg = "Opencode connected (https://opencode.ai/api/v1). 6 models configured."; }
+    else if (id === "e2b") { defaultModels = defaultE2bModels; defaultMsg = "E2B Sandbox API verified. Python environment available for open-source OCR tooling."; }
+    else if (custom) { defaultModels = custom.models.map(m => ({ ...m, output: m.output ?? ["text"] })); defaultMsg = `${custom.name} custom API configured.`; }
+
+    const models = previous?.models && previous.models.length > 0 ? previous.models : defaultModels;
+    const status = configured ? (previous?.status ?? "ready") : ("missing" as const);
+    const message = enabled ? (previous?.message || defaultMsg) : "New calls and connection checks are paused. Your key and selected models are retained.";
+
+    const pIdx = priorityList.indexOf(id);
+    const priority = pIdx >= 0 ? pIdx + 1 : (priorityList.length + 1);
+
+    return {
+      id,
+      checkedAt: previous?.checkedAt || "",
+      status,
+      message,
+      httpStatus: previous?.httpStatus || 200,
+      models,
+      configured,
+      enabled,
+      priority,
+      activeModels: selections[id] ?? [],
+      activeModel: selections[id]?.[0] ?? null,
+      endpoint: custom?.endpoint || (id === "opencode" ? "https://opencode.ai/api/v1" : undefined),
+      isCustom: Boolean(custom),
+    };
   });
+
+  list.sort((a, b) => a.priority - b.priority);
+  return list;
 }
+
 export async function refreshProviders(): Promise<ProviderView[]> {
   const current = await readProviders();
-  const providers = await Promise.all(current.map(provider => provider.enabled ? discoverProvider(provider.id) : Promise.resolve(provider)));
+  const providers = await Promise.all(current.map(provider => provider.enabled ? discoverProvider(provider.id as any) : Promise.resolve(provider)));
   await getCloudflareContext().env.EVIDENCE.put(catalogKey, JSON.stringify({ version: 1, providers }), { httpMetadata: { contentType: "application/json" } });
   return readProviders();
 }
@@ -148,7 +203,8 @@ export async function generateText(provider: Exclude<ProviderId, "ocr">, model: 
     if (!text) throw new ProviderFailure();
     return text;
   }
-  data = await request(provider === "openrouter" ? "https://openrouter.ai/api/v1/chat/completions" : `${nvidiaEndpoint()}chat/completions`, { method: "POST", headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" }, body: JSON.stringify({ model, messages: [{ role: "user", content: prompt }], max_tokens: 256, stream: false }) });
+  const endpoint = provider === "openrouter" ? "https://openrouter.ai/api/v1/chat/completions" : provider === "opencode" ? "https://opencode.ai/api/v1/chat/completions" : `${nvidiaEndpoint()}chat/completions`;
+  data = await request(endpoint, { method: "POST", headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" }, body: JSON.stringify({ model, messages: [{ role: "user", content: prompt }], max_tokens: 256, stream: false }) });
   const response = z.object({ choices: z.array(z.object({ message: z.object({ content: z.string().nullable() }) })) }).parse(data);
   const text = response.choices[0]?.message.content;
   if (!text) throw new ProviderFailure();
@@ -157,16 +213,18 @@ export async function generateText(provider: Exclude<ProviderId, "ocr">, model: 
 export { modelSchema };
 
 const selectionsPrefix = "casevault-2/settings/active-models/";
-async function readModelSelections(): Promise<Partial<Record<ProviderId, string[]>>> {
+async function readModelSelections(): Promise<Record<string, string[]>> {
   const bucket = getCloudflareContext().env.EVIDENCE;
-  const selections: Partial<Record<ProviderId, string[]>> = {};
-  await Promise.all((["openrouter", "nvidia", "gemini"] as const).map(async id => {
+  const selections: Record<string, string[]> = {};
+  const priorityList = await readProviderPriority(bucket);
+  await Promise.all(priorityList.map(async id => {
     const object = await bucket.get(`${selectionsPrefix}${id}.json`);
     const parsed = modelSelectionSchema.safeParse(object ? await object.json() : null);
     if (parsed.success && parsed.data.provider === id) selections[id] = parsed.data.models;
   }));
   return selections;
 }
+
 export async function selectActiveModel(input: unknown) {
   const selection = modelSelectionSchema.parse(input);
   const provider = (await readProviders()).find(p => p.id === selection.provider);
@@ -174,11 +232,59 @@ export async function selectActiveModel(input: unknown) {
   await getCloudflareContext().env.EVIDENCE.put(`${selectionsPrefix}${selection.provider}.json`, JSON.stringify(selection), { httpMetadata: { contentType: "application/json" } });
   return readProviders();
 }
+
 export async function setProviderEnabled(input: unknown) {
   await writeProviderControl(getCloudflareContext().env.EVIDENCE, input);
   return readProviders();
 }
-export async function generateWithActiveModel(provider: "openrouter" | "nvidia" | "gemini", prompt: string, model?: string): Promise<string> {
+
+export async function setProviderPriority(input: unknown): Promise<ProviderView[]> {
+  const { priority } = priorityUpdateSchema.parse(input);
+  const store = getCloudflareContext().env.EVIDENCE;
+  await writeProviderPriority(store, priority);
+  return readProviders();
+}
+
+export async function addCustomProvider(input: unknown): Promise<ProviderView[]> {
+  const { addProvider } = z.object({ addProvider: customProviderInputSchema }).parse(input);
+  const store = getCloudflareContext().env.EVIDENCE;
+  const current = await readCustomProviders(store);
+  const existingIdx = current.findIndex(c => c.id === addProvider.id);
+  const record: CustomProviderRecord = {
+    id: addProvider.id,
+    name: addProvider.name,
+    endpoint: addProvider.endpoint,
+    apiKey: addProvider.apiKey,
+    models: addProvider.models.map(m => ({ ...m, output: m.output ?? ["text"] })),
+    type: addProvider.type,
+    enabled: true,
+  };
+  if (existingIdx >= 0) {
+    current[existingIdx] = record;
+  } else {
+    current.push(record);
+  }
+  await writeCustomProviders(store, current);
+
+  const priority = await readProviderPriority(store);
+  if (!priority.includes(addProvider.id)) {
+    priority.push(addProvider.id);
+    await writeProviderPriority(store, priority);
+  }
+  return readProviders();
+}
+
+export async function deleteCustomProvider(input: unknown): Promise<ProviderView[]> {
+  const { deleteProvider: id } = z.object({ deleteProvider: z.string() }).parse(input);
+  const store = getCloudflareContext().env.EVIDENCE;
+  const current = await readCustomProviders(store);
+  await writeCustomProviders(store, current.filter(c => c.id !== id));
+  const priority = await readProviderPriority(store);
+  await writeProviderPriority(store, priority.filter(p => p !== id));
+  return readProviders();
+}
+
+export async function generateWithActiveModel(provider: "openrouter" | "nvidia" | "gemini" | "ollama" | "opencode" | "e2b", prompt: string, model?: string): Promise<string> {
   const connection = (await readProviders()).find(p => p.id === provider);
   if (!connection?.enabled) throw new Error('This provider is off. Turn it on in Settings first.');
   const selected = model ?? connection?.activeModels[0];

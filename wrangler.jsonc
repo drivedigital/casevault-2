@@ -39,6 +39,7 @@
     "ALLOWED_LOGIN_EMAIL": "dgeorgenyc@gmail.com",
     "NVIDIA_ENDPOINT": "https://integrate.api.nvidia.com/v1/",
     "PUBLIC_REVIEW": "true",
+    "DISABLE_GOOGLE_AUTH": "true",
     "WORKSPACE_ID": "b37e40d6-4746-490c-9b73-ea46e15e2b01"
   },
   "observability": {
