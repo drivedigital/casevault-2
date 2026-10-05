@@ -1,0 +1,636 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><link rel="shortcut icon"  href="/favicon.ico"/><title>Live Database: nyeb_live</title>
+<script type="text/javascript">document.cookie = "PRTYPE=web; path=/;"</script> <script>var default_base_path = "/"; </script> <link rel="stylesheet" type="text/css" href="/css/default.css"><script type="text/javascript" src="/lib/core.js"></script><script type="text/javascript" src="/lib/autocomplete.js"></script><script type="text/javascript" src="/lib/DisableAJTALinks.js"></script><script type="text/javascript">if (top!=self) {top.location.replace(location.href);}</script><script>var default_base_path = "/"; </script><script type="text/javascript" src="/cgi-bin/menu.pl?id=-1"></script></head><body BGCOLOR=FFFFF0 TEXT=000000 onLoad='SetFocus()'>
+				<div class="noprint">
+				<div id="topmenu" class="yuimenubar"><div class="bd">
+				<img id="cmecfLogo" class="cmecfLogo" src="/graphics/logo-cmecf-sm.png" alt="CM/ECF" title="" onClick="CMECF.MainMenu.showCourtInformation(); return false" />
+				<ul class="first-of-type">
+			
+<li class="yuimenubaritem"><a class="yuimenubaritemlabel" href='/cgi-bin/iquery.pl'><u>Q</u>uery</a></li>
+<li class="yuimenubaritem"><a class="yuimenubaritemlabel" href='/cgi-bin/DisplayMenu.pl?Reports&id=-1'><u>R</u>eports <div class='spritedownarrow'></div></a></li>
+<li class="yuimenubaritem"><a class="yuimenubaritemlabel" href='/cgi-bin/DisplayMenu.pl?Utilities&id=-1'><u>U</u>tilities <div class='spritedownarrow'></div></a></li>
+<li class="yuimenubaritem"><a class="yuimenubaritemlabel" onClick="CMECF.MainMenu.showHelpPage(''); return false">Help</a></li>
+<li class="yuimenubaritem"><a class="yuimenubaritemlabel" href='/cgi-bin/login.pl?logout'>Log Out</a></li><li class='yuimenubaritem' id='placeholderForAlertsIcon'></li>
+				</ul></div>
+				<hr class="hrmenuseparator"></div></div>
+				
+			<script type="text/javascript">
+callCreateMenu=function(){
+				var fn = "CMECF.MainMenu.createMenu";
+				if(typeof CMECF.MainMenu.createMenu == 'function') {
+					CMECF.MainMenu.createMenu();
+				}
+                        }
+if (navigator.appVersion.indexOf("MSIE")==-1){window.setTimeout( function(){ callCreateMenu(); }, 1);}else{CMECF.util.Event.addListener(window, "load",  callCreateMenu());}</script> <div id="cmecfMainContent"><input type="hidden" id="cmecfMainContentScroll" value="0"><SCRIPT LANGUAGE="JavaScript">
+		var IsForm = false;
+		var FirstField;
+		function SetFocus() {
+			if(IsForm) {
+				if(FirstField) {
+					var ind = FirstField.indexOf('document.',0);
+					if(ind == 0)
+					{
+						eval(FirstField);
+					}
+					else
+					{
+						var Code = "document.forms[0]."+FirstField+".focus();";
+						eval(Code);
+					}
+				} else {
+					var Cnt = 0;
+					while(document.forms[0].elements[Cnt] != null) {
+						try {
+							if(document.forms[0].elements[Cnt].type != "hidden" &&
+									!document.forms[0].elements[Cnt].disabled &&
+									!document.forms[0].elements[Cnt].readOnly) {
+								document.forms[0].elements[Cnt].focus();
+								break;
+							}
+						}
+						catch(e) {}
+						Cnt += 1;
+					}
+				}
+			}
+			return(true);
+		}
+		</SCRIPT>
+<script type='text/JavaScript'>
+document.cookie="PDFHeaderReferer=1; path=/";
+</script>
+		<script type="text/javascript" src="/lib/widgits.js"></script>
+		<script>
+		var debtorPanel = null;
+
+		function create_panel(clid, message) {
+		    if (!debtorPanel) {
+		        debtorPanel = new CMECF.widget.Panel('debtorPanel', {
+				close:true,
+				draggable:false,
+				context:[clid, 'tl', 'br'],
+				width: "250" + "px",
+				height: "110" + "px",
+				constraintoviewport:true
+			});
+			debtorPanel.setHeader("Barred Debtor Information");
+			debtorPanel.setBody(message);
+			debtorPanel.body.style.height = "8em";
+			debtorPanel.render(document.body);
+		    } else {
+		        debtorPanel.show();
+		    }
+		}
+
+		function close_panel() {
+		    if (debtorPanel) {
+		        debtorPanel.destroy();
+		        debtorPanel = null;
+		    }
+		}
+		</script>
+		
+   <style>
+	table.DktRpt
+	{
+	font-family:times,serif,arial,helvetica,clean,sans-serif;
+	font-size: 14px;
+	}
+   </style>
+	<TABLE  class="DktRpt"  width="100%" align=right BORDER=0 CELLSPACING=5><TR><TD ALIGN=right><h2> <FONT SIZE="3">CounDue, PlnDue, DsclsDue</FONT></h2></TD></TR></TABLE><BR><BR><BR><CENTER><B><FONT SIZE="+1">U.S. Bankruptcy Court<BR>Eastern District of New York (Brooklyn)<BR>Bankruptcy Petition #: 1-26-44227-jmm</FONT></B></CENTER><TABLE  class="DktRpt"  width="100%" BORDER=0 CELLSPACING=1><TR>	<TD VALIGN=top  WIDTH="50%"><FONT SIZE="+0"><BR><I>Assigned to:</I>       Jil Mazer-Marino<BR>Chapter          11<BR>Voluntary<BR>Unknown assets<div class="noprint"><a href='/cgi-bin/SearchClaims.pl?caseid=542916;sc'>Claims Register</a></div><BR><BR>	</FONT></TD>
+	<TD VALIGN=top  WIDTH="50%" ALIGN=right><FONT SIZE="+0"><TABLE  class="DktRpt"  border=0 cellspacing=0 cellpadding=0 align=center><TR><td align="right" valign="top"><I>Date filed:</I></td><td align="left" valign="top">&nbsp;&nbsp;09/08/2026</td></TR><TR><td align="right" valign="top"><I>341 meeting:</I></td><td align="left" valign="top">&nbsp;&nbsp;10/05/2026</td></TR></TABLE>	</FONT></TD>
+</TR>
+</TABLE><BR><FONT SIZE="5"><B></B>
+		</FONT><TABLE  class="DktRpt"  width="100%" BORDER=0 CELLSPACING=1><TR><TR>	<TD VALIGN=top  WIDTH="50%"><FONT SIZE="+0"><I><B>Debtor</B></I><BR><B>Ian Simpson Reisner</B>
+<BR>c/o Andre Cizmarik, Esq.
+<BR>Mintz, Levin, Cohn, Ferris et al
+<BR>919 Third Avenue
+<BR>New York, NY 10022
+<BR>NEW YORK-NY
+<BR>SSN / ITIN: xxx-xx-9431<BR><BR>	</FONT></TD>
+	<TD VALIGN=top  ALIGN=right><FONT SIZE="+0">represented by	</FONT></TD>
+<TD valign="top" WIDTH="40%">
+  						<font size="+0"><B>Salvatore LaMonica</B>
+<BR>LaMonica Herbst and Maniscalco
+<BR>3305 Jerusalem Ave
+<BR>Wantagh, NY 11793
+<BR>(516) 826-6500
+<BR>Fax  : (516) 826-0222
+<BR>Email:&nbsp;<a href='mailto:sl@lhmlawfirm.com'>sl@lhmlawfirm.com</a><BR><BR></font></TD></TR><TR>	<TD VALIGN=top  WIDTH="50%"><FONT SIZE="+0"><I><B>U.S. Trustee</B></I><BR><B>Office of the United States Trustee</B>
+<BR>Eastern District of NY (Brooklyn)
+<BR>Alexander Hamilton Custom House
+<BR>One Bowling Green
+<BR>Room 510
+<BR>New York, NY 10004-1408
+<BR>(212) 206-2580	</FONT></TD>
+	<TD VALIGN=top  WIDTH="20%" ALIGN=right><FONT SIZE="+0">&nbsp;	</FONT></TD>
+	<TD VALIGN=top  WIDTH="40%"><FONT SIZE="+0">&nbsp;	</FONT></TD>
+</TR></TABLE><BR><script>
+function calculateTotal(inputItem, bytes) {
+  max_file_size = 26214400;
+  with (inputItem.form) {
+		if (inputItem.checked == false) {   // unchecked - subtract from total
+			calculatedTotal.value = eval(calculatedTotal.value) - bytes;
+		} else {   // checked - add to total
+			calculatedTotal.value = eval(calculatedTotal.value) + bytes;
+		}
+		if (calculatedTotal.value > max_file_size) {
+			document.view_multi_docs.view_selected.disabled = true;
+			document.view_multi_docs.dl_selected.disabled = true;
+			document.getElementById('file_too_big').style.display = 'block';
+		} else {
+			document.view_multi_docs.view_selected.disabled = false;
+			document.view_multi_docs.dl_selected.disabled = false;
+			document.getElementById('file_too_big').style.display = 'none';
+		}
+    return(calculatedTotal.value / 1000000);
+  }
+}
+</script>
+<script>
+function check_all_attachments(all, calculate_total) {
+	docSeqNum = all.value;
+	var checkbox_id = 'arr_de_seq_nums_' + docSeqNum + '_';
+	var elements = document.forms[0].elements;
+		for(var i=0; i < elements.length; i++) {
+			var checkbox = elements[i];
+			if(checkbox.id.match(checkbox_id)) {
+				if (checkbox.type == 'checkbox') {
+					if(checkbox.checked != all.checked) {
+						checkbox.checked = all.checked;
+						if (calculate_total != 0) {
+							var arr_check_box_id = checkbox.id.split('_');
+							var dm_size   = arr_check_box_id[5];
+							var total = calculateTotal(checkbox, parseFloat(dm_size));
+ 							inputTotal = parseFloat(document.getElementById('total').value, 10);
+ 							document.getElementById('total').value = total;
+}}}}}}
+</script>
+<form enctype='multipart/form-data' method=post action='show_multidocs.pl?caseid=542916&pdf_header=1' name=view_multi_docs><input type='hidden' name='caseid' value='542916'><input type='hidden' name='download_documents' value=''><input type='hidden' name='view_all_attachments' value='1'><script language="javascript">
+<!-- Begin
+function checkAll(field) {
+if (field.length) {
+						for (i = 0; i < field.length; i++) field[i].checked = true;
+					} else {
+						if (! field.checked) {
+							field.checked = true;
+						}
+					}
+		}
+function uncheckAll(field) {
+if (field.length) {
+						for (i = 0; i < field.length; i++) field[i].checked = false;
+					} else {
+						if (field.checked) {
+							field.checked = false;
+						}
+					}
+		}
+//  End -->
+</script>
+<TABLE style='width:100%'  class="DktRpt"  BORDER=1 CELLPADDING=10 CELLSPACING=0><TR><TH width='94' nowrap>Filing Date</TH>
+<TH colspan=2 align='center'>#</TH>
+					<th white-space:nowrap'><SMALL>Select<br>
+					<a href='#' onClick="checkAll(document.view_multi_docs.arr_de_seq_nums);checkAll(document.view_multi_docs.download_documents);"'>all</a> / 
+
+					<a href='#' onClick="uncheckAll(document.view_multi_docs.arr_de_seq_nums);uncheckAll(document.view_multi_docs.download_documents);"'>clear</SMALL></a></th>
+				<TH align=center>Docket Text</TH></TR>
+<TR><TD width="94" nowrap valign=bottom>09/08/2026</TD><TD width=74 valign=top align=right style='border-right:0;padding-right:1px;padding-left:2px;white-space:nowrap'><nobr>  &nbsp;</TD><TD width=30 valign=top align=left style='border-left:0;padding-left:1px'>1</nobr></TD><td align=center>&nbsp;</td><TD valign=bottom>  [ATTY NOTIFIED TO REFILE] Chapter 11 Voluntary Petition for Individuals. Fee Amount &#036; 1738. Filed by Salvatore LaMonica on behalf of Ian Simpson Reisner Chapter 11 Plan due by 01/6/2027. Disclosure Statement due by 01/6/2027. (LaMonica, Salvatore)Modified on 9/8/2026 (gem). (Entered: 09/08/2026)</TD></TR>
+<TR><TD width="94" nowrap valign=bottom>09/08/2026</TD><TD width=74 valign=top align=right style='border-right:0;padding-right:1px;padding-left:2px;white-space:nowrap'><nobr>  &nbsp;</TD><TD width=30 valign=top align=left style='border-left:0;padding-left:1px'>&nbsp;</nobr></TD><td align=center>&nbsp;</td><TD valign=bottom>  Receipt of Voluntary Petition (Chapter 11)(<a href=/cgi-bin/DktRpt.pl?542916> 1-26-44227</a>) [misc,volp11a] (1738.00) Filing Fee. Receipt number A24951935. Fee amount 1738.00. (re: Doc# <a href='https://ecf.nyeb.uscourts.gov/doc1/122031968122'>1</a>) (U.S. Treasury) (Entered: 09/08/2026)</TD></TR>
+<TR><TD width="94" nowrap valign=bottom>09/08/2026</TD><TD width=74 valign=top align=right style='border-right:0;padding-right:1px;padding-left:2px;white-space:nowrap'><nobr>  &nbsp;</TD><TD width=30 valign=top align=left style='border-left:0;padding-left:1px'><a href='/doc1/122031968406' onContextMenu='this.href="https://ecf.nyeb.uscourts.gov/doc1/122031968406"'>2</a> <br><nobr>(66&nbsp;pgs)</nobr></nobr></TD><td align=center><input id='arr_de_seq_nums_14' type=checkbox name='arr_de_seq_nums'  value='14' onclick='check_all_attachments(this,0)'></td>
+<TD valign=bottom>  Refiled Petition Re: Forms Modernization 2015 (Pgs 1-8) for Individuals: Redacted Social Security Number Filed by Salvatore LaMonica on behalf of Ian Simpson Reisner (RE: related document(s)<a href='https://ecf.nyeb.uscourts.gov/doc1/122031968122'>1</a> Voluntary Petition (Chapter 11) filed by Debtor Ian Simpson Reisner) (LaMonica, Salvatore) (Entered: 09/08/2026)</TD></TR>
+<TR>
+					<TD style='border-right:0; width:5%' valign='bottom' nowrap=''></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='right'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='left'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%'></TD>
+					<TD style='border-left: 0; width:80%' valign='bottom'><table class='report' style='margin:10px; width:100%; margin-top: 0px; margin-bottom: 0px;'> <tr class='rowbackground2'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_14_2907012' type = 'checkbox' name='download_documents' value="31968406" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>0</td><td style='width:60%'>Main Document</td>
+						<td style='width:17%'>66 pages</td>
+						<td style='width:18%'> 2.91 MB</td>
+					</tr></table></TD>
+				</TR><TR><TD width="94" nowrap valign=bottom>09/08/2026</TD><TD width=74 valign=top align=right style='border-right:0;padding-right:1px;padding-left:2px;white-space:nowrap'><nobr>  &nbsp;</TD><TD width=30 valign=top align=left style='border-left:0;padding-left:1px'><a href='/doc1/122031971608' onContextMenu='this.href="https://ecf.nyeb.uscourts.gov/doc1/122031971608"'>3</a> <br><nobr>(4&nbsp;pgs; 2&nbsp;docs)</nobr></nobr></TD><td align=center><input id='arr_de_seq_nums_19' type=checkbox name='arr_de_seq_nums'  value='19' onclick='check_all_attachments(this,0)'></td>
+<TD valign=bottom>  Deficient Filing Chapter 11 Certificate of Credit Counseling due by 9/8/2026.Affidavit Pursuant to E.D.N.Y. LBR 1007-4 due 9/8/2026. List of Equity Security Holders due 9/22/2026. Copies of pay statements received from any employer due by 9/22/2026. Incomplete Filings due by 9/22/2026. (dbw) (Entered: 09/09/2026)</TD></TR>
+<TR>
+					<TD style='border-right:0; width:5%' valign='bottom' nowrap=''></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='right'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='left'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%'></TD>
+					<TD style='border-left: 0; width:80%' valign='bottom'><table class='report' style='margin:10px; width:100%; margin-top: 0px; margin-bottom: 0px;'> <tr class='rowbackground2'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_19_9182' type = 'checkbox' name='download_documents' value="31971608" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>0</td><td style='width:60%'>Main Document</td>
+						<td style='width:17%'>3 pages</td>
+						<td style='width:18%'>9.18 KB</td>
+					</tr>  <tr class='rowbackground1'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_19_4069' type = 'checkbox' name='download_documents' value="31971609" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>1</td><td style='width:60%'>Def Notice CH11 Ind - 12/1/15: Notice Recipients</td>
+						<td style='width:17%'>1 page</td>
+						<td style='width:18%'>4.07 KB</td>
+					</tr></table></TD>
+				</TR><TR><TD width="94" nowrap valign=bottom>09/09/2026</TD><TD width=74 valign=top align=right style='border-right:0;padding-right:1px;padding-left:2px;white-space:nowrap'><nobr>  &nbsp;</TD><TD width=30 valign=top align=left style='border-left:0;padding-left:1px'><a href='/doc1/122031979108' onContextMenu='this.href="https://ecf.nyeb.uscourts.gov/doc1/122031979108"'>4</a> <br><nobr>(3&nbsp;pgs; 2&nbsp;docs)</nobr></nobr></TD><td align=center><input id='arr_de_seq_nums_21' type=checkbox name='arr_de_seq_nums'  value='21' onclick='check_all_attachments(this,0)'></td>
+<TD valign=bottom>  Notice of Chapter 11 Bankruptcy Case, Meeting of Creditors Filed by Office of the United States Trustee. 341(a) meeting to be held on 10/5/2026 at 12:00 PM at Zoomgov - Sussman: Zoom.us/join, Meeting ID 165 704 87664, Passcode 8637233185, Phone 1 202 810-2172. Last day to determine dischargeability of a debt under Section 523 is 12/4/2026. Deadline to object to discharge is the first date set for hearing on confirmation of plan. (Sussman, Jeremy) (Entered: 09/09/2026)</TD></TR>
+<TR>
+					<TD style='border-right:0; width:5%' valign='bottom' nowrap=''></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='right'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='left'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%'></TD>
+					<TD style='border-left: 0; width:80%' valign='bottom'><table class='report' style='margin:10px; width:100%; margin-top: 0px; margin-bottom: 0px;'> <tr class='rowbackground2'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_21_10894' type = 'checkbox' name='download_documents' value="31979108" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>0</td><td style='width:60%'>Main Document</td>
+						<td style='width:17%'>2 pages</td>
+						<td style='width:18%'>10.89 KB</td>
+					</tr>  <tr class='rowbackground1'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_21_5470' type = 'checkbox' name='download_documents' value="31979109" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>1</td><td style='width:60%'>Notice of Ch11 Mtg I/J: Notice Recipients</td>
+						<td style='width:17%'>1 page</td>
+						<td style='width:18%'>5.47 KB</td>
+					</tr></table></TD>
+				</TR><TR><TD width="94" nowrap valign=bottom>09/09/2026</TD><TD width=74 valign=top align=right style='border-right:0;padding-right:1px;padding-left:2px;white-space:nowrap'><nobr>  &nbsp;</TD><TD width=30 valign=top align=left style='border-left:0;padding-left:1px'><a href='/doc1/122031978918' onContextMenu='this.href="https://ecf.nyeb.uscourts.gov/doc1/122031978918"'>5</a> <br><nobr>(1&nbsp;pg)</nobr></nobr></TD><td align=center><input id='arr_de_seq_nums_23' type=checkbox name='arr_de_seq_nums'  value='23' onclick='check_all_attachments(this,0)'></td>
+<TD valign=bottom>  Order Directing Clerk&#039;s Office to restrict access to the document. (RE: related document(s)<a href='https://ecf.nyeb.uscourts.gov/doc1/122031968122'>1</a> Voluntary Petition (Chapter 11) filed by Debtor Ian Simpson Reisner). Signed on 9/9/2026 (nwh) (Entered: 09/11/2026)</TD></TR>
+<TR>
+					<TD style='border-right:0; width:5%' valign='bottom' nowrap=''></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='right'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='left'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%'></TD>
+					<TD style='border-left: 0; width:80%' valign='bottom'><table class='report' style='margin:10px; width:100%; margin-top: 0px; margin-bottom: 0px;'> <tr class='rowbackground2'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_23_255353' type = 'checkbox' name='download_documents' value="31978918" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>0</td><td style='width:60%'>Main Document</td>
+						<td style='width:17%'>1 page</td>
+						<td style='width:18%'>255.35 KB</td>
+					</tr></table></TD>
+				</TR><TR><TD width="94" nowrap valign=bottom>09/11/2026</TD><TD width=74 valign=top align=right style='border-right:0;padding-right:1px;padding-left:2px;white-space:nowrap'><nobr>  &nbsp;</TD><TD width=30 valign=top align=left style='border-left:0;padding-left:1px'><a href='/doc1/122031981846' onContextMenu='this.href="https://ecf.nyeb.uscourts.gov/doc1/122031981846"'>6</a> <br><nobr>(4&nbsp;pgs)</nobr></nobr></TD><td align=center><input id='arr_de_seq_nums_26' type=checkbox name='arr_de_seq_nums'  value='26' onclick='check_all_attachments(this,0)'></td>
+<TD valign=bottom>  BNC Certificate of Mailing with Notice of Deficient Filing Notice Date 09/11/2026. (Admin.) (Entered: 09/12/2026)</TD></TR>
+<TR>
+					<TD style='border-right:0; width:5%' valign='bottom' nowrap=''></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='right'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='left'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%'></TD>
+					<TD style='border-left: 0; width:80%' valign='bottom'><table class='report' style='margin:10px; width:100%; margin-top: 0px; margin-bottom: 0px;'> <tr class='rowbackground2'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_26_29161' type = 'checkbox' name='download_documents' value="31981846" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>0</td><td style='width:60%'>Main Document</td>
+						<td style='width:17%'>4 pages</td>
+						<td style='width:18%'>29.16 KB</td>
+					</tr></table></TD>
+				</TR><TR><TD width="94" nowrap valign=bottom>09/13/2026</TD><TD width=74 valign=top align=right style='border-right:0;padding-right:1px;padding-left:2px;white-space:nowrap'><nobr>  &nbsp;</TD><TD width=30 valign=top align=left style='border-left:0;padding-left:1px'><a href='/doc1/122031984562' onContextMenu='this.href="https://ecf.nyeb.uscourts.gov/doc1/122031984562"'>7</a> <br><nobr>(4&nbsp;pgs)</nobr></nobr></TD><td align=center><input id='arr_de_seq_nums_28' type=checkbox name='arr_de_seq_nums'  value='28' onclick='check_all_attachments(this,0)'></td>
+<TD valign=bottom>  BNC Certificate of Mailing - Meeting of Creditors Notice Date 09/13/2026. (Admin.) (Entered: 09/14/2026)</TD></TR>
+<TR>
+					<TD style='border-right:0; width:5%' valign='bottom' nowrap=''></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='right'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='left'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%'></TD>
+					<TD style='border-left: 0; width:80%' valign='bottom'><table class='report' style='margin:10px; width:100%; margin-top: 0px; margin-bottom: 0px;'> <tr class='rowbackground2'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_28_28382' type = 'checkbox' name='download_documents' value="31984562" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>0</td><td style='width:60%'>Main Document</td>
+						<td style='width:17%'>4 pages</td>
+						<td style='width:18%'>28.38 KB</td>
+					</tr></table></TD>
+				</TR><TR><TD width="94" nowrap valign=bottom>09/16/2026</TD><TD width=74 valign=top align=right style='border-right:0;padding-right:1px;padding-left:2px;white-space:nowrap'><nobr>  &nbsp;</TD><TD width=30 valign=top align=left style='border-left:0;padding-left:1px'><a href='/doc1/122031993781' onContextMenu='this.href="https://ecf.nyeb.uscourts.gov/doc1/122031993781"'>8</a> <br><nobr>(15&nbsp;pgs; 2&nbsp;docs)</nobr></nobr></TD><td align=center><input id='arr_de_seq_nums_30' type=checkbox name='arr_de_seq_nums'  value='30' onclick='check_all_attachments(this,0)'></td>
+<TD valign=bottom>  Motion for Waiver from Credit Counseling Due to Incapacity <i></i> Filed by Salvatore LaMonica on behalf of Ian Simpson Reisner. (Attachments: # <a href='https://ecf.nyeb.uscourts.gov/doc1/122131993782'>1</a> Proposed Order) (LaMonica, Salvatore) (Entered: 09/16/2026)</TD></TR>
+<TR>
+					<TD style='border-right:0; width:5%' valign='bottom' nowrap=''></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='right'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='left'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%'></TD>
+					<TD style='border-left: 0; width:80%' valign='bottom'><table class='report' style='margin:10px; width:100%; margin-top: 0px; margin-bottom: 0px;'> <tr class='rowbackground2'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_30_471555' type = 'checkbox' name='download_documents' value="31993781" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>0</td><td style='width:60%'>Main Document</td>
+						<td style='width:17%'>13 pages</td>
+						<td style='width:18%'>471.56 KB</td>
+					</tr>  <tr class='rowbackground1'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_30_112083' type = 'checkbox' name='download_documents' value="31993782" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>1</td><td style='width:60%'>Proposed Order</td>
+						<td style='width:17%'>2 pages</td>
+						<td style='width:18%'>112.08 KB</td>
+					</tr></table></TD>
+				</TR><TR><TD width="94" nowrap valign=bottom>09/16/2026</TD><TD width=74 valign=top align=right style='border-right:0;padding-right:1px;padding-left:2px;white-space:nowrap'><nobr>  &nbsp;</TD><TD width=30 valign=top align=left style='border-left:0;padding-left:1px'><a href='/doc1/122031997566' onContextMenu='this.href="https://ecf.nyeb.uscourts.gov/doc1/122031997566"'>9</a> <br><nobr>(2&nbsp;pgs)</nobr></nobr></TD><td align=center><input id='arr_de_seq_nums_32' type=checkbox name='arr_de_seq_nums'  value='32' onclick='check_all_attachments(this,0)'></td>
+<TD valign=bottom>  Notice of Appearance and Request for Notice Filed by Jay B Solomon on behalf of 230 PARK SOUTH APARTMENT, INC. (Solomon, Jay) (Entered: 09/16/2026)</TD></TR>
+<TR>
+					<TD style='border-right:0; width:5%' valign='bottom' nowrap=''></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='right'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='left'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%'></TD>
+					<TD style='border-left: 0; width:80%' valign='bottom'><table class='report' style='margin:10px; width:100%; margin-top: 0px; margin-bottom: 0px;'> <tr class='rowbackground2'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_32_220557' type = 'checkbox' name='download_documents' value="31997566" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>0</td><td style='width:60%'>Main Document</td>
+						<td style='width:17%'>2 pages</td>
+						<td style='width:18%'>220.56 KB</td>
+					</tr></table></TD>
+				</TR><TR><TD width="94" nowrap valign=bottom>09/21/2026</TD><TD width=74 valign=top align=right style='border-right:0;padding-right:1px;padding-left:2px;white-space:nowrap'><nobr>  &nbsp;</TD><TD width=30 valign=top align=left style='border-left:0;padding-left:1px'><a href='/doc1/122032014150' onContextMenu='this.href="https://ecf.nyeb.uscourts.gov/doc1/122032014150"'>10</a> <br><nobr>(4&nbsp;pgs; 2&nbsp;docs)</nobr></nobr></TD><td align=center><input id='arr_de_seq_nums_36' type=checkbox name='arr_de_seq_nums'  value='36' onclick='check_all_attachments(this,0)'></td>
+<TD valign=bottom>  Order Scheduling Initial Case Management Conference . Signed on 9/21/2026 Status hearing to be held on 11/4/2026 at 10:00 AM at Courtroom 3529 (Judge Mazer-Marino), Brooklyn, NY. (dbw) (Entered: 09/22/2026)</TD></TR>
+<TR>
+					<TD style='border-right:0; width:5%' valign='bottom' nowrap=''></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='right'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='left'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%'></TD>
+					<TD style='border-left: 0; width:80%' valign='bottom'><table class='report' style='margin:10px; width:100%; margin-top: 0px; margin-bottom: 0px;'> <tr class='rowbackground2'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_36_126502' type = 'checkbox' name='download_documents' value="32014150" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>0</td><td style='width:60%'>Main Document</td>
+						<td style='width:17%'>3 pages</td>
+						<td style='width:18%'>126.50 KB</td>
+					</tr>  <tr class='rowbackground1'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_36_5409' type = 'checkbox' name='download_documents' value="32014153" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>1</td><td style='width:60%'>PDF to All Parties, All Credit: Notice Recipients</td>
+						<td style='width:17%'>1 page</td>
+						<td style='width:18%'>5.41 KB</td>
+					</tr></table></TD>
+				</TR><TR><TD width="94" nowrap valign=bottom>09/23/2026</TD><TD width=74 valign=top align=right style='border-right:0;padding-right:1px;padding-left:2px;white-space:nowrap'><nobr>  &nbsp;</TD><TD width=30 valign=top align=left style='border-left:0;padding-left:1px'><a href='/doc1/122032024372' onContextMenu='this.href="https://ecf.nyeb.uscourts.gov/doc1/122032024372"'>11</a> <br><nobr>(2&nbsp;pgs)</nobr></nobr></TD><td align=center><input id='arr_de_seq_nums_38' type=checkbox name='arr_de_seq_nums'  value='38' onclick='check_all_attachments(this,0)'></td>
+<TD valign=bottom>  Notice of Appearance and Request for Notice Filed by Shari S Barak on behalf of HSBC BANK USA, N.A. (Barak, Shari) (Entered: 09/23/2026)</TD></TR>
+<TR>
+					<TD style='border-right:0; width:5%' valign='bottom' nowrap=''></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='right'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='left'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%'></TD>
+					<TD style='border-left: 0; width:80%' valign='bottom'><table class='report' style='margin:10px; width:100%; margin-top: 0px; margin-bottom: 0px;'> <tr class='rowbackground2'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_38_8306' type = 'checkbox' name='download_documents' value="32024372" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>0</td><td style='width:60%'>Main Document</td>
+						<td style='width:17%'>2 pages</td>
+						<td style='width:18%'>8.31 KB</td>
+					</tr></table></TD>
+				</TR><TR><TD width="94" nowrap valign=bottom>09/24/2026</TD><TD width=74 valign=top align=right style='border-right:0;padding-right:1px;padding-left:2px;white-space:nowrap'><nobr>  &nbsp;</TD><TD width=30 valign=top align=left style='border-left:0;padding-left:1px'><a href='/doc1/122032027262' onContextMenu='this.href="https://ecf.nyeb.uscourts.gov/doc1/122032027262"'>12</a> <br><nobr>(2&nbsp;pgs)</nobr></nobr></TD><td align=center><input id='arr_de_seq_nums_42' type=checkbox name='arr_de_seq_nums'  value='42' onclick='check_all_attachments(this,0)'></td>
+<TD valign=bottom>  Employee Income Records / Copies of Pay Statements <i>Declaration of Andre K. Cizmarik, Permanent Property Guardian of the Debtor, Regarding Income of the Debtor</i> Filed by Salvatore LaMonica on behalf of Ian Simpson Reisner (RE: related document(s)<a href='https://ecf.nyeb.uscourts.gov/doc1/122031971608'>3</a> Deficient Filing Chapter 11) (LaMonica, Salvatore) (Entered: 09/24/2026)</TD></TR>
+<TR>
+					<TD style='border-right:0; width:5%' valign='bottom' nowrap=''></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='right'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='left'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%'></TD>
+					<TD style='border-left: 0; width:80%' valign='bottom'><table class='report' style='margin:10px; width:100%; margin-top: 0px; margin-bottom: 0px;'> <tr class='rowbackground2'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_42_124007' type = 'checkbox' name='download_documents' value="32027262" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>0</td><td style='width:60%'>Main Document</td>
+						<td style='width:17%'>2 pages</td>
+						<td style='width:18%'>124.01 KB</td>
+					</tr></table></TD>
+				</TR><TR><TD width="94" nowrap valign=bottom>09/24/2026</TD><TD width=74 valign=top align=right style='border-right:0;padding-right:1px;padding-left:2px;white-space:nowrap'><nobr>  &nbsp;</TD><TD width=30 valign=top align=left style='border-left:0;padding-left:1px'><a href='/doc1/122032027307' onContextMenu='this.href="https://ecf.nyeb.uscourts.gov/doc1/122032027307"'>13</a> <br><nobr>(11&nbsp;pgs)</nobr></nobr></TD><td align=center><input id='arr_de_seq_nums_45' type=checkbox name='arr_de_seq_nums'  value='45' onclick='check_all_attachments(this,0)'></td>
+<TD valign=bottom>  Statement <i>Declaration of Andre K. Cizmarik, Permanent Property Guardian for Debtor, in Compliance with Rule 1007-4 of the Local Bankruptcy Rules</i> Filed by Salvatore LaMonica on behalf of Ian Simpson Reisner (LaMonica, Salvatore) (Entered: 09/24/2026)</TD></TR>
+<TR>
+					<TD style='border-right:0; width:5%' valign='bottom' nowrap=''></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='right'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='left'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%'></TD>
+					<TD style='border-left: 0; width:80%' valign='bottom'><table class='report' style='margin:10px; width:100%; margin-top: 0px; margin-bottom: 0px;'> <tr class='rowbackground2'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_45_215926' type = 'checkbox' name='download_documents' value="32027307" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>0</td><td style='width:60%'>Main Document</td>
+						<td style='width:17%'>11 pages</td>
+						<td style='width:18%'>215.93 KB</td>
+					</tr></table></TD>
+				</TR><TR><TD width="94" nowrap valign=bottom>09/24/2026</TD><TD width=74 valign=top align=right style='border-right:0;padding-right:1px;padding-left:2px;white-space:nowrap'><nobr>  &nbsp;</TD><TD width=30 valign=top align=left style='border-left:0;padding-left:1px'><a href='/doc1/122032027364' onContextMenu='this.href="https://ecf.nyeb.uscourts.gov/doc1/122032027364"'>14</a> <br><nobr>(1&nbsp;pg)</nobr></nobr></TD><td align=center><input id='arr_de_seq_nums_47' type=checkbox name='arr_de_seq_nums'  value='47' onclick='check_all_attachments(this,0)'></td>
+<TD valign=bottom>  Statement <i>Notice of Adjournment of 341 Meeting to October 19, 2026 at 10a.m.</i> Filed by Salvatore LaMonica on behalf of Ian Simpson Reisner (RE: related document(s)<a href='https://ecf.nyeb.uscourts.gov/doc1/122031979108'>4</a> Meeting of Creditors Chapter 11 - US Trustee filed by U.S. Trustee Office of the United States Trustee) (LaMonica, Salvatore) (Entered: 09/24/2026)</TD></TR>
+<TR>
+					<TD style='border-right:0; width:5%' valign='bottom' nowrap=''></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='right'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='left'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%'></TD>
+					<TD style='border-left: 0; width:80%' valign='bottom'><table class='report' style='margin:10px; width:100%; margin-top: 0px; margin-bottom: 0px;'> <tr class='rowbackground2'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_47_148767' type = 'checkbox' name='download_documents' value="32027364" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>0</td><td style='width:60%'>Main Document</td>
+						<td style='width:17%'>1 page</td>
+						<td style='width:18%'>148.77 KB</td>
+					</tr></table></TD>
+				</TR><TR><TD width="94" nowrap valign=bottom>09/24/2026</TD><TD width=74 valign=top align=right style='border-right:0;padding-right:1px;padding-left:2px;white-space:nowrap'><nobr>  &nbsp;</TD><TD width=30 valign=top align=left style='border-left:0;padding-left:1px'><a href='/doc1/122032027753' onContextMenu='this.href="https://ecf.nyeb.uscourts.gov/doc1/122032027753"'>15</a> <br><nobr>(32&nbsp;pgs; 6&nbsp;docs)</nobr></nobr></TD><td align=center><input id='arr_de_seq_nums_50' type=checkbox name='arr_de_seq_nums'  value='50' onclick='check_all_attachments(this,0)'></td>
+<TD valign=bottom>  Amended Schedule(s), Required Statement(s) and Affidavit Pursuant to E.D.N.Y. LBR 1009-1(a) Schedule A/B, Schedule C, Schedule E/F, : Statement of Financial Affairs Fee Amount &#036;34 Filed by Salvatore LaMonica on behalf of Ian Simpson Reisner (Attachments: # <a href='https://ecf.nyeb.uscourts.gov/doc1/122132027754'>1</a> Amended Schedule A/B # <a href='https://ecf.nyeb.uscourts.gov/doc1/122132027755'>2</a> Amended Schedule C # <a href='https://ecf.nyeb.uscourts.gov/doc1/122132027756'>3</a> Amended Schedule E/F # <a href='https://ecf.nyeb.uscourts.gov/doc1/122132027757'>4</a> Amended Statement of Financial Affairs # <a href='https://ecf.nyeb.uscourts.gov/doc1/122132027758'>5</a> Statement as to Amendments) (LaMonica, Salvatore) (Entered: 09/24/2026)</TD></TR>
+<TR>
+					<TD style='border-right:0; width:5%' valign='bottom' nowrap=''></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='right'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='left'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%'></TD>
+					<TD style='border-left: 0; width:80%' valign='bottom'><table class='report' style='margin:10px; width:100%; margin-top: 0px; margin-bottom: 0px;'> <tr class='rowbackground2'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_50_281984' type = 'checkbox' name='download_documents' value="32027753" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>0</td><td style='width:60%'>Main Document</td>
+						<td style='width:17%'>1 page</td>
+						<td style='width:18%'>281.98 KB</td>
+					</tr>  <tr class='rowbackground1'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_50_128226' type = 'checkbox' name='download_documents' value="32027754" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>1</td><td style='width:60%'>Amended Schedule A/B</td>
+						<td style='width:17%'>7 pages</td>
+						<td style='width:18%'>128.23 KB</td>
+					</tr>  <tr class='rowbackground2'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_50_122389' type = 'checkbox' name='download_documents' value="32027755" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>2</td><td style='width:60%'>Amended Schedule C</td>
+						<td style='width:17%'>1 page</td>
+						<td style='width:18%'>122.39 KB</td>
+					</tr>  <tr class='rowbackground1'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_50_143071' type = 'checkbox' name='download_documents' value="32027756" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>3</td><td style='width:60%'>Amended Schedule E/F</td>
+						<td style='width:17%'>12 pages</td>
+						<td style='width:18%'>143.07 KB</td>
+					</tr>  <tr class='rowbackground2'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_50_206780' type = 'checkbox' name='download_documents' value="32027757" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>4</td><td style='width:60%'>Amended Statement of Financial Affairs</td>
+						<td style='width:17%'>8 pages</td>
+						<td style='width:18%'>206.78 KB</td>
+					</tr>  <tr class='rowbackground1'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_50_163914' type = 'checkbox' name='download_documents' value="32027758" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>5</td><td style='width:60%'>Statement as to Amendments</td>
+						<td style='width:17%'>3 pages</td>
+						<td style='width:18%'>163.91 KB</td>
+					</tr></table></TD>
+				</TR><TR><TD width="94" nowrap valign=bottom>09/24/2026</TD><TD width=74 valign=top align=right style='border-right:0;padding-right:1px;padding-left:2px;white-space:nowrap'><nobr>  &nbsp;</TD><TD width=30 valign=top align=left style='border-left:0;padding-left:1px'>&nbsp;</nobr></TD><td align=center>&nbsp;</td><TD valign=bottom>  Receipt of Amended Schedule(s), Required Statement(s) and Affidavit Pursuant to E.D.N.Y. LBR 1009-1(a) (Fee Due)(<a href=/cgi-bin/DktRpt.pl?542916> 1-26-44227-jmm</a>) [misc,aschsfa] ( 34.00) Filing Fee. Receipt number A25000163. Fee amount 34.00. (re: Doc# <a href='https://ecf.nyeb.uscourts.gov/doc1/122032027753'>15</a>) (U.S. Treasury) (Entered: 09/24/2026)</TD></TR>
+<TR><TD width="94" nowrap valign=bottom>09/24/2026</TD><TD width=74 valign=top align=right style='border-right:0;padding-right:1px;padding-left:2px;white-space:nowrap'><nobr>  &nbsp;</TD><TD width=30 valign=top align=left style='border-left:0;padding-left:1px'><a href='/doc1/122032029055' onContextMenu='this.href="https://ecf.nyeb.uscourts.gov/doc1/122032029055"'>16</a> <br><nobr>(5&nbsp;pgs)</nobr></nobr></TD><td align=center><input id='arr_de_seq_nums_55' type=checkbox name='arr_de_seq_nums'  value='55' onclick='check_all_attachments(this,0)'></td>
+<TD valign=bottom>  BNC Certificate of Mailing with Notice/Order Notice Date 09/24/2026. (Admin.) (Entered: 09/25/2026)</TD></TR>
+<TR>
+					<TD style='border-right:0; width:5%' valign='bottom' nowrap=''></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='right'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='left'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%'></TD>
+					<TD style='border-left: 0; width:80%' valign='bottom'><table class='report' style='margin:10px; width:100%; margin-top: 0px; margin-bottom: 0px;'> <tr class='rowbackground2'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_55_137692' type = 'checkbox' name='download_documents' value="32029055" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>0</td><td style='width:60%'>Main Document</td>
+						<td style='width:17%'>5 pages</td>
+						<td style='width:18%'>137.69 KB</td>
+					</tr></table></TD>
+				</TR><TR><TD width="94" nowrap valign=bottom>09/25/2026</TD><TD width=74 valign=top align=right style='border-right:0;padding-right:1px;padding-left:2px;white-space:nowrap'><nobr>  &nbsp;</TD><TD width=30 valign=top align=left style='border-left:0;padding-left:1px'><a href='/doc1/122032031192' onContextMenu='this.href="https://ecf.nyeb.uscourts.gov/doc1/122032031192"'>17</a> <br><nobr>(4&nbsp;pgs)</nobr></nobr></TD><td align=center><input id='arr_de_seq_nums_57' type=checkbox name='arr_de_seq_nums'  value='57' onclick='check_all_attachments(this,0)'></td>
+<TD valign=bottom>  Affidavit/Certificate of Service <i></i> Filed by Salvatore LaMonica on behalf of Ian Simpson Reisner (RE: related document(s)<a href='https://ecf.nyeb.uscourts.gov/doc1/122032027753'>15</a> Amended Schedule(s), Required Statement(s) and Affidavit Pursuant to E.D.N.Y. LBR 1009-1(a) (Fee Due) filed by Debtor Ian Simpson Reisner) (LaMonica, Salvatore) (Entered: 09/25/2026)</TD></TR>
+<TR>
+					<TD style='border-right:0; width:5%' valign='bottom' nowrap=''></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='right'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='left'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%'></TD>
+					<TD style='border-left: 0; width:80%' valign='bottom'><table class='report' style='margin:10px; width:100%; margin-top: 0px; margin-bottom: 0px;'> <tr class='rowbackground2'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_57_195021' type = 'checkbox' name='download_documents' value="32031192" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>0</td><td style='width:60%'>Main Document</td>
+						<td style='width:17%'>4 pages</td>
+						<td style='width:18%'>195.02 KB</td>
+					</tr></table></TD>
+				</TR><TR><TD width="94" nowrap valign=bottom>09/25/2026</TD><TD width=74 valign=top align=right style='border-right:0;padding-right:1px;padding-left:2px;white-space:nowrap'><nobr>  &nbsp;</TD><TD width=30 valign=top align=left style='border-left:0;padding-left:1px'><a href='/doc1/122032031200' onContextMenu='this.href="https://ecf.nyeb.uscourts.gov/doc1/122032031200"'>18</a> <br><nobr>(4&nbsp;pgs)</nobr></nobr></TD><td align=center><input id='arr_de_seq_nums_60' type=checkbox name='arr_de_seq_nums'  value='60' onclick='check_all_attachments(this,0)'></td>
+<TD valign=bottom>  Affidavit/Certificate of Service <i></i> Filed by Salvatore LaMonica on behalf of Ian Simpson Reisner (RE: related document(s)<a href='https://ecf.nyeb.uscourts.gov/doc1/122032027364'>14</a> Statement filed by Debtor Ian Simpson Reisner) (LaMonica, Salvatore) (Entered: 09/25/2026)</TD></TR>
+<TR>
+					<TD style='border-right:0; width:5%' valign='bottom' nowrap=''></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='right'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='left'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%'></TD>
+					<TD style='border-left: 0; width:80%' valign='bottom'><table class='report' style='margin:10px; width:100%; margin-top: 0px; margin-bottom: 0px;'> <tr class='rowbackground2'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_60_195158' type = 'checkbox' name='download_documents' value="32031200" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>0</td><td style='width:60%'>Main Document</td>
+						<td style='width:17%'>4 pages</td>
+						<td style='width:18%'>195.16 KB</td>
+					</tr></table></TD>
+				</TR><TR><TD width="94" nowrap valign=bottom>09/25/2026</TD><TD width=74 valign=top align=right style='border-right:0;padding-right:1px;padding-left:2px;white-space:nowrap'><nobr>  &nbsp;</TD><TD width=30 valign=top align=left style='border-left:0;padding-left:1px'><a href='/doc1/122032031300' onContextMenu='this.href="https://ecf.nyeb.uscourts.gov/doc1/122032031300"'>19</a> <br><nobr>(2&nbsp;pgs)</nobr></nobr></TD><td align=center><input id='arr_de_seq_nums_63' type=checkbox name='arr_de_seq_nums'  value='63' onclick='check_all_attachments(this,0)'></td>
+<TD valign=bottom>  Notice of Appearance and Request for Notice Filed by Evan M Newman on behalf of David Spira (Newman, Evan) (Entered: 09/25/2026)</TD></TR>
+<TR>
+					<TD style='border-right:0; width:5%' valign='bottom' nowrap=''></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='right'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='left'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%'></TD>
+					<TD style='border-left: 0; width:80%' valign='bottom'><table class='report' style='margin:10px; width:100%; margin-top: 0px; margin-bottom: 0px;'> <tr class='rowbackground2'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_63_23699' type = 'checkbox' name='download_documents' value="32031300" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>0</td><td style='width:60%'>Main Document</td>
+						<td style='width:17%'>2 pages</td>
+						<td style='width:18%'>23.70 KB</td>
+					</tr></table></TD>
+				</TR><TR><TD width="94" nowrap valign=bottom>09/30/2026</TD><TD width=74 valign=top align=right style='border-right:0;padding-right:1px;padding-left:2px;white-space:nowrap'><nobr>  &nbsp;</TD><TD width=30 valign=top align=left style='border-left:0;padding-left:1px'><a href='/doc1/122032046641' onContextMenu='this.href="https://ecf.nyeb.uscourts.gov/doc1/122032046641"'>20</a> <br><nobr>(14&nbsp;pgs; 2&nbsp;docs)</nobr></nobr></TD><td align=center><input id='arr_de_seq_nums_67' type=checkbox name='arr_de_seq_nums'  value='67' onclick='check_all_attachments(this,0)'></td>
+<TD valign=bottom>  Motion to Authorize/Direct <i>Debtor to Maintain its Pre-Petition Bank Accounts and Granting Related Relief</i>. Objections to be filed on October 28, 2026. Filed by Salvatore LaMonica on behalf of Ian Simpson Reisner. Hearing scheduled for 11/4/2026 at 10:00 AM at Courtroom 3529 (Judge Mazer-Marino), Brooklyn, NY. (Attachments: # <a href='https://ecf.nyeb.uscourts.gov/doc1/122132046642'>1</a> Proposed Order) (LaMonica, Salvatore) (Entered: 09/30/2026)</TD></TR>
+<TR>
+					<TD style='border-right:0; width:5%' valign='bottom' nowrap=''></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='right'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='left'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%'></TD>
+					<TD style='border-left: 0; width:80%' valign='bottom'><table class='report' style='margin:10px; width:100%; margin-top: 0px; margin-bottom: 0px;'> <tr class='rowbackground2'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_67_234526' type = 'checkbox' name='download_documents' value="32046641" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>0</td><td style='width:60%'>Main Document</td>
+						<td style='width:17%'>11 pages</td>
+						<td style='width:18%'>234.53 KB</td>
+					</tr>  <tr class='rowbackground1'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_67_137183' type = 'checkbox' name='download_documents' value="32046642" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>1</td><td style='width:60%'>Proposed Order</td>
+						<td style='width:17%'>3 pages</td>
+						<td style='width:18%'>137.18 KB</td>
+					</tr></table></TD>
+				</TR><TR><TD width="94" nowrap valign=bottom>09/30/2026</TD><TD width=74 valign=top align=right style='border-right:0;padding-right:1px;padding-left:2px;white-space:nowrap'><nobr>  &nbsp;</TD><TD width=30 valign=top align=left style='border-left:0;padding-left:1px'><a href='/doc1/122032046663' onContextMenu='this.href="https://ecf.nyeb.uscourts.gov/doc1/122032046663"'>21</a> <br><nobr>(18&nbsp;pgs; 3&nbsp;docs)</nobr></nobr></TD><td align=center><input id='arr_de_seq_nums_69' type=checkbox name='arr_de_seq_nums'  value='69' onclick='check_all_attachments(this,0)'></td>
+<TD valign=bottom>  Ex Parte Motion to Set Last Day to File Proofs of Claim <i></i> Filed by Salvatore LaMonica on behalf of Ian Simpson Reisner. (Attachments: # <a href='https://ecf.nyeb.uscourts.gov/doc1/122132046664'>1</a> Proposed Notice of Bar Date # <a href='https://ecf.nyeb.uscourts.gov/doc1/122132046665'>2</a> Proposed Order Setting Bar Date) (LaMonica, Salvatore) (Entered: 09/30/2026)</TD></TR>
+<TR>
+					<TD style='border-right:0; width:5%' valign='bottom' nowrap=''></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='right'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='left'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%'></TD>
+					<TD style='border-left: 0; width:80%' valign='bottom'><table class='report' style='margin:10px; width:100%; margin-top: 0px; margin-bottom: 0px;'> <tr class='rowbackground2'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_69_211740' type = 'checkbox' name='download_documents' value="32046663" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>0</td><td style='width:60%'>Main Document</td>
+						<td style='width:17%'>7 pages</td>
+						<td style='width:18%'>211.74 KB</td>
+					</tr>  <tr class='rowbackground1'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_69_209220' type = 'checkbox' name='download_documents' value="32046664" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>1</td><td style='width:60%'>Proposed Notice of Bar Date</td>
+						<td style='width:17%'>6 pages</td>
+						<td style='width:18%'>209.22 KB</td>
+					</tr>  <tr class='rowbackground2'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_69_128936' type = 'checkbox' name='download_documents' value="32046665" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>2</td><td style='width:60%'>Proposed Order Setting Bar Date</td>
+						<td style='width:17%'>5 pages</td>
+						<td style='width:18%'>128.94 KB</td>
+					</tr></table></TD>
+				</TR><TR><TD width="94" nowrap valign=bottom>09/30/2026</TD><TD width=74 valign=top align=right style='border-right:0;padding-right:1px;padding-left:2px;white-space:nowrap'><nobr>  &nbsp;</TD><TD width=30 valign=top align=left style='border-left:0;padding-left:1px'><a href='/doc1/122032046860' onContextMenu='this.href="https://ecf.nyeb.uscourts.gov/doc1/122032046860"'>22</a> <br><nobr>(3&nbsp;pgs)</nobr></nobr></TD><td align=center><input id='arr_de_seq_nums_71' type=checkbox name='arr_de_seq_nums'  value='71' onclick='check_all_attachments(this,0)'></td>
+<TD valign=bottom>  Amended Notice of Motion/Presentment <i>(Amending Courtroom location)</i>. Objections to be filed on October 28, 2026. Filed by Salvatore LaMonica on behalf of Ian Simpson Reisner (RE: related document(s)<a href='https://ecf.nyeb.uscourts.gov/doc1/122032046641'>20</a> Motion to Authorize/Direct filed by Debtor Ian Simpson Reisner) Hearing scheduled for 11/4/2026 at 10:00 AM at Courtroom 3529 (Judge Mazer-Marino), Brooklyn, NY. (LaMonica, Salvatore) (Entered: 09/30/2026)</TD></TR>
+<TR>
+					<TD style='border-right:0; width:5%' valign='bottom' nowrap=''></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='right'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='left'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%'></TD>
+					<TD style='border-left: 0; width:80%' valign='bottom'><table class='report' style='margin:10px; width:100%; margin-top: 0px; margin-bottom: 0px;'> <tr class='rowbackground2'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_71_153919' type = 'checkbox' name='download_documents' value="32046860" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>0</td><td style='width:60%'>Main Document</td>
+						<td style='width:17%'>3 pages</td>
+						<td style='width:18%'>153.92 KB</td>
+					</tr></table></TD>
+				</TR><TR><TD width="94" nowrap valign=bottom>09/30/2026</TD><TD width=74 valign=top align=right style='border-right:0;padding-right:1px;padding-left:2px;white-space:nowrap'><nobr>  &nbsp;</TD><TD width=30 valign=top align=left style='border-left:0;padding-left:1px'><a href='/doc1/122032047884' onContextMenu='this.href="https://ecf.nyeb.uscourts.gov/doc1/122032047884"'>23</a> <br><nobr>(4&nbsp;pgs)</nobr></nobr></TD><td align=center><input id='arr_de_seq_nums_74' type=checkbox name='arr_de_seq_nums'  value='74' onclick='check_all_attachments(this,0)'></td>
+<TD valign=bottom>  Affidavit/Certificate of Service <i></i> Filed by Salvatore LaMonica on behalf of Ian Simpson Reisner (RE: related document(s)<a href='https://ecf.nyeb.uscourts.gov/doc1/122032046641'>20</a> Motion to Authorize/Direct, <a href='https://ecf.nyeb.uscourts.gov/doc1/122032046860'>22</a> Amended Notice of Motion/Presentment) (LaMonica, Salvatore). Modified on 10/1/2026 to add linkage (dbw). (Entered: 09/30/2026)</TD></TR>
+<TR>
+					<TD style='border-right:0; width:5%' valign='bottom' nowrap=''></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='right'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='left'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%'></TD>
+					<TD style='border-left: 0; width:80%' valign='bottom'><table class='report' style='margin:10px; width:100%; margin-top: 0px; margin-bottom: 0px;'> <tr class='rowbackground2'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_74_196684' type = 'checkbox' name='download_documents' value="32047884" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>0</td><td style='width:60%'>Main Document</td>
+						<td style='width:17%'>4 pages</td>
+						<td style='width:18%'>196.68 KB</td>
+					</tr></table></TD>
+				</TR><TR><TD width="94" nowrap valign=bottom>10/01/2026</TD><TD width=74 valign=top align=right style='border-right:0;padding-right:1px;padding-left:2px;white-space:nowrap'><nobr>  &nbsp;</TD><TD width=30 valign=top align=left style='border-left:0;padding-left:1px'><a href='/doc1/122032051536' onContextMenu='this.href="https://ecf.nyeb.uscourts.gov/doc1/122032051536"'>24</a> <br><nobr>(15&nbsp;pgs; 3&nbsp;docs)</nobr></nobr></TD><td align=center><input id='arr_de_seq_nums_78' type=checkbox name='arr_de_seq_nums'  value='78' onclick='check_all_attachments(this,0)'></td>
+<TD valign=bottom>  Application to Employ LaMonica, Herbst & Maniscalco, LLP as General Bankruptcy Counsel for Debtor <i></i>. Objections to be filed on October 23, 2026. Filed by Salvatore LaMonica on behalf of Ian Simpson Reisner. Order to be presented for signature on 10/30/2026. (Attachments: # <a href='https://ecf.nyeb.uscourts.gov/doc1/122132051537'>1</a> Exhibit A - Proposed Order # <a href='https://ecf.nyeb.uscourts.gov/doc1/122132051538'>2</a> Exhibit B - Declaration of Salvatore LaMonica, Esq.) (LaMonica, Salvatore) (Entered: 10/01/2026)</TD></TR>
+<TR>
+					<TD style='border-right:0; width:5%' valign='bottom' nowrap=''></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='right'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='left'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%'></TD>
+					<TD style='border-left: 0; width:80%' valign='bottom'><table class='report' style='margin:10px; width:100%; margin-top: 0px; margin-bottom: 0px;'> <tr class='rowbackground2'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_78_292084' type = 'checkbox' name='download_documents' value="32051536" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>0</td><td style='width:60%'>Main Document</td>
+						<td style='width:17%'>7 pages</td>
+						<td style='width:18%'>292.08 KB</td>
+					</tr>  <tr class='rowbackground1'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_78_146335' type = 'checkbox' name='download_documents' value="32051537" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>1</td><td style='width:60%'>Exhibit A - Proposed Order</td>
+						<td style='width:17%'>4 pages</td>
+						<td style='width:18%'>146.34 KB</td>
+					</tr>  <tr class='rowbackground2'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_78_142983' type = 'checkbox' name='download_documents' value="32051538" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>2</td><td style='width:60%'>Exhibit B - Declaration of Salvatore LaMonica, Esq.</td>
+						<td style='width:17%'>4 pages</td>
+						<td style='width:18%'>142.98 KB</td>
+					</tr></table></TD>
+				</TR><TR><TD width="94" nowrap valign=bottom>10/01/2026</TD><TD width=74 valign=top align=right style='border-right:0;padding-right:1px;padding-left:2px;white-space:nowrap'><nobr>  &nbsp;</TD><TD width=30 valign=top align=left style='border-left:0;padding-left:1px'><a href='/doc1/122032052075' onContextMenu='this.href="https://ecf.nyeb.uscourts.gov/doc1/122032052075"'>25</a> <br><nobr>(3&nbsp;pgs)</nobr></nobr></TD><td align=center><input id='arr_de_seq_nums_80' type=checkbox name='arr_de_seq_nums'  value='80' onclick='check_all_attachments(this,0)'></td>
+<TD valign=bottom>  Notice of Appearance and Request for Notice Filed by Thomas R Slome on behalf of Pinter Holdings, LLC (Slome, Thomas) (Entered: 10/01/2026)</TD></TR>
+<TR>
+					<TD style='border-right:0; width:5%' valign='bottom' nowrap=''></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='right'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='left'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%'></TD>
+					<TD style='border-left: 0; width:80%' valign='bottom'><table class='report' style='margin:10px; width:100%; margin-top: 0px; margin-bottom: 0px;'> <tr class='rowbackground2'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_80_130840' type = 'checkbox' name='download_documents' value="32052075" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>0</td><td style='width:60%'>Main Document</td>
+						<td style='width:17%'>3 pages</td>
+						<td style='width:18%'>130.84 KB</td>
+					</tr></table></TD>
+				</TR><TR><TD width="94" nowrap valign=bottom>10/01/2026</TD><TD width=74 valign=top align=right style='border-right:0;padding-right:1px;padding-left:2px;white-space:nowrap'><nobr>  &nbsp;</TD><TD width=30 valign=top align=left style='border-left:0;padding-left:1px'><a href='/doc1/122032052786' onContextMenu='this.href="https://ecf.nyeb.uscourts.gov/doc1/122032052786"'>26</a> <br><nobr>(2&nbsp;pgs)</nobr></nobr></TD><td align=center><input id='arr_de_seq_nums_84' type=checkbox name='arr_de_seq_nums'  value='84' onclick='check_all_attachments(this,0)'></td>
+<TD valign=bottom>  Affidavit/Certificate of Service <i>and Request for Service of Papers</i> Filed by Kyle George Kunst on behalf of Pinter Holdings, LLC (RE: related document(s)<a href='https://ecf.nyeb.uscourts.gov/doc1/122032052075'>25</a> Notice of Appearance filed by Creditor Pinter Holdings, LLC) (Kunst, Kyle) (Entered: 10/01/2026)</TD></TR>
+<TR>
+					<TD style='border-right:0; width:5%' valign='bottom' nowrap=''></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='right'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='left'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%'></TD>
+					<TD style='border-left: 0; width:80%' valign='bottom'><table class='report' style='margin:10px; width:100%; margin-top: 0px; margin-bottom: 0px;'> <tr class='rowbackground2'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_84_196179' type = 'checkbox' name='download_documents' value="32052786" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>0</td><td style='width:60%'>Main Document</td>
+						<td style='width:17%'>2 pages</td>
+						<td style='width:18%'>196.18 KB</td>
+					</tr></table></TD>
+				</TR><TR><TD width="94" nowrap valign=bottom>10/01/2026</TD><TD width=74 valign=top align=right style='border-right:0;padding-right:1px;padding-left:2px;white-space:nowrap'><nobr>  &nbsp;</TD><TD width=30 valign=top align=left style='border-left:0;padding-left:1px'><a href='/doc1/122032052806' onContextMenu='this.href="https://ecf.nyeb.uscourts.gov/doc1/122032052806"'>27</a> <br><nobr>(4&nbsp;pgs)</nobr></nobr></TD><td align=center><input id='arr_de_seq_nums_88' type=checkbox name='arr_de_seq_nums'  value='88' onclick='check_all_attachments(this,0)'></td>
+<TD valign=bottom>  Affidavit/Certificate of Service <i></i> Filed by Salvatore LaMonica on behalf of Ian Simpson Reisner (RE: related document(s)<a href='https://ecf.nyeb.uscourts.gov/doc1/122032051536'>24</a> Application to Employ filed by Debtor Ian Simpson Reisner) (LaMonica, Salvatore) (Entered: 10/01/2026)</TD></TR>
+<TR>
+					<TD style='border-right:0; width:5%' valign='bottom' nowrap=''></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='right'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='left'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%'></TD>
+					<TD style='border-left: 0; width:80%' valign='bottom'><table class='report' style='margin:10px; width:100%; margin-top: 0px; margin-bottom: 0px;'> <tr class='rowbackground2'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_88_197631' type = 'checkbox' name='download_documents' value="32052806" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>0</td><td style='width:60%'>Main Document</td>
+						<td style='width:17%'>4 pages</td>
+						<td style='width:18%'>197.63 KB</td>
+					</tr></table></TD>
+				</TR><TR><TD width="94" nowrap valign=bottom>10/02/2026</TD><TD width=74 valign=top align=right style='border-right:0;padding-right:1px;padding-left:2px;white-space:nowrap'><nobr>  &nbsp;</TD><TD width=30 valign=top align=left style='border-left:0;padding-left:1px'><a href='/doc1/122032055341' onContextMenu='this.href="https://ecf.nyeb.uscourts.gov/doc1/122032055341"'>28</a> <br><nobr>(2&nbsp;pgs)</nobr></nobr></TD><td align=center><input id='arr_de_seq_nums_91' type=checkbox name='arr_de_seq_nums'  value='91' onclick='check_all_attachments(this,0)'></td>
+<TD valign=bottom>  Amended Notice of Motion/Presentment <i>of Debtor&#039;s Motion for Waiver of Credit Counseling Requirement</i>. Objections to be filed on October 23, 2026. Filed by Salvatore LaMonica on behalf of Ian Simpson Reisner (RE: related document(s)<a href='https://ecf.nyeb.uscourts.gov/doc1/122031993781'>8</a> Motion for Waiver from Credit Counseling filed by Debtor Ian Simpson Reisner) Order to be presented for signature on 10/30/2026. (LaMonica, Salvatore) (Entered: 10/02/2026)</TD></TR>
+<TR>
+					<TD style='border-right:0; width:5%' valign='bottom' nowrap=''></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='right'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='left'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%'></TD>
+					<TD style='border-left: 0; width:80%' valign='bottom'><table class='report' style='margin:10px; width:100%; margin-top: 0px; margin-bottom: 0px;'> <tr class='rowbackground2'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_91_162444' type = 'checkbox' name='download_documents' value="32055341" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>0</td><td style='width:60%'>Main Document</td>
+						<td style='width:17%'>2 pages</td>
+						<td style='width:18%'>162.44 KB</td>
+					</tr></table></TD>
+				</TR><TR><TD width="94" nowrap valign=bottom>10/02/2026</TD><TD width=74 valign=top align=right style='border-right:0;padding-right:1px;padding-left:2px;white-space:nowrap'><nobr>  &nbsp;</TD><TD width=30 valign=top align=left style='border-left:0;padding-left:1px'><a href='/doc1/122032057685' onContextMenu='this.href="https://ecf.nyeb.uscourts.gov/doc1/122032057685"'>29</a> <br><nobr>(4&nbsp;pgs)</nobr></nobr></TD><td align=center><input id='arr_de_seq_nums_94' type=checkbox name='arr_de_seq_nums'  value='94' onclick='check_all_attachments(this,0)'></td>
+<TD valign=bottom>  Affidavit/Certificate of Service <i></i> Filed by Salvatore LaMonica on behalf of Ian Simpson Reisner (RE: related document(s)<a href='https://ecf.nyeb.uscourts.gov/doc1/122032055341'>28</a> Amended Notice of Motion/Presentment filed by Debtor Ian Simpson Reisner) (LaMonica, Salvatore) (Entered: 10/02/2026)</TD></TR>
+<TR>
+					<TD style='border-right:0; width:5%' valign='bottom' nowrap=''></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='right'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%' valign='top' align='left'><nobr></nobr></TD>
+					<TD style='border-right:0; border-left:0; width:5%'></TD>
+					<TD style='border-left: 0; width:80%' valign='bottom'><table class='report' style='margin:10px; width:100%; margin-top: 0px; margin-bottom: 0px;'> <tr class='rowbackground2'>
+						<td style="width:2%; text-align:center"><input id = 'arr_de_seq_nums_94_198296' type = 'checkbox' name='download_documents' value="32057685" autocomplete="off" /></td>
+						<td style='width:3%; text-align:center'>0</td><td style='width:60%'>Main Document</td>
+						<td style='width:17%'>4 pages</td>
+						<td style='width:18%'>198.30 KB</td>
+					</tr></table></TD>
+				</TR></TABLE><BR><BR><BR><BR><input type='hidden' name='zipit' value='0'>
+<input type=submit value='View Selected' onclick="document.view_multi_docs.zipit.value=0;"><br> or <br>
+<input type=submit value='Download Selected' name='dl_selected' onclick="document.view_multi_docs.zipit.value=1;"><HR><CENTER><TABLE BORDER=1 BGCOLOR=white width="400"><TR><TH COLSPAN=4><FONT SIZE=+1 COLOR=DARKRED>PACER Service Center </FONT></TH></TR><TR><TH COLSPAN=4><FONT COLOR=DARKBLUE>Transaction Receipt </FONT></TH></TR><TR></TR><TR></TR><TR><TD COLSPAN=4 ALIGN=CENTER><FONT SIZE=-1 COLOR=DARKBLUE>10/04/2026 16:38:18</FONT></TD></TR><TR><TH ALIGN=LEFT><FONT SIZE=-1 COLOR=DARKBLUE> PACER Login: </FONT></TH><TD ALIGN=LEFT><FONT SIZE=-1 COLOR=DARKBLUE> dgeorgemsp </FONT></TH></TD><TH ALIGN=LEFT><FONT SIZE=-1 COLOR=DARKBLUE> Client Code: </FONT></TH><TD ALIGN=LEFT><FONT SIZE=-1 COLOR=DARKBLUE>  </FONT></TD></TR><TR><TH ALIGN=LEFT><FONT SIZE=-1 COLOR=DARKBLUE> Description: </FONT></TH><TD ALIGN=LEFT><FONT SIZE=-1 COLOR=DARKBLUE> Docket Report </FONT></TD><TH ALIGN=LEFT><FONT SIZE=-1 COLOR=DARKBLUE> Search Criteria: </FONT></TH><TD ALIGN=LEFT><FONT SIZE=-1 COLOR=DARKBLUE> 1-26-44227-jmm Fil or Ent: filed From: 1/1/1960  Doc From: 0 Doc To: 99999999 Term: included  Headers: included  Multiple Docs: on  All attachments: on Format: html Page counts for documents: included </FONT></TD></TR><TR><TH ALIGN=LEFT><FONT SIZE=-1 COLOR=DARKBLUE> Billable Pages: </FONT></TH><TD ALIGN=LEFT><FONT SIZE=-1 COLOR=DARKBLUE> 5 </FONT></TD><TH ALIGN=LEFT><FONT SIZE=-1 COLOR=DARKBLUE> Cost: </FONT></TH><TD ALIGN=LEFT><FONT SIZE=-1 COLOR=DARKBLUE> 0.50 </FONT></TD></TR><TR></TR><TR></TR></TABLE></CENTER></HR><BR></BR></div></body></html>

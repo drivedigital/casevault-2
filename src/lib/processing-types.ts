@@ -25,7 +25,18 @@ export function parseAnalysis(text: string) { const trimmed = text.trim(); const
     if (!candidate)
         continue;
     try {
-        return analysisSchema.parse(JSON.parse(candidate));
+        const raw = JSON.parse(candidate);
+        if (raw && typeof raw === 'object' && Array.isArray((raw as { facts?: unknown[] }).facts)) {
+            (raw as { facts: Record<string, unknown>[] }).facts = (raw as { facts: Record<string, unknown>[] }).facts.map(f => {
+                if (f && typeof f === 'object' && typeof f.kind === 'string') {
+                    if (f.kind === 'entity' || f.kind === 'organization' || !['person', 'date', 'event', 'statement'].includes(f.kind)) {
+                        f.kind = 'statement';
+                    }
+                }
+                return f;
+            });
+        }
+        return analysisSchema.parse(raw);
     }
     catch { /* Try only bounded JSON candidates; every result still passes the schema. */ }
 } throw new Error('Model response has no valid summary/facts JSON; inspect the saved response receipt or retry.'); }

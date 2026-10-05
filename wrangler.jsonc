@@ -33,12 +33,6 @@
       "bucket_name": "legal-evidence-arena"
     }
   ],
-  "kv_namespaces": [
-    {
-      "binding": "LEGACY_EVIDENCE",
-      "id": "d707525cc924472aadf3bd3eeccec3db"
-    }
-  ],
   "vars": {
     "SUPABASE_URL": "https://lrollxodgqswpylzulpu.supabase.co",
     "SUPABASE_PUBLISHABLE_KEY": "sb_publishable_cW2J6APjBPQkJArG41ztCQ_Tnyz-ZAV",

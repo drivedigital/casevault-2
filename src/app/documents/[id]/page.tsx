@@ -73,13 +73,13 @@ export default async function DocumentDetailPage({
       </div>
 
       {comparisons.length>0&&<Card className="p-5"><h2 className="font-semibold">Hosted OCR comparisons and searchable PDF versions</h2><p className="mt-1 text-sm text-slate-500">Each comparison preserves all 13 original pages, separate model transcripts, extraction failures and draft summaries. Searchable versions remain unreviewed; partial coverage and approximate text placement are labeled.</p>{comparisons.map(run=><p key={run.id} className="mt-3 text-sm"><a href={`/api/ocr-comparisons/runs/${run.id}/view`} className="text-indigo-600 hover:underline">Open {run.models}-model comparison · {formatDateTime(run.approvedAt)}</a></p>)}</Card>}
-      <DocumentProcessingPrompt documents={[{id:doc.id,title:doc.title}]} agents={await readAgents()} selectedDocumentId={doc.id}/>
       <div className="grid grid-cols-1 gap-5 xl:grid-cols-[1.3fr_1fr]">
         <div className="h-[720px] xl:sticky xl:top-5">
           <DocumentViewer fileUrl={doc.objectKey ? `/api/documents/${doc.id}/file` : null} title={doc.fileName ?? doc.title} pageCount={doc.pageCount ?? 1} ocrText={doc.ocrText} highlights={highlights} />
         </div>
 
         <div className="space-y-5">
+          <DocumentProcessingPrompt documents={[{id:doc.id,title:doc.title}]} agents={await readAgents()} selectedDocumentId={doc.id}/>
           <ProcessingHistory documentId={doc.id} history={JSON.parse(JSON.stringify(await processingHistory(doc.id))) as HistoryView}/>
           <Card className="p-5">
             <h2 className="text-sm font-semibold text-slate-800">Document metadata</h2>

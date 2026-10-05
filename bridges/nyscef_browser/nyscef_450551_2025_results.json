@@ -1,0 +1,947 @@
+{
+  "case": "450551/2025",
+  "source_url": "https://iapps.courts.state.ny.us/nyscef/DocumentList?docketId=ecI11XOsbEkeyrYFYND8Xg==&display=all&courtType=New%20York%20County%20Supreme%20Court&resultsPageNum=1",
+  "metadata": {},
+  "entries_count": 72,
+  "entries": [
+    {
+      "raw_columns": [
+        "1",
+        "SUMMONS + COMPLAINT",
+        "GLUCK, EVANFiled: 01/27/2025Received: 01/27/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "1",
+      "description": "SUMMONS + COMPLAINT",
+      "doc_type": "GLUCK, EVANFiled: 01/27/2025Received: 01/27/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=ITeVcc3_PLUS_k5auJH9nk2Nd6g=="
+    },
+    {
+      "raw_columns": [
+        "2",
+        "NO FEE AUTHORIZATION (LETTER/ORDER/AFFIRMATION)",
+        "GLUCK, EVANFiled: 01/27/2025Received: 01/27/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "2",
+      "description": "NO FEE AUTHORIZATION (LETTER/ORDER/AFFIRMATION)",
+      "doc_type": "GLUCK, EVANFiled: 01/27/2025Received: 01/27/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=BnlL3w2Ejrm9L9jxK6atpA=="
+    },
+    {
+      "raw_columns": [
+        "3",
+        "ORDER TO SHOW CAUSE ( PROPOSED )(Motion #001)\n\n            *Corrected*",
+        "GLUCK, EVANFiled: 01/28/2025Received: 01/29/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "3",
+      "description": "ORDER TO SHOW CAUSE ( PROPOSED )(Motion #001)\n\n            *Corrected*",
+      "doc_type": "GLUCK, EVANFiled: 01/28/2025Received: 01/29/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=aQaQNIes_PLUS_JozzWJNfNf/Cw=="
+    },
+    {
+      "raw_columns": [
+        "4",
+        "AFFIRMATION(Motion #001)\n\n            *Corrected*",
+        "GLUCK, EVANFiled: 01/28/2025Received: 01/29/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "4",
+      "description": "AFFIRMATION(Motion #001)\n\n            *Corrected*",
+      "doc_type": "GLUCK, EVANFiled: 01/28/2025Received: 01/29/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=SQdLTaazVCtE8xiejo8QkA=="
+    },
+    {
+      "raw_columns": [
+        "5",
+        "EXHIBIT(S)- 1\n            \u00a0(Motion #001)Copy of Deed",
+        "GLUCK, EVANFiled: 01/28/2025Received: 01/28/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "5",
+      "description": "EXHIBIT(S)- 1\n            \u00a0(Motion #001)Copy of Deed",
+      "doc_type": "GLUCK, EVANFiled: 01/28/2025Received: 01/28/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=7P/BHBtOVmVJJbpgBOgHQg=="
+    },
+    {
+      "raw_columns": [
+        "6",
+        "EXHIBIT(S)- 2\n            \u00a0(Motion #001)Copy of NYC Dept of State Corp Info",
+        "GLUCK, EVANFiled: 01/28/2025Received: 01/28/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "6",
+      "description": "EXHIBIT(S)- 2\n            \u00a0(Motion #001)Copy of NYC Dept of State Corp Info",
+      "doc_type": "GLUCK, EVANFiled: 01/28/2025Received: 01/28/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=doSjMzObwzK2CeXXz88Umg=="
+    },
+    {
+      "raw_columns": [
+        "7",
+        "EXHIBIT(S)- 3\n            \u00a0(Motion #001)Affirmation of Lt. Corde",
+        "GLUCK, EVANFiled: 01/28/2025Received: 01/28/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "7",
+      "description": "EXHIBIT(S)- 3\n            \u00a0(Motion #001)Affirmation of Lt. Corde",
+      "doc_type": "GLUCK, EVANFiled: 01/28/2025Received: 01/28/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=v1l1Ng0zI/tT6_PLUS_/vJhFLGg=="
+    },
+    {
+      "raw_columns": [
+        "8",
+        "EXHIBIT(S)- 4\n            \u00a0(Motion #001)Affirmation of Sgt. Castillo",
+        "GLUCK, EVANFiled: 01/28/2025Received: 01/28/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "8",
+      "description": "EXHIBIT(S)- 4\n            \u00a0(Motion #001)Affirmation of Sgt. Castillo",
+      "doc_type": "GLUCK, EVANFiled: 01/28/2025Received: 01/28/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=T5Ki1E8dp1m7WEaK3LmANw=="
+    },
+    {
+      "raw_columns": [
+        "9",
+        "EXHIBIT(S)- 5\n            \u00a0(Motion #001)On-Line Advertisement",
+        "GLUCK, EVANFiled: 01/28/2025Received: 01/28/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "9",
+      "description": "EXHIBIT(S)- 5\n            \u00a0(Motion #001)On-Line Advertisement",
+      "doc_type": "GLUCK, EVANFiled: 01/28/2025Received: 01/28/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=O6qeszaIj8ZiDpN3j08JGQ=="
+    },
+    {
+      "raw_columns": [
+        "10",
+        "AFFIRMATION OF GOOD FAITH(Motion #001)",
+        "GLUCK, EVANFiled: 01/28/2025Received: 01/28/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "10",
+      "description": "AFFIRMATION OF GOOD FAITH(Motion #001)",
+      "doc_type": "GLUCK, EVANFiled: 01/28/2025Received: 01/28/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=cL2IlKaHmTWn09JtbEx1rw=="
+    },
+    {
+      "raw_columns": [
+        "11",
+        "NO FEE AUTHORIZATION (LETTER/ORDER/AFFIRMATION)(Motion #001)",
+        "GLUCK, EVANFiled: 01/28/2025Received: 01/28/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "11",
+      "description": "NO FEE AUTHORIZATION (LETTER/ORDER/AFFIRMATION)(Motion #001)",
+      "doc_type": "GLUCK, EVANFiled: 01/28/2025Received: 01/28/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=wcrtFM3USqM/6tefqFeQwA=="
+    },
+    {
+      "raw_columns": [
+        "12",
+        "RJI -RE: ORDER TO SHOW CAUSE(Motion #001)",
+        "GLUCK, EVANFiled: 01/28/2025Received: 01/28/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "12",
+      "description": "RJI -RE: ORDER TO SHOW CAUSE(Motion #001)",
+      "doc_type": "GLUCK, EVANFiled: 01/28/2025Received: 01/28/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=kX7jWNHMiA8cMZvR2vu6XA=="
+    },
+    {
+      "raw_columns": [
+        "13",
+        "ORDER TO SHOW CAUSE(Motion #001)",
+        "Court UserFiled: 01/30/2025Received: 01/29/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "13",
+      "description": "ORDER TO SHOW CAUSE(Motion #001)",
+      "doc_type": "Court UserFiled: 01/30/2025Received: 01/29/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=aahFkPLzo2VfXBBYCGO_PLUS_BQ=="
+    },
+    {
+      "raw_columns": [
+        "14",
+        "AFFIRMATION(Motion #001)Amended Corrected Attorney Affirmation",
+        "GLUCK, EVANFiled: 02/03/2025Received: 02/03/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "14",
+      "description": "AFFIRMATION(Motion #001)Amended Corrected Attorney Affirmation",
+      "doc_type": "GLUCK, EVANFiled: 02/03/2025Received: 02/03/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=3ieCQKc3T62bfi/yKZ2h/w=="
+    },
+    {
+      "raw_columns": [
+        "15",
+        "COMPLAINT (AMENDED)",
+        "GLUCK, EVANFiled: 02/03/2025Received: 02/03/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "15",
+      "description": "COMPLAINT (AMENDED)",
+      "doc_type": "GLUCK, EVANFiled: 02/03/2025Received: 02/03/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=dDbT8454OvyQ0OHcDU_PLUS_jzA=="
+    },
+    {
+      "raw_columns": [
+        "16",
+        "AFFIRMATION/AFFIDAVIT OF SERVICE(Motion #001)",
+        "GLUCK, EVANFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "16",
+      "description": "AFFIRMATION/AFFIDAVIT OF SERVICE(Motion #001)",
+      "doc_type": "GLUCK, EVANFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=TSU46uM5TzM1Md5uYEmPMQ=="
+    },
+    {
+      "raw_columns": [
+        "17",
+        "NOTICE OF APPEARANCE (POST RJI)",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "17",
+      "description": "NOTICE OF APPEARANCE (POST RJI)",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=uWFiod1iodLgpSxNFxUbrw=="
+    },
+    {
+      "raw_columns": [
+        "18",
+        "AFFIRMATIONAttorney Affirmation of Robert J. Hantman on Behalf of John Doe",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "18",
+      "description": "AFFIRMATIONAttorney Affirmation of Robert J. Hantman on Behalf of John Doe",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=vCWP30I0H0gqnaY4vq2RGg=="
+    },
+    {
+      "raw_columns": [
+        "19",
+        "EXHIBIT(S)- 1Summons of the related action filed against Jane Doe",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "19",
+      "description": "EXHIBIT(S)- 1Summons of the related action filed against Jane Doe",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=UnHSzsPHKldgyjinxiRJMw=="
+    },
+    {
+      "raw_columns": [
+        "20",
+        "EXHIBIT(S)- 2Complaint of the related action filed against Jane Doe",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "20",
+      "description": "EXHIBIT(S)- 2Complaint of the related action filed against Jane Doe",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=2JY9HYR3e_PLUS_z_PLUS_EFOQNhCCsw=="
+    },
+    {
+      "raw_columns": [
+        "21",
+        "EXHIBIT(S)- 3Affirmation of John Doe from the related action",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "21",
+      "description": "EXHIBIT(S)- 3Affirmation of John Doe from the related action",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=cdKbJSvXnvQcrrs4ed8Cmw=="
+    },
+    {
+      "raw_columns": [
+        "22",
+        "EXHIBIT(S)- 4Exhibit 1 - Email of Lupo receiving term sheet",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "22",
+      "description": "EXHIBIT(S)- 4Exhibit 1 - Email of Lupo receiving term sheet",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=DSFm708fvuLuDh9h4D0f9g=="
+    },
+    {
+      "raw_columns": [
+        "23",
+        "EXHIBIT(S)- 5Exhibit 2 - Email re security deposit and insurance",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "23",
+      "description": "EXHIBIT(S)- 5Exhibit 2 - Email re security deposit and insurance",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=uUPhhvT39duSTLC18jB3yg=="
+    },
+    {
+      "raw_columns": [
+        "24",
+        "EXHIBIT(S)- 6Exhibit 3 - Emails Showing Lupo's Reluctance",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "24",
+      "description": "EXHIBIT(S)- 6Exhibit 3 - Emails Showing Lupo's Reluctance",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=vTPHTBNnhdRbCX99DnteBQ=="
+    },
+    {
+      "raw_columns": [
+        "25",
+        "EXHIBIT(S)- 7Exhibit 4 - Email showing Reisner demanded from Lupo proof of insurance as a condition",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "25",
+      "description": "EXHIBIT(S)- 7Exhibit 4 - Email showing Reisner demanded from Lupo proof of insurance as a condition",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=_PLUS_BKr_PLUS_e09dER2eyuSDQqb5Q=="
+    },
+    {
+      "raw_columns": [
+        "26",
+        "EXHIBIT(S)- 8Exhibit 5 - Email from Lemmerman re Weekend of Nov 7,8,9 Club Activities",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "26",
+      "description": "EXHIBIT(S)- 8Exhibit 5 - Email from Lemmerman re Weekend of Nov 7,8,9 Club Activities",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=MVYn4CBHTkrshwEnTCGtIQ=="
+    },
+    {
+      "raw_columns": [
+        "27",
+        "EXHIBIT(S)- 9Exhibit 6 - Email Re_ NOISE COMPLAINTS, THUGGERY, Master Keys, SLA investigation etc",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "27",
+      "description": "EXHIBIT(S)- 9Exhibit 6 - Email Re_ NOISE COMPLAINTS, THUGGERY, Master Keys, SLA investigation etc",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=_PLUS_Oa/BPd3zF6rgkwfiR3OBQ=="
+    },
+    {
+      "raw_columns": [
+        "28",
+        "EXHIBIT(S)- 10Exhibit 7 - Email re Master Keys, SLA investigation and selling an equity stake",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "28",
+      "description": "EXHIBIT(S)- 10Exhibit 7 - Email re Master Keys, SLA investigation and selling an equity stake",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=_PLUS_bc4NvfNeXweIljbUEUtAw=="
+    },
+    {
+      "raw_columns": [
+        "29",
+        "EXHIBIT(S)- 11Exhibit 8 - Investigation Report",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "29",
+      "description": "EXHIBIT(S)- 11Exhibit 8 - Investigation Report",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=B8DDI75IWfVTcKB5tSaYog=="
+    },
+    {
+      "raw_columns": [
+        "30",
+        "EXHIBIT(S)- 12Exhibit 9 - Email from Paul Brown",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "30",
+      "description": "EXHIBIT(S)- 12Exhibit 9 - Email from Paul Brown",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=qybg/HDRZnooN93vN56GRw=="
+    },
+    {
+      "raw_columns": [
+        "31",
+        "EXHIBIT(S)- 13Exhibit 10 - Formal Notice to Maureen Lupo",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "31",
+      "description": "EXHIBIT(S)- 13Exhibit 10 - Formal Notice to Maureen Lupo",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=bzyUbT2DDi13AUPa3hi3rQ=="
+    },
+    {
+      "raw_columns": [
+        "32",
+        "EXHIBIT(S)- 14Exhibit 11 - Email from Lemmerman x Lupo Multiple Emails",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "32",
+      "description": "EXHIBIT(S)- 14Exhibit 11 - Email from Lemmerman x Lupo Multiple Emails",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=sOs1YT9wnGK9QcpHXSJhBw=="
+    },
+    {
+      "raw_columns": [
+        "33",
+        "EXHIBIT(S)- 15Exhibit 12 - Mr Locks Invoice",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "33",
+      "description": "EXHIBIT(S)- 15Exhibit 12 - Mr Locks Invoice",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=m5uS/ZP9cFOPFZJLDX2I3w=="
+    },
+    {
+      "raw_columns": [
+        "34",
+        "EXHIBIT(S)- 16Exhibit 13 - term sheet bearing False signature",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "34",
+      "description": "EXHIBIT(S)- 16Exhibit 13 - term sheet bearing False signature",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=4JrhTz9/m/nCjD_PLUS_RvfuAMw=="
+    },
+    {
+      "raw_columns": [
+        "35",
+        "EXHIBIT(S)- 17Exhibit 14 - Reisner Torturous interference Email",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "35",
+      "description": "EXHIBIT(S)- 17Exhibit 14 - Reisner Torturous interference Email",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=QYRpLrsfIqQl9KJ5FaN0Hg=="
+    },
+    {
+      "raw_columns": [
+        "36",
+        "EXHIBIT(S)- 18Exhibit 15 - Illegal Revenue Overview",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "36",
+      "description": "EXHIBIT(S)- 18Exhibit 15 - Illegal Revenue Overview",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=7OKLmBzurVmnOZW0eROjUw=="
+    },
+    {
+      "raw_columns": [
+        "37",
+        "EXHIBIT(S)- 19Exhibit 16 - Email re Nov 6 2024 50 Cents Event",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "37",
+      "description": "EXHIBIT(S)- 19Exhibit 16 - Email re Nov 6 2024 50 Cents Event",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=UlQbTQSblsGUMHl4rvOTRA=="
+    },
+    {
+      "raw_columns": [
+        "38",
+        "EXHIBIT(S)- 20OTSC - Emergent Relief Requested for the related action filed against Jane Doe",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "38",
+      "description": "EXHIBIT(S)- 20OTSC - Emergent Relief Requested for the related action filed against Jane Doe",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=AppTaiL2wGvAlRuL9ivkVA=="
+    },
+    {
+      "raw_columns": [
+        "39",
+        "EXHIBIT(S)- 21MEMORANDUM OF LAW IN SUPPORT of OTSC filed against Jane Doe",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "39",
+      "description": "EXHIBIT(S)- 21MEMORANDUM OF LAW IN SUPPORT of OTSC filed against Jane Doe",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=vhfn/nvs1EqAJe5r/om7Dw=="
+    },
+    {
+      "raw_columns": [
+        "40",
+        "EXHIBIT(S)- 22Exhibit 1 - Email of Maureen receiving term sheet",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "40",
+      "description": "EXHIBIT(S)- 22Exhibit 1 - Email of Maureen receiving term sheet",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=iF7i9BQn3IzXoxkfLghKDw=="
+    },
+    {
+      "raw_columns": [
+        "41",
+        "EXHIBIT(S)- 23Exhibit 2 - Email re security deposit and insurance",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "41",
+      "description": "EXHIBIT(S)- 23Exhibit 2 - Email re security deposit and insurance",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=UX3L3vF58qq/AC93t_PLUS_QF4A=="
+    },
+    {
+      "raw_columns": [
+        "42",
+        "EXHIBIT(S)- 24Exhibit 3 - Email from Lemmerman x Lupo Multiple Emails",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "42",
+      "description": "EXHIBIT(S)- 24Exhibit 3 - Email from Lemmerman x Lupo Multiple Emails",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=mFyCljyWv0SVTgJi8gL4OQ=="
+    },
+    {
+      "raw_columns": [
+        "43",
+        "EXHIBIT(S)- 25Exhibit 4 - Emails Showing Lupo's Reluctance",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "43",
+      "description": "EXHIBIT(S)- 25Exhibit 4 - Emails Showing Lupo's Reluctance",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=Sbes403C/BScoKo0gBM9Dg=="
+    },
+    {
+      "raw_columns": [
+        "44",
+        "EXHIBIT(S)- 26Exhibit 5 - Email showing Ian demanded from Lupo proof of insurance as a condition",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "44",
+      "description": "EXHIBIT(S)- 26Exhibit 5 - Email showing Ian demanded from Lupo proof of insurance as a condition",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=KJPzOOYqPy_PLUS_keAvdbQeLTw=="
+    },
+    {
+      "raw_columns": [
+        "45",
+        "EXHIBIT(S)- 27Exhibit 6 - Email Re_ NOISE COMPLAINTS, THUGGERY, Master Keys, SLA investigation etc",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "45",
+      "description": "EXHIBIT(S)- 27Exhibit 6 - Email Re_ NOISE COMPLAINTS, THUGGERY, Master Keys, SLA investigation etc",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=AMRkXjlaKPkX37IQ/xoWEw=="
+    },
+    {
+      "raw_columns": [
+        "46",
+        "EXHIBIT(S)- 28Exhibit 7 - Email re Master Keys, SLA investigation and selling an equity stake",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "46",
+      "description": "EXHIBIT(S)- 28Exhibit 7 - Email re Master Keys, SLA investigation and selling an equity stake",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=j/3o2HhM/DJp6fvZsd_PLUS_4Iw=="
+    },
+    {
+      "raw_columns": [
+        "47",
+        "EXHIBIT(S)- 29Exhibit 8 - Investigation Report",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "47",
+      "description": "EXHIBIT(S)- 29Exhibit 8 - Investigation Report",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=JrEkqA1rtVA1Tj2ijYgCcQ=="
+    },
+    {
+      "raw_columns": [
+        "48",
+        "EXHIBIT(S)- 30Exhibit 9 - Formal Notice to Maureen Lupo Dec 9",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "48",
+      "description": "EXHIBIT(S)- 30Exhibit 9 - Formal Notice to Maureen Lupo Dec 9",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=VIviA9cDHP/VfInSj0XVfA=="
+    },
+    {
+      "raw_columns": [
+        "49",
+        "EXHIBIT(S)- 31Exhibit 10 - Email from Paul Brown",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "49",
+      "description": "EXHIBIT(S)- 31Exhibit 10 - Email from Paul Brown",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=4FD2/foTLUNXQc7Q6IpwZQ=="
+    },
+    {
+      "raw_columns": [
+        "50",
+        "EXHIBIT(S)- 32Exhibit 11 - Mr Locks Invoice",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "50",
+      "description": "EXHIBIT(S)- 32Exhibit 11 - Mr Locks Invoice",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=XlhOjhpDul3hvXYSOtl9Wg=="
+    },
+    {
+      "raw_columns": [
+        "51",
+        "EXHIBIT(S)- 33Exhibit 12 - Term Sheet Bearing False Signature",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "51",
+      "description": "EXHIBIT(S)- 33Exhibit 12 - Term Sheet Bearing False Signature",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=pcZEoUHaYcoNl2/iwWK5GQ=="
+    },
+    {
+      "raw_columns": [
+        "52",
+        "EXHIBIT(S)- 34Exhibit 13 - Illegal Revenue Overview",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "52",
+      "description": "EXHIBIT(S)- 34Exhibit 13 - Illegal Revenue Overview",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=hKNsN/fzGgubVNiHorQpRQ=="
+    },
+    {
+      "raw_columns": [
+        "53",
+        "EXHIBIT(S)- 35Exhibit 14 - Email from Lemmerman re Weekend of Nov 7,8,9 Club Activities",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "53",
+      "description": "EXHIBIT(S)- 35Exhibit 14 - Email from Lemmerman re Weekend of Nov 7,8,9 Club Activities",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=6i48hEcy6pJ7venVhy2kgA=="
+    },
+    {
+      "raw_columns": [
+        "54",
+        "EXHIBIT(S)- 36Exhibit 15 - Reisner Torturous interference Email",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "54",
+      "description": "EXHIBIT(S)- 36Exhibit 15 - Reisner Torturous interference Email",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=/zYDzNT4OVVi0kmf6dCKKA=="
+    },
+    {
+      "raw_columns": [
+        "55",
+        "EXHIBIT(S)- 37AFFIDAVIT OR AFFIRMATION IN SUPPORT OF PROPOSED OSC/EXPARTE APP Affidavit of Paul Brown",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "55",
+      "description": "EXHIBIT(S)- 37AFFIDAVIT OR AFFIRMATION IN SUPPORT OF PROPOSED OSC/EXPARTE APP Affidavit of Paul Brown",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=7/A8Aq44nXfzyaLixbhFZw=="
+    },
+    {
+      "raw_columns": [
+        "56",
+        "EXHIBIT(S)- 38Exhibit 1 - Email from Paul Brown",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "56",
+      "description": "EXHIBIT(S)- 38Exhibit 1 - Email from Paul Brown",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=rkC88YuF0UINK2C_PLUS_tiZYJA=="
+    },
+    {
+      "raw_columns": [
+        "57",
+        "EXHIBIT(S)- 39Exhibit 2 - Email from Lemmerman re Weekend of Nov 7,8,9 Club Activities",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "57",
+      "description": "EXHIBIT(S)- 39Exhibit 2 - Email from Lemmerman re Weekend of Nov 7,8,9 Club Activities",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=/dsNrSNjKa0Txe1f7IvX_PLUS_w=="
+    },
+    {
+      "raw_columns": [
+        "58",
+        "EXHIBIT(S)- 40Exhibit 3 - Email from Lemmerman",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "58",
+      "description": "EXHIBIT(S)- 40Exhibit 3 - Email from Lemmerman",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=c0AZ/QiuD/8gXjSf5LE4Gw=="
+    },
+    {
+      "raw_columns": [
+        "59",
+        "EXHIBIT(S)- 41Exhibit 4 - Investigation Report",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "59",
+      "description": "EXHIBIT(S)- 41Exhibit 4 - Investigation Report",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=atg4JjZSU0lvrrT30J6bag=="
+    },
+    {
+      "raw_columns": [
+        "60",
+        "EXHIBIT(S)- 42Exhibit 5 - Emails Showing Lupo's Reluctance",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "60",
+      "description": "EXHIBIT(S)- 42Exhibit 5 - Emails Showing Lupo's Reluctance",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=1vUaNLKW38cWnHXg2zzLEA=="
+    },
+    {
+      "raw_columns": [
+        "61",
+        "EXHIBIT(S)- 43Exhibit 6 - Email Re_ NOISE COMPLAINTS, THUGGERY, Master Keys, SLA investigation etc",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "61",
+      "description": "EXHIBIT(S)- 43Exhibit 6 - Email Re_ NOISE COMPLAINTS, THUGGERY, Master Keys, SLA investigation etc",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=fHMB1Ah5cEFc6DuIaZIjvQ=="
+    },
+    {
+      "raw_columns": [
+        "62",
+        "EXHIBIT(S)- 44Exhibit 7 - Illegal Revenue Overview",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "62",
+      "description": "EXHIBIT(S)- 44Exhibit 7 - Illegal Revenue Overview",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=K1Bv96_PLUS_ksdtFyTtk2bWr3g=="
+    },
+    {
+      "raw_columns": [
+        "63",
+        "EXHIBIT(S)- 45AFFIDAVIT OR AFFIRMATION IN SUPPORT OF PROPOSED OSC/EXPARTE APP Affidavit of Michael Ruggiero",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "63",
+      "description": "EXHIBIT(S)- 45AFFIDAVIT OR AFFIRMATION IN SUPPORT OF PROPOSED OSC/EXPARTE APP Affidavit of Michael Ruggiero",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=ZWXaueMEyjnM4lAsG1lzEQ=="
+    },
+    {
+      "raw_columns": [
+        "64",
+        "EXHIBIT(S)- 46Exhibit 1 - Investigation Report",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "64",
+      "description": "EXHIBIT(S)- 46Exhibit 1 - Investigation Report",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=dwCvPt0l7eBJcEee2m6c7A=="
+    },
+    {
+      "raw_columns": [
+        "65",
+        "EXHIBIT(S)- 47RJI -RE: ORDER TO SHOW CAUSE for related case filed against Jane Doe",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "65",
+      "description": "EXHIBIT(S)- 47RJI -RE: ORDER TO SHOW CAUSE for related case filed against Jane Doe",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=RiWnSd7UI4kAWXbHU7T/Ow=="
+    },
+    {
+      "raw_columns": [
+        "66",
+        "EXHIBIT(S)- 48DECISION + ORDER ON MOTION  (Motion #001) on related case filed against Jane Doe",
+        "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "66",
+      "description": "EXHIBIT(S)- 48DECISION + ORDER ON MOTION  (Motion #001) on related case filed against Jane Doe",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 02/04/2025Received: 02/04/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=mTzJP1n8ScTq94KipuOD7w=="
+    },
+    {
+      "raw_columns": [
+        "67",
+        "ORDER - INTERIM (MOTION RELATED)(Motion #001)",
+        "Court UserFiled: 02/11/2025Received: 02/11/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "67",
+      "description": "ORDER - INTERIM (MOTION RELATED)(Motion #001)",
+      "doc_type": "Court UserFiled: 02/11/2025Received: 02/11/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=CPwhhmg6nDkUQ2Gx22KHzg=="
+    },
+    {
+      "raw_columns": [
+        "68",
+        "AFFIRMATION/AFFIDAVIT OF SERVICE(Motion #001)Service of TCO",
+        "GLUCK, EVANFiled: 02/14/2025Received: 02/14/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "68",
+      "description": "AFFIRMATION/AFFIDAVIT OF SERVICE(Motion #001)Service of TCO",
+      "doc_type": "GLUCK, EVANFiled: 02/14/2025Received: 02/14/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=Z6FJEiJY8K3dPN496ZDBaQ=="
+    },
+    {
+      "raw_columns": [
+        "69",
+        "AFFIDAVIT OR AFFIRMATION IN OPPOSITION TO ORDER TO SHOW CAUSE(Motion #001)",
+        "HANTMAN, ROBERT JAYFiled: 06/27/2025Received: 06/27/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "69",
+      "description": "AFFIDAVIT OR AFFIRMATION IN OPPOSITION TO ORDER TO SHOW CAUSE(Motion #001)",
+      "doc_type": "HANTMAN, ROBERT JAYFiled: 06/27/2025Received: 06/27/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=P1kf6YHtn_PLUS_0XYKb0fStebQ=="
+    },
+    {
+      "raw_columns": [
+        "70",
+        "ORDER ( PROPOSED )",
+        "CZIK, STEVEN JFiled: 07/08/2025Received: 07/08/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "70",
+      "description": "ORDER ( PROPOSED )",
+      "doc_type": "CZIK, STEVEN JFiled: 07/08/2025Received: 07/08/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=GyFp9UMA2ceUrEU9JAo8_PLUS_A=="
+    },
+    {
+      "raw_columns": [
+        "71",
+        "ORDER - OTHER (NON-MOTION)",
+        "Court UserFiled: 08/07/2025Received: 08/07/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "71",
+      "description": "ORDER - OTHER (NON-MOTION)",
+      "doc_type": "Court UserFiled: 08/07/2025Received: 08/07/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=556NXwgnNGdjcFDHs4Z0lw=="
+    },
+    {
+      "raw_columns": [
+        "72",
+        "SUBSTITUTION OF ATTORNEY (POST RJI)",
+        "DAVIDSON, JASON RONALDFiled: 08/19/2025Received: 08/19/2025",
+        "ProcessedConfirmation Notice"
+      ],
+      "doc_number": "72",
+      "description": "SUBSTITUTION OF ATTORNEY (POST RJI)",
+      "doc_type": "DAVIDSON, JASON RONALDFiled: 08/19/2025Received: 08/19/2025",
+      "filed_date": "ProcessedConfirmation Notice",
+      "pdf_url": "https://iapps.courts.state.ny.us/nyscef/ViewDocument?docIndex=IT20s9DXSKMMMWmR3GGz2g=="
+    }
+  ],
+  "pdf_retrieved": true,
+  "pdf_file": "/Users/dangeorge/Documents/GitHub/docket-key/scraper/downloads/NYSCEF_450551_2025_doc_1.pdf",
+  "browser_minutes_used": 0.116
+}

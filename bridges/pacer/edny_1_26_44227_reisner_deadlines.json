@@ -1,0 +1,128 @@
+[
+  {
+    "doc_number": 1,
+    "deadline_hearing": "Chapter 11 Plan",
+    "event_filed": "09/08/2026",
+    "due_set": "01/06/2027",
+    "satisfied": "",
+    "terminated": "",
+    "hearing_judge": ""
+  },
+  {
+    "doc_number": 1,
+    "deadline_hearing": "Disclosure Statement Due",
+    "event_filed": "09/08/2026",
+    "due_set": "01/06/2027",
+    "satisfied": "",
+    "terminated": "",
+    "hearing_judge": ""
+  },
+  {
+    "doc_number": 3,
+    "deadline_hearing": "Copies of Pay Stmts",
+    "event_filed": "09/08/2026",
+    "due_set": "09/22/2026",
+    "satisfied": "09/24/2026",
+    "terminated": "",
+    "hearing_judge": ""
+  },
+  {
+    "doc_number": 3,
+    "deadline_hearing": "Affidavit Pursuant LBR 1007-4",
+    "event_filed": "09/08/2026",
+    "due_set": "09/08/2026",
+    "satisfied": "",
+    "terminated": "09/24/2026",
+    "hearing_judge": ""
+  },
+  {
+    "doc_number": 3,
+    "deadline_hearing": "Cert of Credit Counseling",
+    "event_filed": "09/08/2026",
+    "due_set": "09/08/2026",
+    "satisfied": "",
+    "terminated": "",
+    "hearing_judge": ""
+  },
+  {
+    "doc_number": 3,
+    "deadline_hearing": "Eq Sec Hold (14 Days)",
+    "event_filed": "09/08/2026",
+    "due_set": "09/22/2026",
+    "satisfied": "",
+    "terminated": "",
+    "hearing_judge": ""
+  },
+  {
+    "doc_number": 3,
+    "deadline_hearing": "Incomplete Filings Due",
+    "event_filed": "09/08/2026",
+    "due_set": "09/22/2026",
+    "satisfied": "",
+    "terminated": "",
+    "hearing_judge": ""
+  },
+  {
+    "doc_number": 4,
+    "deadline_hearing": "341 Meeting",
+    "event_filed": "09/09/2026",
+    "due_set": "10/05/2026 at 12:00 PM",
+    "satisfied": "",
+    "terminated": "",
+    "hearing_judge": ""
+  },
+  {
+    "doc_number": 4,
+    "deadline_hearing": "Objection to Discharge Ch 11",
+    "event_filed": "09/09/2026",
+    "due_set": "12/04/2026",
+    "satisfied": "",
+    "terminated": "",
+    "hearing_judge": ""
+  },
+  {
+    "doc_number": 8,
+    "deadline_hearing": "Presentment",
+    "event_filed": "09/16/2026",
+    "due_set": "10/30/2026",
+    "satisfied": "",
+    "terminated": "",
+    "hearing_judge": ""
+  },
+  {
+    "doc_number": 10,
+    "deadline_hearing": "Status Hearing",
+    "event_filed": "09/21/2026",
+    "due_set": "11/04/2026 at 10:00 AM",
+    "satisfied": "",
+    "terminated": "",
+    "hearing_judge": "Mazer-Marino, Jil"
+  },
+  {
+    "doc_number": 20,
+    "deadline_hearing": "Hearing",
+    "event_filed": "09/30/2026",
+    "due_set": "11/04/2026 at 10:00 AM",
+    "satisfied": "",
+    "terminated": "",
+    "hearing_judge": "Mazer-Marino, Jil"
+  },
+  {
+    "doc_number": 20,
+    "deadline_hearing": "Hearing",
+    "event_filed": "09/30/2026",
+    "due_set": "11/04/2026 at 10:00 AM",
+    "satisfied": "",
+    "terminated": "09/30/2026",
+    "hearing_judge": "Mazer-Marino, Jil"
+  },
+  {
+    "doc_number": 24,
+    "deadline_hearing": "Presentment",
+    "event_filed": "10/01/2026",
+    "due_set": "10/30/2026",
+    "satisfied": "",
+    "terminated": "",
+    "hearing_judge": ""
+  }
+]

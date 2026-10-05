@@ -1,0 +1,29 @@
+{
+  "source_document": "NYSCEF_450551_2025_doc_1.pdf",
+  "page": 1,
+  "endpoint": "https://docket-key-ocr.dan-2eb.workers.dev/ocr/structured",
+  "model": "@cf/meta/llama-3.2-11b-vision-instruct",
+  "extracted": {
+    "court": "Supreme Court of the State of New York, County of New York",
+    "index_or_docket_number": "450551/2025",
+    "document_title": "Summons and Complaint",
+    "filing_date": "01/27/2025",
+    "parties": {
+      "plaintiffs": [
+        "The City of New York"
+      ],
+      "defendants": [
+        "The Land and Building Known as 512 West 42nd Street",
+        "West 42nd Street Developers, LLC",
+        "Baby's West 42 LLC",
+        "John Doe",
+        "Jane Doe"
+      ]
+    },
+    "stamps_and_marginalia": [
+      "FILED: NEW YORK COUNTY CLERK 01/27/2025 11:19:01 AM",
+      "Page 1 of 20"
+    ]
+  },
+  "processing_time_ms": 24129
+}

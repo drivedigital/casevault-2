@@ -47,7 +47,7 @@ export function SectionHeading({
 }: {
   eyebrow?: string;
   title: string;
-  description?: string;
+  description?: ReactNode;
   action?: ReactNode;
 }) {
   return (
@@ -60,7 +60,7 @@ export function SectionHeading({
         ) : null}
         <h1 className="mt-1 text-2xl font-semibold text-slate-900">{title}</h1>
         {description ? (
-          <p className="mt-1 max-w-2xl text-sm text-slate-500">{description}</p>
+          <div className="mt-1 max-w-2xl text-sm text-slate-500">{description}</div>
         ) : null}
       </div>
       {action ? <div className="flex-shrink-0">{action}</div> : null}

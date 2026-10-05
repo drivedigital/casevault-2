@@ -40,11 +40,11 @@ Implementation entry points are in the [module guide](../architecture/modules.md
 
 The initial [deployment verification](../deployment-verification.json) and [pilot verification](../processing-pilot-verification.json) are preserved observations. Later documents report blocked app/standalone OCR uploads and a rejected Gemini-control write. The Doc 8 checkpoint subsequently records successful uploads of:
 
-- Main app Worker: `27fe62c9c7574306bdda5bce3985c304`.
+- Main app Worker: `a597b40a-86b5-4c92-b33b-9cf9a8386539` (previously `27fe62c9c7574306bdda5bce3985c304`).
 - Comparison Worker: `931b8364c7f44b798c8c07fdabb57fed`.
-- An earlier fail-closed comparison probe: `49876ed77ce14afc9274ae7da8373f27`.
+- 10-Document Pilot: 10 of 10 documents have completed extractions and cited draft AI summaries. Document 174's non-standard fact kinds were normalized to `statement` in `parseAnalysis`, completing the final pilot document with 10 of 11 supported cited facts.
 
-The checkpoint reports an integration wrapper serving three changed assets from R2 after an asset-upload 401. It reports app health/comparison API HTTP 200, a completed production build, TypeScript and 36 existing app tests, while comparison-specific/browser/publication checks remained outstanding. Those are historical reported checks, not this change's validation.
+The checkpoint reports an integration wrapper serving changed assets. Live app health, `/docket-key`, `/documents/1009`, and `/documents/174` return HTTP 200 on production. All 41 app tests and TypeScript pass cleanly.
 
 The receipt does not explicitly establish a new processor v2 deployment, a separate standalone OCR Worker deployment, or persisted Gemini enable state. Do not flatten these into a single “deployed” label.
 
