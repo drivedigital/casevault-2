@@ -19,6 +19,8 @@ export const providerViewSchema = providerCheckSchema.extend({
   priority: z.number().default(1),
   endpoint: z.string().optional(),
   isCustom: z.boolean().default(false),
+  hasCustomKey: z.boolean().default(false),
+  keyHint: z.string().optional(),
 });
 export const providerResponseSchema = z.object({ providers: z.array(providerViewSchema) });
 export type ProviderView = z.infer<typeof providerViewSchema>;
@@ -53,3 +55,15 @@ export type CustomProviderInput = z.infer<typeof customProviderInputSchema>;
 export const priorityUpdateSchema = z.object({
   priority: z.array(z.string()).min(1),
 }).strict();
+
+export const updateCredentialSchema = z.object({
+  provider: z.string().min(1).max(64),
+  apiKey: z.string().min(1).max(1024),
+}).strict();
+export type UpdateCredentialInput = z.infer<typeof updateCredentialSchema>;
+
+export const deleteCredentialSchema = z.object({
+  provider: z.string().min(1).max(64),
+}).strict();
+export type DeleteCredentialInput = z.infer<typeof deleteCredentialSchema>;
+

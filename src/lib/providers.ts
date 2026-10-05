@@ -1,8 +1,8 @@
 import "server-only";
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { z } from "zod";
-import { catalogSchema, modelSchema, providerIds, providerNames, type ProviderId, type ProviderCheck, type ProviderView, type Model, modelSelectionSchema, validActiveModel, priorityUpdateSchema, customProviderInputSchema } from "./provider-types";
-import { readProviderEnabled, requireProviderEnabled, writeProviderControl, readProviderPriority, writeProviderPriority, readCustomProviders, writeCustomProviders, type CustomProviderRecord } from './provider-controls';
+import { catalogSchema, modelSchema, providerIds, providerNames, type ProviderId, type ProviderCheck, type ProviderView, type Model, modelSelectionSchema, validActiveModel, priorityUpdateSchema, customProviderInputSchema, updateCredentialSchema, deleteCredentialSchema } from "./provider-types";
+import { readProviderEnabled, requireProviderEnabled, writeProviderControl, readProviderPriority, writeProviderPriority, readCustomProviders, writeCustomProviders, type CustomProviderRecord, readProviderCredential, writeProviderCredential, deleteProviderCredential, type ProviderControlStore } from './provider-controls';
 
 const catalogKey = "casevault-2/settings/provider-catalog-v1.json";
 const openAIModels = z.object({ data: z.array(z.object({ id: z.string(), name: z.string().optional(), context_length: z.number().optional(), architecture: z.object({ input_modalities: z.array(z.string()).optional(), output_modalities: z.array(z.string()).optional() }).optional() })) });
@@ -33,8 +33,16 @@ export const defaultE2bModels: Model[] = [
   { id: "tesseract-searchable-pdf", name: "Tesseract / OCRmyPDF Searchable PDF", output: ["text"] },
 ];
 
-function credential(id: ProviderId): string | undefined {
-  const env = getCloudflareContext().env as any;
+export async function credential(id: ProviderId, store?: Pick<ProviderControlStore, 'get'>): Promise<string | undefined> {
+  const s = store ?? getCloudflareContext().env?.EVIDENCE;
+  if (s) {
+    const r2Key = await readProviderCredential(s, id);
+    if (r2Key) return r2Key;
+    const customList = await readCustomProviders(s);
+    const custom = customList.find(c => c.id === id);
+    if (custom?.apiKey) return custom.apiKey;
+  }
+  const env = (getCloudflareContext().env || {}) as any;
   const standardKeys: Record<string, string | undefined> = {
     openrouter: env.OPEN_ROUTER_KEY,
     nvidia: env.NVIDIA_KEY,
@@ -68,7 +76,7 @@ function failureMessage(status?: number): string {
 }
 export async function discoverProvider(id: ProviderId): Promise<ProviderCheck> {
   const checkedAt = new Date().toISOString();
-  const key = credential(id);
+  const key = await credential(id, getCloudflareContext().env.EVIDENCE);
   if (!key) return { id, checkedAt, status: "missing", message: "Credential has not been installed.", models: [] };
   try {
     let models: Model[] = [];
@@ -121,7 +129,7 @@ export async function discoverProvider(id: ProviderId): Promise<ProviderCheck> {
     return { id, checkedAt, status: "ready", httpStatus: 200, message: `${models.length} models discovered. Model access and inference limits depend on your provider account.`, models };
   } catch (error) {
     const safeError = error instanceof Error ? `${error.name}: ${error.message}`.slice(0, 300) : "Unknown error";
-    console.warn("Provider check failed", id, providerIds.reduce((message, p) => { const secret = credential(p); return secret ? message.replaceAll(secret, "[redacted]") : message; }, safeError));
+    console.warn("Provider check failed", id, key ? safeError.replaceAll(key, "[redacted]") : safeError);
     const status = error instanceof ProviderFailure ? error.status : undefined;
     return { id, checkedAt, status: "error", httpStatus: status, message: failureMessage(status), models: [] };
   }
@@ -139,9 +147,13 @@ export async function readProviders(): Promise<ProviderView[]> {
   const allIds = Array.from(new Set([...providerIds, ...customProviders.map(c => c.id)]));
   const controls = await Promise.all(allIds.map(async id => ({ id, enabled: await readProviderEnabled(store, id as any) })));
 
-  const list: ProviderView[] = allIds.map(id => {
+  const list: ProviderView[] = await Promise.all(allIds.map(async id => {
     const custom = customProviders.find(c => c.id === id);
-    const configured = Boolean(credential(id as any) || custom?.apiKey);
+    const key = await credential(id as any, store);
+    const r2Key = await readProviderCredential(store, id);
+    const configured = Boolean(key);
+    const hasCustomKey = Boolean(r2Key || custom?.apiKey);
+    const keyHint = key ? (key.length > 8 ? `${key.slice(0, 4)}...${key.slice(-4)}` : "••••") : undefined;
     const previous = parsed.success ? parsed.data.providers.find(p => p.id === id) : undefined;
     const enabled = controls.find(control => control.id === id)?.enabled ?? (id !== "gemini");
 
@@ -173,8 +185,10 @@ export async function readProviders(): Promise<ProviderView[]> {
       activeModel: selections[id]?.[0] ?? null,
       endpoint: custom?.endpoint || (id === "opencode" ? "https://opencode.ai/api/v1" : undefined),
       isCustom: Boolean(custom),
+      hasCustomKey,
+      keyHint,
     };
-  });
+  }));
 
   list.sort((a, b) => a.priority - b.priority);
   return list;
@@ -191,7 +205,7 @@ export async function refreshProviders(): Promise<ProviderView[]> {
 // discovery alone never starts processing or sends legal documents externally.
 export async function generateText(provider: Exclude<ProviderId, "ocr">, model: string, prompt: string): Promise<string> {
   await requireProviderEnabled(getCloudflareContext().env.EVIDENCE, provider);
-  const key = credential(provider);
+  const key = await credential(provider, getCloudflareContext().env.EVIDENCE);
   if (!key) throw new ProviderFailure();
   const current = (await readProviders()).find(p => p.id === provider);
   if (!current?.activeModels.includes(model) || !validActiveModel(current, model)) throw new Error("Choose an active model from the current provider catalog");
@@ -291,3 +305,19 @@ export async function generateWithActiveModel(provider: "openrouter" | "nvidia" 
   if (!connection || !selected || !connection.activeModels.includes(selected) || !validActiveModel(connection,selected)) throw new Error("Choose an available active model in Settings first.");
   return generateText(provider, selected, prompt);
 }
+
+export async function setProviderCredential(input: unknown): Promise<ProviderView[]> {
+  const { updateCredential } = z.object({ updateCredential: updateCredentialSchema }).parse(input);
+  const store = getCloudflareContext().env.EVIDENCE;
+  await writeProviderCredential(store, updateCredential.provider, updateCredential.apiKey);
+  // Re-check provider immediately with newly installed key
+  return refreshProviders();
+}
+
+export async function removeProviderCredential(input: unknown): Promise<ProviderView[]> {
+  const { deleteCredential } = z.object({ deleteCredential: deleteCredentialSchema }).parse(input);
+  const store = getCloudflareContext().env.EVIDENCE;
+  await deleteProviderCredential(store, deleteCredential.provider);
+  return refreshProviders();
+}
+

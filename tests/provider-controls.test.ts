@@ -2,19 +2,27 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
   defaultProviderPriority,
+  deleteProviderCredential,
   providerControlKey,
   readCustomProviders,
+  readProviderCredential,
   readProviderEnabled,
   readProviderPriority,
   requireProviderEnabled,
   writeCustomProviders,
   writeProviderControl,
+  writeProviderCredential,
   writeProviderPriority,
 } from '../src/lib/provider-controls';
 
 function store() {
   const objects = new Map<string, string>();
-  return { objects, get: async (key: string) => objects.has(key) ? { json: async () => JSON.parse(objects.get(key)!) } : null, put: async (key: string, value: string) => { objects.set(key, value); } };
+  return {
+    objects,
+    get: async (key: string) => objects.has(key) ? { json: async () => JSON.parse(objects.get(key)!) } : null,
+    put: async (key: string, value: string) => { objects.set(key, value); },
+    delete: async (key: string) => { objects.delete(key); },
+  };
 }
 test('Gemini starts off without changing existing providers', async () => {
   const bucket = store();
@@ -84,4 +92,15 @@ test('custom provider records round-trip and support persistence', async () => {
   const saved = await readCustomProviders(bucket);
   assert.deepEqual(saved, customList);
 });
+test('provider credentials persist securely in R2 and support removal', async () => {
+  const bucket = store();
+  assert.equal(await readProviderCredential(bucket, 'nvidia'), undefined);
+
+  await writeProviderCredential(bucket as any, 'nvidia', 'nvapi-synthetic-test-key');
+  assert.equal(await readProviderCredential(bucket, 'nvidia'), 'nvapi-synthetic-test-key');
+
+  await deleteProviderCredential(bucket as any, 'nvidia');
+  assert.equal(await readProviderCredential(bucket, 'nvidia'), undefined);
+});
+
 

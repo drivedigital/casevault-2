@@ -5,8 +5,33 @@ export const providerControlSchema = z.object({ provider: z.enum(providerIds), e
 export const providerControlKey = (provider: ProviderId) => `casevault-2/settings/provider-controls/${provider}.json`;
 export const providerPriorityKey = 'casevault-2/settings/provider-priority.json';
 export const customProvidersKey = 'casevault-2/settings/custom-providers.json';
+export const providerCredentialKey = (provider: string) => `casevault-2/settings/credentials/${provider}.json`;
 
 export const defaultProviderPriority: string[] = ['nvidia', 'openrouter', 'gemini', 'ollama', 'opencode', 'e2b', 'ocr'];
+
+export async function readProviderCredential(store: Pick<ProviderControlStore, 'get'>, provider: string): Promise<string | undefined> {
+  const object = await store.get(providerCredentialKey(provider));
+  if (!object) return undefined;
+  try {
+    const data = await object.json() as any;
+    return typeof data?.apiKey === 'string' && data.apiKey.trim() ? data.apiKey.trim() : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+export async function writeProviderCredential(store: ProviderControlStore, provider: string, apiKey: string): Promise<void> {
+  await store.put(providerCredentialKey(provider), JSON.stringify({ provider, apiKey: apiKey.trim(), updatedAt: new Date().toISOString() }), { httpMetadata: { contentType: 'application/json' } });
+}
+
+export async function deleteProviderCredential(store: ProviderControlStore & { delete?(key: string): Promise<unknown> }, provider: string): Promise<void> {
+  if (typeof store.delete === 'function') {
+    await store.delete(providerCredentialKey(provider));
+  } else {
+    await store.put(providerCredentialKey(provider), JSON.stringify({ provider, apiKey: '', deletedAt: new Date().toISOString() }), { httpMetadata: { contentType: 'application/json' } });
+  }
+}
+
 
 export interface ProviderControlStore {
   get(key: string): Promise<{ json(): Promise<unknown> } | null>;

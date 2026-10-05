@@ -134,6 +134,67 @@ export function ProviderSettings({ initialProviders }: { initialProviders: Provi
     }
   }
 
+  // Credential modal state
+  const [credentialModalProvider, setCredentialModalProvider] = useState<ProviderView | null>(null);
+  const [credentialApiKey, setCredentialApiKey] = useState("");
+
+  async function handleSaveCredential(e: React.FormEvent) {
+    e.preventDefault();
+    if (!credentialModalProvider) return;
+    if (!credentialApiKey.trim()) {
+      setError("API Key cannot be blank.");
+      return;
+    }
+    const target = credentialModalProvider;
+    setSaving(`credential-${target.id}`); setError("");
+    try {
+      const response = await fetch("/api/settings/providers", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          updateCredential: {
+            provider: target.id,
+            apiKey: credentialApiKey.trim(),
+          },
+        }),
+      });
+      if (!response.ok) throw new Error();
+      setProviders(providerResponseSchema.parse(await response.json()).providers);
+      setCredentialModalProvider(null);
+      setCredentialApiKey("");
+    } catch {
+      setError(`Failed to save credential for ${providerNames[target.id] || target.id}. Check key validity.`);
+    } finally {
+      setSaving(null);
+    }
+  }
+
+  async function handleDeleteCredential() {
+    if (!credentialModalProvider) return;
+    const target = credentialModalProvider;
+    if (!confirm(`Are you sure you want to remove the custom credential for ${providerNames[target.id] || target.id}?`)) return;
+    setSaving(`credential-${target.id}`); setError("");
+    try {
+      const response = await fetch("/api/settings/providers", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          deleteCredential: {
+            provider: target.id,
+          },
+        }),
+      });
+      if (!response.ok) throw new Error();
+      setProviders(providerResponseSchema.parse(await response.json()).providers);
+      setCredentialModalProvider(null);
+      setCredentialApiKey("");
+    } catch {
+      setError(`Could not remove credential.`);
+    } finally {
+      setSaving(null);
+    }
+  }
+
   return <>
     <Card className="p-5">
       <h2 className="text-base font-semibold text-slate-800">Document workflow</h2>
@@ -251,9 +312,26 @@ export function ProviderSettings({ initialProviders }: { initialProviders: Provi
                 {provider.enabled && ready ? <CheckCircle2 size={13} /> : <CircleAlert size={13} />}
                 {!provider.enabled ? 'Provider paused' : ready ? "Connection verified" : provider.status === "error" ? "Check failed" : "Not checked"}
               </span>
-              <span className="flex items-center gap-1 text-xs text-slate-500">
+              <span className="flex items-center gap-1.5 text-xs text-slate-500">
                 <KeyRound size={13} />
-                {provider.configured ? "Credential installed" : "Credential missing"}
+                {provider.configured ? (
+                  <span>
+                    Credential installed {provider.keyHint ? <span className="font-mono text-slate-400">({provider.keyHint})</span> : null}
+                  </span>
+                ) : (
+                  <span className="text-amber-700 font-medium">Credential missing</span>
+                )}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setCredentialModalProvider(provider);
+                    setCredentialApiKey("");
+                  }}
+                  disabled={saving !== null || refreshing}
+                  className="ml-1 rounded border border-slate-200 bg-white px-2 py-0.5 text-xs font-medium text-indigo-600 hover:border-indigo-300 hover:bg-indigo-50 disabled:opacity-50"
+                >
+                  {provider.configured ? "Change Key" : "Install Key"}
+                </button>
               </span>
               {provider.endpoint ? (
                 <span className="truncate text-xs text-slate-400" title={provider.endpoint}>
@@ -421,6 +499,73 @@ export function ProviderSettings({ initialProviders }: { initialProviders: Provi
               >
                 {saving === "add-provider" ? "Adding…" : "Save Connection"}
               </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    ) : null}
+
+    {/* Install / Update Credential Modal */}
+    {credentialModalProvider ? (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 p-4 backdrop-blur-xs">
+        <div className="w-full max-w-md rounded-xl bg-white p-6 shadow-xl">
+          <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+            <h3 className="text-base font-semibold text-slate-800">
+              {credentialModalProvider.configured ? "Update API Key" : "Install API Key"} &middot; {providerNames[credentialModalProvider.id] || credentialModalProvider.id}
+            </h3>
+            <button
+              type="button"
+              onClick={() => setCredentialModalProvider(null)}
+              className="text-slate-400 hover:text-slate-600"
+            >
+              <X size={18} />
+            </button>
+          </div>
+
+          <form onSubmit={handleSaveCredential} className="mt-4 space-y-4">
+            <div>
+              <label className="block text-xs font-medium text-slate-700">API Key / Token</label>
+              <input
+                type="password"
+                placeholder={credentialModalProvider.keyHint ? `Enter new key to replace ${credentialModalProvider.keyHint}` : "Enter API key (sk-...)"}
+                value={credentialApiKey}
+                onChange={e => setCredentialApiKey(e.target.value)}
+                required
+                className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-indigo-600 font-mono"
+              />
+              <p className="mt-2 text-xs text-slate-500">
+                Keys are stored securely in your private vault in Cloudflare R2 (<code className="text-slate-600">casevault-2/settings/credentials/</code>). They are never exposed to browser clients or logs.
+              </p>
+            </div>
+
+            <div className="flex items-center justify-between pt-2">
+              {credentialModalProvider.hasCustomKey ? (
+                <button
+                  type="button"
+                  onClick={handleDeleteCredential}
+                  disabled={saving !== null}
+                  className="text-xs text-rose-600 hover:underline"
+                >
+                  Remove Saved Key
+                </button>
+              ) : <div />}
+
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => setCredentialModalProvider(null)}
+                  className="rounded-lg border border-slate-300 px-3.5 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={saving !== null}
+                  className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-50"
+                >
+                  {saving?.startsWith("credential-") ? "Saving & Testing…" : "Save & Verify"}
+                </button>
+              </div>
             </div>
           </form>
         </div>

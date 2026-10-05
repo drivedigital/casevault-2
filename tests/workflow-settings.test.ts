@@ -5,7 +5,7 @@ import { driveSearchQuery, driveImportSchema } from '../src/lib/drive-schema';
 import { bridgeCompletionSchema, validCourtUrl } from '../src/lib/bridge-schema';
 
 test('active model selection rejects unknown and non-text models or unavailable credentials', () => {
-  const provider: ProviderView = { id: 'openrouter', configured: true, enabled: true, status: 'ready', checkedAt: '', message: '', models: [{ id: 'synthetic-text', name: 'Synthetic text', output: ['text'] }, { id: 'synthetic-image', name: 'Synthetic image', output: ['image'] }], activeModel: null, activeModels: [], priority: 1, isCustom: false };
+  const provider: ProviderView = { id: 'openrouter', configured: true, enabled: true, status: 'ready', checkedAt: '', message: '', models: [{ id: 'synthetic-text', name: 'Synthetic text', output: ['text'] }, { id: 'synthetic-image', name: 'Synthetic image', output: ['image'] }], activeModel: null, activeModels: [], priority: 1, isCustom: false, hasCustomKey: false };
   assert.equal(validActiveModel(provider, 'synthetic-text'), true);
   assert.equal(validActiveModel(provider, 'synthetic-image'), false);
   assert.equal(validActiveModel(provider, 'another-provider/model'), false);

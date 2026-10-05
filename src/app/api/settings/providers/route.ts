@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { readProviders, refreshProviders, selectActiveModel, setProviderEnabled, setProviderPriority, addCustomProvider, deleteCustomProvider } from "@/lib/providers";
+import { readProviders, refreshProviders, selectActiveModel, setProviderEnabled, setProviderPriority, addCustomProvider, deleteCustomProvider, setProviderCredential, removeProviderCredential } from "@/lib/providers";
 
 export async function GET() {
   return NextResponse.json({ providers: await readProviders() }, { headers: { "Cache-Control": "private, no-store" } });
@@ -14,6 +14,12 @@ export async function PATCH(request: Request) {
     if (input !== null && typeof input === 'object') {
       if (Object.hasOwn(input, 'priority')) {
         return NextResponse.json({ providers: await setProviderPriority(input) });
+      }
+      if (Object.hasOwn(input, 'updateCredential')) {
+        return NextResponse.json({ providers: await setProviderCredential(input) });
+      }
+      if (Object.hasOwn(input, 'deleteCredential')) {
+        return NextResponse.json({ providers: await removeProviderCredential(input) });
       }
       if (Object.hasOwn(input, 'addProvider')) {
         return NextResponse.json({ providers: await addCustomProvider(input) });
