@@ -72,7 +72,7 @@ function view(run,base=''){
  return new Response(`<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Doc 8 · OCR comparison · CaseVault</title><style>body{margin:0;background:#f8fafc;color:#0f172a;font:15px system-ui}header{padding:24px;background:#fff;border-bottom:1px solid #e2e8f0}main{display:grid;grid-template-columns:minmax(300px,1fr) minmax(350px,1fr);gap:24px;padding:24px}iframe{width:100%;height:85vh;position:sticky;top:20px;border:1px solid #ddd}section{padding:20px;background:white;border:1px solid #e2e8f0;border-radius:12px;margin-bottom:16px}h1{margin:8px 0}h2{font-size:18px}a{color:#4338ca}.warning{color:#92400e;font-size:13px}blockquote{background:#f0f9ff;margin:12px 0;padding:12px}small{color:#64748b}@media(max-width:800px){main{grid-template-columns:1fr}iframe{position:static;height:60vh}}</style></head><body><header><a href="https://casevault-2.dan-2eb.workers.dev/documents/1008">← Doc 8 in CaseVault</a><h1>Full-document OCR comparison</h1><p>13 original pages · 10 hosted candidates · Approved ${escape(run.approvedAt)}</p><p class="warning">Searchable output and AI success do not establish human verification. Page-anchored text supports page search; highlight positions are approximate. Failed pages retain their original image.</p><a href="${url}/view">Refresh progress</a></header><main><iframe src="${url}/original" title="Original Doc 8"></iframe><div>${rows}</div></main></body></html>`,{headers:{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'self'; style-src 'unsafe-inline'; frame-src 'self'; script-src 'none'; base-uri 'none'; form-action 'none'"}});
 }
 
-export default {
+const comparisonWorker = {
  async fetch(req,env){
   try{
    const url=new URL(req.url),path=url.pathname;
@@ -109,7 +109,7 @@ export default {
     if(lease&&(await lease.json()).until>Date.now())return json({error:'Page is already running'},409);
     const claimed=await env.EVIDENCE.put(leaseKey,JSON.stringify({token,until:Date.now()+5*60000}),{onlyIf:lease?{etagMatches:lease.etag}:{etagDoesNotMatch:'*'}});if(!claimed)return json({error:'Page lease conflict'},409);
     const t=Date.now(),receipt={modelId:c.id,model:c.model,provider:c.provider,page,imageSha256:run.pages[page-1].sha256,at:new Date().toISOString(),humanAccepted:false,attempt:(previous?.attempt||0)+1};
-    try{const failures=[];for(let p=Math.max(1,page-2);p<page;p++){const o=await env.EVIDENCE.get(prefix+`pages/${c.id}/${p}.json`);if(o)failures.push(await o.json());}if(failures.length===2&&failures.every(r=>r.state==='failed'&&/timeout|aborted|Empty inference|Inference HTTP 5|Space inference failed/.test(r.error||'')))throw Error('Provider paused after two consecutive availability failures; this page was not submitted. Retry after recovery.');receipt.entitlement=await freeCheck(env,c);receipt.output=await hosted(env,c,bytes);receipt.state=receipt.output.complete?'complete':'partial';}
+    try{const failures=[];for(let p=Math.max(1,page-2);p<page;p++){const o=await env.EVIDENCE.get(prefix+`pages/${c.id}/${p}.json`);if(o)failures.push(await o.json());}if(failures.length===2&&failures.every(r=>r.state==='failed'&&/timeout|aborted|Empty inference|Inference HTTP 5|Space inference failed|Provider paused/.test(r.error||'')))throw Error('Provider paused after two consecutive availability failures; this page was not submitted. Retry after recovery.');receipt.entitlement=await freeCheck(env,c);receipt.output=await hosted(env,c,bytes);receipt.state=receipt.output.complete?'complete':'partial';}
     catch(e){receipt.state='failed';receipt.error=String(e.message||e).slice(0,1500);for(const secret of [env.NVIDIA_KEY,env.OPEN_ROUTER_KEY,env.CASEVAULT_API_TOKEN])if(secret)receipt.error=receipt.error.replaceAll(secret,'[redacted]');}
     receipt.elapsedMs=Date.now()-t;const current=await env.EVIDENCE.get(leaseKey);if(!current||(await current.json()).token!==token)throw Error('Stale page completion');receipt.receiptKey=prefix+`attempts/${c.id}/${page}/${token}.json`;await putJson(env,receipt.receiptKey,receipt);await putJson(env,receiptKey,receipt,false);return json(receipt);
    }
@@ -141,3 +141,5 @@ export default {
   }catch(e){return json({error:String(e.message||e).slice(0,500)},400);}
  }
 };
+
+export default comparisonWorker;

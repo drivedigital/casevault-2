@@ -4,7 +4,7 @@ import {createHash} from 'node:crypto';
 import {Agent,setGlobalDispatcher,fetch as httpFetch} from 'undici';
 setGlobalDispatcher(new Agent({allowH2:false,connections:6}));
 import {api,authHeaders} from './runtime-credentials.mjs';
-const endpoint=process.env.COMPARISON_ENDPOINT||'https://casevault-2-ocr-comparison.dan-2eb.workers.dev';
+const endpoint=process.env.COMPARISON_ENDPOINT||'https://casevault-2.dan-2eb.workers.dev/api/ocr-comparisons';
 const directory='.private/doc8-comparison';mkdirSync(directory,{recursive:true});
 const models=['kimi','qwen','nano','gemma','dots','deepseekocr','nemotronocr','moondream','llama90','deepseekflash'];
 const pages=Array.from({length:13},(_,i)=>{const path=`.private/ocr-benchmark/page-${String(i+1).padStart(2,'0')}.png`;return {page:i+1,path,sha256:createHash('sha256').update(readFileSync(path)).digest('hex')};});

@@ -75,6 +75,8 @@ Exact historical commands and deployment IDs remain in the [unaltered checkpoint
 
 ## Other open work
 
+The three newly supplied Docket-Key archives are awaiting integration. See the [suspended integration checkpoint](handoff-integration-checkpoint.md) for source hashes, completed inspection and resume scope.
+
 The pilot recorded document 174 with completed OCR but invalid AI output and no accepted run. General backlog expansion remains held. Processor v2 deployment, current provider settings, remote notebook status and standalone OCR Worker availability need separately scoped verification. The [blocker ledger](../status/bugs-and-blockers.md) identifies the local evidence and gaps.
 
 ## Sources
