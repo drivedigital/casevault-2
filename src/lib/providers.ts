@@ -18,12 +18,12 @@ export const defaultOllamaModels: Model[] = [
 ];
 
 export const defaultOpencodeModels: Model[] = [
-  { id: "Big Pickle Free", name: "Big Pickle Free", output: ["text"] },
-  { id: "MiMo-V2.5 Free", name: "MiMo-V2.5 Free", output: ["text"] },
-  { id: "Ling 3.0 Flash Fin Free", name: "Ling 3.0 Flash Fin Free", output: ["text"] },
-  { id: "Nemotron 3 Ultra Free", name: "Nemotron 3 Ultra Free", output: ["text"] },
-  { id: "Nemotron 3.5 Lightning Free", name: "Nemotron 3.5 Lightning Free", output: ["text"] },
-  { id: "Opencode Zen", name: "Opencode Zen", output: ["text"] },
+  { id: "nemotron-3.5-lightning-free", name: "Nemotron 3.5 Lightning (Free)", output: ["text"] },
+  { id: "ling-3.1-flash-free", name: "Ling 3.1 Flash (Free)", output: ["text"] },
+  { id: "deepseek-v4.1-flash", name: "DeepSeek V4.1 Flash", output: ["text"] },
+  { id: "big-pickle", name: "Big Pickle", output: ["text"] },
+  { id: "claude-sonnet-4-6", name: "Claude Sonnet 4.6", output: ["text"] },
+  { id: "gpt-5.5", name: "GPT 5.5", output: ["text"] },
 ];
 
 export const defaultE2bModels: Model[] = [
@@ -102,7 +102,36 @@ export async function discoverProvider(id: ProviderId): Promise<ProviderCheck> {
     } else if (id === "ollama") {
       return { id, checkedAt, status: "ready", httpStatus: 200, message: "Ollama Cloud connected. 6 models configured.", models: defaultOllamaModels };
     } else if (id === "opencode") {
-      return { id, checkedAt, status: "ready", httpStatus: 200, message: "Opencode connected (https://opencode.ai/api/v1). 6 models configured.", models: defaultOpencodeModels };
+      try {
+        const result = openAIModels.parse(await request("https://opencode.ai/zen/v1/models", { headers: { Authorization: `Bearer ${key}` } }));
+        models = result.data.map(m => ({ id: m.id, name: m.name ?? m.id, contextWindow: m.context_length, output: ["text"] }));
+        models.sort((a, b) => a.name.localeCompare(b.name));
+      } catch {
+        models = defaultOpencodeModels;
+      }
+      try {
+        const smokeModel = models.some(m => m.id === "nemotron-3.5-lightning-free") ? "nemotron-3.5-lightning-free" : models[0]?.id;
+        if (!smokeModel) throw new ProviderFailure();
+        const testRes = z.object({ choices: z.array(z.object({ message: z.object({ content: z.string().nullable() }) })) }).parse(
+          await request("https://opencode.ai/zen/v1/chat/completions", {
+            method: "POST",
+            headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
+            body: JSON.stringify({ model: smokeModel, messages: [{ role: "user", content: "Reply connected." }], max_tokens: 16, stream: false }),
+          })
+        );
+        if (!testRes.choices[0]?.message.content) throw new ProviderFailure();
+        return { id, checkedAt, status: "ready", httpStatus: 200, message: `OpenCode Zen connected (${models.length} models discovered).`, models };
+      } catch (authError: any) {
+        const errStatus = authError?.status ?? (authError instanceof ProviderFailure ? authError.status : undefined);
+        const isOpenRouterKey = typeof key === "string" && key.trim().startsWith("sk-or-v1-");
+        const isAuth = isOpenRouterKey || errStatus === 401 || errStatus === 403;
+        const errMsg = isOpenRouterKey
+          ? "The installed key is an OpenRouter key (sk-or-v1-...). OpenCode Zen requires its own API key from console.opencode.ai."
+          : isAuth
+          ? "Invalid OpenCode API key. An OpenCode Zen key is required."
+          : `${models.length} models discovered. OpenCode Zen key verification failed.`;
+        return { id, checkedAt, status: "error", httpStatus: isAuth ? 401 : (errStatus || 500), message: errMsg, models };
+      }
     } else if (id === "e2b") {
       return { id, checkedAt, status: "ready", httpStatus: 200, message: "E2B Sandbox API verified. Python environment available for open-source OCR tooling.", models: defaultE2bModels };
     } else {
@@ -160,7 +189,7 @@ export async function readProviders(): Promise<ProviderView[]> {
     let defaultModels: Model[] = [];
     let defaultMsg = configured ? "Credential installed." : "Credential has not been installed.";
     if (id === "ollama") { defaultModels = defaultOllamaModels; defaultMsg = "Ollama Cloud connected. 6 models configured."; }
-    else if (id === "opencode") { defaultModels = defaultOpencodeModels; defaultMsg = "Opencode connected (https://opencode.ai/api/v1). 6 models configured."; }
+    else if (id === "opencode") { defaultModels = defaultOpencodeModels; defaultMsg = "OpenCode Zen connected (https://opencode.ai/zen/v1)."; }
     else if (id === "e2b") { defaultModels = defaultE2bModels; defaultMsg = "E2B Sandbox API verified. Python environment available for open-source OCR tooling."; }
     else if (custom) { defaultModels = custom.models.map(m => ({ ...m, output: m.output ?? ["text"] })); defaultMsg = `${custom.name} custom API configured.`; }
 
@@ -183,7 +212,7 @@ export async function readProviders(): Promise<ProviderView[]> {
       priority,
       activeModels: selections[id] ?? [],
       activeModel: selections[id]?.[0] ?? null,
-      endpoint: custom?.endpoint || (id === "opencode" ? "https://opencode.ai/api/v1" : undefined),
+      endpoint: custom?.endpoint || (id === "opencode" ? "https://opencode.ai/zen/v1" : undefined),
       isCustom: Boolean(custom),
       hasCustomKey,
       keyHint,
@@ -251,7 +280,7 @@ export async function generateText(provider: Exclude<ProviderId, "ocr">, model: 
     if (!text) throw new ProviderFailure();
     return text;
   }
-  const endpoint = provider === "openrouter" ? "https://openrouter.ai/api/v1/chat/completions" : provider === "opencode" ? "https://opencode.ai/api/v1/chat/completions" : `${nvidiaEndpoint()}chat/completions`;
+  const endpoint = provider === "openrouter" ? "https://openrouter.ai/api/v1/chat/completions" : provider === "opencode" ? "https://opencode.ai/zen/v1/chat/completions" : `${nvidiaEndpoint()}chat/completions`;
   data = await request(endpoint, { method: "POST", headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" }, body: JSON.stringify({ model, messages: [{ role: "user", content: prompt }], max_tokens: 256, stream: false }) });
   const response = z.object({ choices: z.array(z.object({ message: z.object({ content: z.string().nullable() }) })) }).parse(data);
   const text = response.choices[0]?.message.content;
