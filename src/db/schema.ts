@@ -69,6 +69,43 @@ export const polarityEnum = pgEnum("polarity_type", [
   "context",
 ]);
 
+// ---------- CLAIMS MATRIX ----------
+export const proofStrengthEnum = pgEnum("proof_strength", [
+  "strong",
+  "moderate",
+  "weak",
+  "gap",
+]);
+
+export const elementStatusEnum = pgEnum("element_status", [
+  "unreviewed",
+  "in_progress",
+  "supported",
+  "disputed",
+  "gap",
+]);
+
+export const evidenceKindEnum = pgEnum("evidence_kind", [
+  "document",
+  "testimony",
+  "chronology",
+  "note",
+]);
+
+export const linkReviewStateEnum = pgEnum("link_review_state", [
+  "proposed",
+  "accepted",
+  "rejected",
+]);
+
+export const witnessTypeEnum = pgEnum("witness_type", [
+  "fact",
+  "expert",
+  "adverse",
+  "party",
+  "custodian",
+]);
+
 export const deadlineStatusEnum = pgEnum("deadline_status", [
   "upcoming",
   "completed",
@@ -290,6 +327,15 @@ export const claims = pgTable("claims", {
   title: text("title").notNull(),
   statute: varchar("statute", { length: 256 }),
   description: text("description"),
+  chartType: varchar("chart_type", { length: 48 }).notNull().default("civil-element"),
+  causeOfAction: text("cause_of_action"),
+  jurisdiction: varchar("jurisdiction", { length: 128 }),
+  burdenOfProof: varchar("burden_of_proof", { length: 48 }).notNull().default("preponderance"),
+  // Slug of the code-defined template (src/lib/claim-templates.ts) this claim was copied from.
+  templateSlug: varchar("template_slug", { length: 128 }),
+  position: integer("position").notNull().default(0),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
 
 export const claimElements = pgTable("claim_elements", {
@@ -299,6 +345,14 @@ export const claimElements = pgTable("claim_elements", {
     .references(() => claims.id, { onDelete: "cascade" }),
   title: text("title").notNull(),
   description: text("description"),
+  position: integer("position").notNull().default(0),
+  // Attorney-assigned rating; the UI shows a computed hint beside it but never overwrites it.
+  proofStrength: proofStrengthEnum("proof_strength").notNull().default("gap"),
+  status: elementStatusEnum("status").notNull().default("unreviewed"),
+  authorityCitation: text("authority_citation"),
+  citationStatus: varchar("citation_status", { length: 16 }).notNull().default("verify"),
+  notes: text("notes"),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
 
 export const factLinks = pgTable("fact_links", {
@@ -315,7 +369,34 @@ export const factLinks = pgTable("fact_links", {
   }),
   polarity: polarityEnum("polarity").notNull().default("supporting"),
   notes: text("notes"),
+  kind: evidenceKindEnum("kind").notNull().default("document"),
+  pageCite: varchar("page_cite", { length: 64 }),
+  quote: text("quote"),
+  exhibitLabel: varchar("exhibit_label", { length: 64 }),
+  // Speaker/author for testimony links.
+  contactId: integer("contact_id").references(() => contacts.id, {
+    onDelete: "set null",
+  }),
+  // Manual links are accepted; AI-suggested links start as proposed.
+  reviewState: linkReviewStateEnum("review_state").notNull().default("accepted"),
+  aiProposalId: integer("ai_proposal_id").references(() => aiProposals.id, {
+    onDelete: "set null",
+  }),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
 });
+
+export const claimElementWitnesses = pgTable("claim_element_witnesses", {
+  id: serial("id").primaryKey(),
+  claimElementId: integer("claim_element_id")
+    .notNull()
+    .references(() => claimElements.id, { onDelete: "cascade" }),
+  contactId: integer("contact_id")
+    .notNull()
+    .references(() => contacts.id, { onDelete: "cascade" }),
+  witnessType: witnessTypeEnum("witness_type").notNull().default("fact"),
+  notes: text("notes"),
+});
+
 
 export const deadlines = pgTable("deadlines", {
   id: serial("id").primaryKey(),
